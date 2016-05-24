@@ -1,0 +1,410 @@
+{
+  "model.chat.ask.not_ready": [
+    "Wait wait %%, I didn't even have enough time to wake up properly, Elian just started me right now... Can I get some coffee?"
+  ],
+
+
+
+  "model.repeatcommand.description": [
+    "Allows you to execute again the last executed command"
+  ],
+  "model.repeatcommand.process.no_last_command": [
+    "%% => No command was executed on this channel since I joined. Sorry :/ ."
+  ],
+
+
+
+  "model.commandlist.ping.description": [
+    "Who's up for ping pong? Oh, sorry. Table tennis u_u"
+  ],
+  "model.commandlist.ping.process.answer": [
+    "%%  => Pong!"
+  ],
+
+  "model.commandlist.addjoke.description": [
+    "Allows you to add a joke in the database"
+  ],
+  "model.commandlist.addjoke.fail": [
+    "Sorry %%, the joke did not save correctly."
+  ],
+  "model.commandlist.addjoke.success": [
+    "Thank you %%, the joke has been successfully saved :) !"
+  ],
+
+  "model.commandlist.addtagtoblacklist.description": [
+    "Allows you to forbid a tag while searching on e621 or e926"
+  ],
+  "model.commandlist.addtagtoblacklist.wrong_format": [
+    "%% => We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
+  ],
+  "model.commandlist.addtagtoblacklist.fail": [
+    "%% => Nope, didn't work : %%"
+  ],
+  "model.commandlist.addtagtoblacklist.success": [
+    "%% => Got it, saved it!"
+  ],
+
+  "model.commandlist.scream.description": [
+    "I can imitate lots of animals"
+  ],
+
+  "model.commandlist.cat.description": [
+    "Displays a random cat"
+  ],
+  "model.commandlist.cat.process.fail": [
+    "Welp... Seems like random.cat just crashed. I'm sorry %% :( ..."
+  ],
+
+  "model.commandlist.crash.description": [
+    "This command kills me. I mean... Literally"
+  ],
+  "model.commandlist.crash.process.speech": [
+    "Oh, so it's like that? So you're tired of me? Alright. You really think you can get rid of me just like that? You really think it's that easy? Yo, I'm crazy! I can handle paradoxes without a flinch!\n\n\"This sentence is wrong.\""
+  ],
+
+  "model.commandlist.decide.description": [
+    "You have two (or more) options, you have to make a choice, and you just can't make your mind? Let me help :D"
+  ],
+  "model.commandlist.decide.process.split": [
+    "or"
+  ],
+  "model.commandlist.decide.process.wrong_format": [
+    "%% => You ask me to pick one, but... You only have one to pick... It doesn't make any sense D: !"
+  ],
+
+  "model.commandlist.deletejoke.description": [
+    "Allows you to delete a joke from the database"
+  ],
+  "model.commandlist.deletejoke.process.wong_format": [
+    "%% => Seems like you got mistaken while typing the command. I'm expecting a joke ID, a number c: ."
+  ],
+  "model.commandlist.deletejoke.process.not_found": [
+    "Sorry %%, I did not find any joke with that number."
+  ],
+  "model.commandlist.deletejoke.process.failed": [
+    "Sorry %%, the joke was not deleted successfully."
+  ],
+  "model.commandlist.deletejoke.process.success": [
+    "Alright %%, the joke has been successfully deleted :) !"
+  ],
+
+  "model.commandlist.unregisterpermission.description": [
+    "Allows you to delete a previously registered permission."
+  ],
+  "model.commandlist.unregisterpermission.process.wrong_format": [
+    "%% => We got a problem. I think you made a mistake while typing the command, I didn't understand a thing."
+  ],
+  "model.commandlist.unregisterpermission.process.wrong_user": [
+    "%% => We got a problem. I don't know which member you want to unregister a permission from. I need the member ID, right? Well, you can highlight him with an @, I will translate it."
+  ],
+  "model.commandlist.unregisterpermission.process.not_found": [
+    "%% => The permission you're asking me to delete doesn't exist. I guess it's good news?"
+  ],
+  "model.commandlist.unregisterpermission.process.success": [
+    "%% => The permission has been successfully unregistered :) !"
+  ],
+  "model.commandlist.unregisterpermission.process.fail": [
+    "%% => There has been an error during unregistering, sorry :/ ."
+  ],
+
+  "model.commandlist.deletetagfromblacklist.description": [
+    "Allows you to un-forbid a tag while searching on e621 or e926."
+  ],
+  "model.commandlist.deletetagfromblacklist.wrong_format": [
+    "%% => We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
+  ],
+  "model.commandlist.deletetagfromblacklist.not_found": [
+    "%% => The tag you're asking me to remove from the blacklist doesn't exist. I guess it's good news?"
+  ],
+  "model.commandlist.deletetagfromblacklist.fail": [
+    "%% => Nope, didn't work : %%"
+  ],
+  "model.commandlist.deletetagfromblacklist.success": [
+    "%% => Got it, deleted it!"
+  ],
+
+  "model.commandlist.avatar.description": [
+    "Shows a member avatar in the chat, wider"
+  ],
+  "model.commandlist.avatar.process.not_found": [
+    "Sorry %%, but I didn't find this member..."
+  ],
+  "model.commandlist.avatar.process.client_avatar_author": [
+    "My avatar has been created by Yamavu: %%"
+  ],
+
+  "model.commandlist.e621.description": [
+    "Allows you to search for furry (or not, I heard there's everything down there) pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
+  ],
+
+  "model.commandlist.e926.description": [
+    "Allows you to search for furry (or not, I heard there's everything down there) pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
+  ],
+
+  "model.commandlist.gelbooru.description": [
+    "Allows you to search for manga pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
+  ],
+
+  "model.commandlist.safebooru.description": [
+    "Allows you to search for manga pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
+  ],
+
+  "model.commandlist.eval.description": [
+    "Allows you to execute javascript commands and display the return value."
+  ],
+  "model.commandlist.eval.process.exception": [
+    "Well done, %%, you code almost made me crash!"
+  ],
+
+  "model.commandlist.getblacklistedtags.description": [
+    "Displays all the blacklisted tags on the current server, or on the server that was passed in parameter"
+  ],
+  "model.commandlist.getblacklistedtags.process.fail": [
+    "%% => Nope, didn't work, sorry"
+  ],
+  "model.commandlist.getblacklistedtags.process.success": [
+    "%% => Here are all the blacklisted tags on this server: \n%%"
+  ],
+
+  "model.commandlist.getserverid.description": [
+    "Displays the current server ID"
+  ],
+  "model.commandlist.getserverod.process.private_conversation": [
+    "%% => We're in a private conversation. There's no server ID."
+  ],
+  "model.commandlist.getserverod.process.answer": [
+    "%% => This server's ID is: %%"
+  ],
+
+  "model.commandlist.getuserid.description": [
+    "Allows you to get a chat user ID from his username"
+  ],
+  "model.commandlist.getuserid.process.no_args": [
+    "If you don't tell me which user you want the ID from, %%, I *might* have trouble finding them :/ ..."
+  ],
+  "model.commandlist.getuserid.process.not_found": [
+    "Sorry, %%, I did not find a user corresponding to your search :/ ."
+  ],
+  "model.commandlist.getuserid.process.answer_panic": [
+    "The user ID of %%... Hey wait... IT'S ME D: ! WHY DO YOU NEED THIS INFORMATION %%??\n\n...\n\nOh well. Here it is: %%"
+  ],
+  "model.commandlist.getuserid.process.answer": [
+    "%% => The user ID of %% is: %%"
+  ],
+
+  "model.commandlist.hug.description": [
+    "Everyone needs a little love one day or another. Hey, who said bots can't feel love?"
+  ],
+  "model.commandlist.hug.process.self_hug.1": [
+    "**Turns into an octopus and hugs himself with his tentacles <3**"
+  ],
+  "model.commandlist.hug.process.self_hug.2": [
+    "**Grabs his own torso to hug himself tight <3**"
+  ],
+  "model.commandlist.hug.process.self_hug.3": [
+    "**Grabs a pillow, draws his avatar on it and hugs it <3**"
+  ],
+  "model.commandlist.hug.process.hug.1": [
+    "**Sneakity sneakily crawls in high herbs, stays still, wags, and JUMPS on %% to hug him tight!**"
+  ],
+  "model.commandlist.hug.process.hug.2": [
+    "**Makes a furry hug to %%**"
+  ],
+  "model.commandlist.hug.process.hug.3": [
+    "Come here so I can hug you, %% ! **hugs tight**"
+  ],
+  "model.commandlist.hug.process.hug.4": [
+    "**Falls from a tree and hugs %%**"
+  ],
+  "model.commandlist.hug.process.hug.5": [
+    "**Sneakity sneakily crawls in a hole and jumps out of the earth to hold %% in his arms**"
+  ],
+  "model.commandlist.hug.process.hug.6": [
+    "**Swings from rope to rope and jumps in %%'s arms**"
+  ],
+  "model.commandlist.hug.process.hug.7": [
+    "**Throws a teddy bear to %%'s head while shouting \"HUG\"**"
+  ],
+  "model.commandlist.hug.process.hug.8": [
+    "**Turns into an octopus and holds %% with his tentacles**"
+  ],
+  "model.commandlist.hug.process.hug.9": [
+    "**Turns into a snake and holds %% tight**"
+  ],
+
+  "model.commandlist.joke.description": [
+    "I can tell jokes. True! You can even search for one or more words if you're looking for a particular one"
+  ],
+  "model.commandlist.joke.process.not_found": [
+    "Sorry %%, I did not find any joke :/ ..."
+  ],
+  "model.commandlist.joke.process.answer": [
+    "%% => Joke number %%: \n%%"
+  ],
+
+  "model.commandlist.meme.description": [
+    "Allows you to generate a meme of type (type) with the text (top text) at the top of it and the text (bottom text) at the bottom of it if it has been filled"
+  ],
+  "model.commandlist.meme.process.parse_error": [
+    "Sorry %%, but you did not write the command correctly, I don't understand what you want."
+  ],
+  "model.commandlist.meme.process.not_found": [
+    "Sorry %%, but this meme type doesn't exist... You should try !memelist to get the list of the meme types that exist !"
+  ],
+  "model.commandlist.meme.process.fail": [
+    "Sorry %%, seems like Imgflip has crashed..."
+  ],
+
+  "model.commandlist.memelist.description": [
+    "I can send you in private the list of the available memes"
+  ],
+  "model.commandlist.memelist.process.finished": [
+    "Just sent you the available meme list in private, %%!"
+  ],
+
+  "model.commandlist.wiki.description": [
+    "I can look up an article on Wikipedia and write the beginning here if you want"
+  ],
+  "model.commandlist.wiki.process.parse_error": [
+    "%% => You wanna make a search on Wikipedia without... Search terms?"
+  ],
+  "model.commandlist.wiki.process.fail": [
+    "Seems like Wikipedia crashed. Didn't think that day would come! Sorry %%!"
+  ],
+  "model.commandlist.wiki.process.not_found": [
+    "23 19, WE GOT A 23 19!! Oh, wait, it's a 404, sorry. Well, the page you asked for doesn't exist on Wikipédia. Sorry, %% !"
+  ],
+
+  "model.commandlist.youtube.description": [
+    "Allows you to make a search on YouTube"
+  ],
+  "model.commandlist.youtube.process.wait": [
+    "Wait a moment, %%, I'm asking YouTube if he's got something..."
+  ],
+  "model.commandlist.youtube.process.fail": [
+    "Welp... Seems like YouTube has crashed. How strange... I'm sorry %% :( ..."
+  ],
+  "model.commandlist.youtube.process.error": [
+    "Welp... YouTube told me there has been an error. I think we reached the search quota for today! I'm sorry %% :( ..."
+  ],
+  "model.commandlist.youtube.process.not_found": [
+    "Welp... YouTube didn't find anything for you. I'm sorry %% :( ..."
+  ],
+
+
+
+  "model.mangapicture.searchpicture.sql_error": [
+    "Welp... Seems like my database is not in the mood... I am sorry %% :( ..."
+  ],
+  "model.mangapicture.searchpicture.forbidden_search_message_to_owner": [
+    "The user %% tried to search a manga picture with the following forbidden tag(s): %%."
+  ],
+  "model.mangapicture.searchpicture.forbidden_search_public_message": [
+    "%% => You just made a search that involved at least one blacklisted tag. That's nasty. Here are the incriminated tags: %%"
+  ],
+  "model.mangapicture.searchpicture.wait": [
+    "Just a moment, %%, gotta ask %% if he can find something for you..."
+  ],
+  "model.mangapicture.proxypicturefoundhandler.no_valid_picture_found": [
+    "Sorry %%, but I did not find any picture that would've been authorized on this server... You can retry if you want, who know, I could find one this time! But don't spam, please. If I still don't find after a few retries, you can stop right there, I won't find at all."
+  ],
+
+
+
+  "model.entity.permission.register.error_data_format": [
+    "Incorrect data format"
+  ],
+  "model.entity.permission.register.error_sql_server_retrieval": [
+    "SQL server returned an error while retrieving data"
+  ],
+  "model.entity.permission.register.error_sql_server_saving": [
+    "SQL server returned an error while saving data"
+  ],
+  "model.entity.permission.unregister.error_data_format": [
+    "Incorrect data format"
+  ],
+  "model.entity.permission.unregister.error_sql_server_retrieval": [
+    "SQL server returned an error while retrieving data"
+  ],
+  "model.entity.permission.unregister.error_sql_server_deleting": [
+    "SQL server returned an error while deleting data"
+  ],
+  "model.entity.permission.register.error_404": [
+    "This permission doesn't exist"
+  ],
+  "model.command.requestexecutecommand.message_to_owner": [
+    "%% tried to execute command %% with arguments \"%%\" but doesn't have the right to."
+  ],
+  "model.command.requestexecutecommand.message_to_member": [
+    "Sorry, %%, you don't have the right to execute this command."
+  ],
+
+  "model.command.handleunknowncommand.answer": [
+    "%%? I don't know this command, sorry, %%... You can get the command list by typing !help :) ."
+  ],
+
+
+
+  "model.command.displayhelpdialog.sql_error": [
+    "%% => Sorry, the database answered with an error, I don't know which commands you can execute :/ ."
+  ],
+  "model.command.displayhelpdialog.introduction": [
+    "Bot **Ylias** for **Discord** - need help? Here is a list of the commands I can answer to:"
+  ],
+  "model.command.displayhelpdialog.end": [
+    "As you can see, some commands can take parameters. A parameter is indicated by a pair of parenthesis. When you type the command, you shall not type these parenthesis. If you see parameters in *italic*, that means they are optionnal. If you need more help, ask **Elian Wonhalf**. He's the dumbass that created me, he should know."
+  ],
+  "model.command.displayhelpdialog.message_to_member": [
+    "I just sent you the list of the commands I can answer to by private message, %%"
+  ],
+
+
+
+  "net.mangapictureproxy.initializequerycompletehandler.host_crashed": [
+    "Well... Seems like %% has crashed. I'm sorry %% :( ..."
+  ],
+  "net.mangapictureproxy.initializequerycompletehandler.no_result": [
+    "Well... %% told me that he hasn't got anything about your search. I'm sorry %% :( ..."
+  ],
+
+
+
+  "utils.humanify.getimagedeliverysentence.1": [
+    "Here!"
+  ],
+  "utils.humanify.getimagedeliverysentence.2": [
+    "Here's one!"
+  ],
+  "utils.humanify.getimagedeliverysentence.3": [
+    "Do you like this one?"
+  ],
+  "utils.humanify.getimagedeliverysentence.4": [
+    "Found this one!"
+  ],
+  "utils.humanify.getimagedeliverysentence.5": [
+    "Someone told me a lot about this one. Won't tell you who, though c: ."
+  ],
+
+  "utils.humanify.getchoicedeliverysentence.1": [
+    "I choose %%!"
+  ],
+  "utils.humanify.getchoicedeliverysentence.2": [
+    "%%, without a doubt."
+  ],
+  "utils.humanify.getchoicedeliverysentence.3": [
+    "You kidding, right? Pick %%, obviously!"
+  ],
+  "utils.humanify.getchoicedeliverysentence.4": [
+    "To make this choice is a big responsibility. But I'm ready. I pick %%."
+  ],
+
+
+
+
+  "utils.discordutils.getlocationstringfrommessage.location_private": [
+    "It was on a private conversation (date : %%)."
+  ],
+  "utils.discordutils.getlocationstringfrommessage.location_public": [
+    "It was on server %% and on channel #%% (date : %%)."
+  ]
+}

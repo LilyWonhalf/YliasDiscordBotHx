@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." name="myproject" default="deploy-local" >
+    <property file="build.properties"/>
+
+    <target name="deploy">
+        <antcall target="package"/>
+        <antcall target="upload"/>
+        <antcall target="remove-package"/>
+        <antcall target="unpack"/>
+        <antcall target="delete-package"/>
+    </target>
+
+    <target name="package">
+        <tar destfile="${archiveFilename}" compression="gzip">
+            <tarfileset dir="${basedir}/out/release" filemode="775" dirmode="775">
+                <include name="bot.js"/>
+                <include name="package.json"/>
+            </tarfileset>
+        </tar>
+    </target>
+
+    <target name="upload">
+        <scp
+            file="${archiveFilename}"
+            todir="${sshUser}@${sshHost}:${sshFolder}"
+            keyfile="${sshKeyFile}"
+            verbose="false" sftp="true"
+            trust="true"
+        />
+    </target>
+
+    <target name="remove-package">
+        <echo>remove package...</echo>
+        <delete file="site.tar.gz"/>
+    </target>
+
+    <target name="unpack">
+        <sshexec
+            host="${sshHost}"
+            username="${sshUser}"
+            keyfile="${sshKeyFile}"
+            verbose="false"
+            trust="true"
+            command="tar -zxf ${sshFolder}/${archiveFilename} -C ${sshFolder}/"
+        />
+    </target>
+
+    <target name="delete-package">
+        <sshexec
+            host="${sshHost}"
+            username="${sshUser}"
+            keyfile="${sshKeyFile}"
+            verbose="false"
+            trust="true"
+            command="rm ${sshFolder}/${archiveFilename}"
+        />
+    </target>
+</project>

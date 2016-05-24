@@ -1,0 +1,430 @@
+{
+  "model.chat.ask.not_ready": [
+    "Attends attends %%, j'ai même pas eu le temps de me réveiller correctement, Elian vient tout juste de me démarrer là... Je peux avoir un café ?"
+  ],
+
+
+
+  "model.repeatcommand.description": [
+    "Permet d'exécuter à nouveau la dernière commande exécutée"
+  ],
+  "model.repeatcommand.process.no_last_command": [
+    "%% => Aucune commande n'a été exécutée sur ce canal depuis que je suis connecté. Désolé :/ ."
+  ],
+
+
+
+  "model.commandlist.ping.description": [
+    "Qui pour un ping pong ? Oh, pardon. Un tennis de table u_u"
+  ],
+  "model.commandlist.ping.process.answer": [
+    "%%  => Pong !"
+  ],
+
+  "model.commandlist.addjoke.description": [
+    "Permet de rajouter une blague dans la base de données"
+  ],
+  "model.commandlist.addjoke.fail": [
+    "Désolé %%, la blague ne s'est pas enregistrée correctement."
+  ],
+  "model.commandlist.addjoke.success": [
+    "Merci %%, la blague a bien été enregistrée :) !"
+  ],
+
+  "model.commandlist.addtagtoblacklist.description": [
+    "Permet d'interdire un tag lors des recherches e621 et e926"
+  ],
+  "model.commandlist.addtagtoblacklist.wrong_format": [
+    "%% => On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
+  ],
+  "model.commandlist.addtagtoblacklist.fail": [
+    "%% => Nope, ça n'a pas fonctionné : %%"
+  ],
+  "model.commandlist.addtagtoblacklist.success": [
+    "%% => Compris, c'est dans la boîte !"
+  ],
+
+  "model.commandlist.scream.description": [
+    "Je sais imiter pas mal de cris d'animaux"
+  ],
+
+  "model.commandlist.cat.description": [
+    "Affiche un chat aléatoire"
+  ],
+  "model.commandlist.cat.process.fail": [
+    "Bon... random.cat a planté on dirait. Je suis désolé %% :( ..."
+  ],
+
+  "model.commandlist.crash.description": [
+    "Cette commande, elle me tue. Non mais... Littéralement, en fait"
+  ],
+  "model.commandlist.crash.process.speech": [
+    "Ah d'accord, donc t'en as marre de moi. D'accord. Tu crois vraiment que tu peux te débarrasser de moi comme ça ? Tu crois vraiment que c'est aussi facile ? Mais j'suis un malade moi ! Je peux traiter des paradoxes sans problème moi !\n\n\"Cette phrase est fausse.\""
+  ],
+
+  "model.commandlist.decide.description": [
+    "Vous n'arrivez pas à vous décider entre deux choses ? Je peux décider pour vous :D"
+  ],
+  "model.commandlist.decide.process.split": [
+    "ou"
+  ],
+  "model.commandlist.decide.process.wrong_format": [
+    "%% => Tu me demandes de décider entre... Une seule chose ? Ça n'a aucun sens D: !"
+  ],
+
+  "model.commandlist.deletejoke.description": [
+    "Permet de supprimer une blague dans la base de données"
+  ],
+  "model.commandlist.deletejoke.process.wong_format": [
+    "%% => Il semblerait que tu te sois planté dans la syntaxe de la commande. J'attends un ID de blague, un numéro, pas autre chose c: ."
+  ],
+  "model.commandlist.deletejoke.process.not_found": [
+    "Désolé %%, je n'ai pas trouvé de blague correspondant à ce numéro."
+  ],
+  "model.commandlist.deletejoke.process.failed": [
+    "Désolé %%, la blague ne s'est pas supprimée correctement."
+  ],
+  "model.commandlist.deletejoke.process.success": [
+    "C'est bon %%, la blague a bien été supprimée :) !"
+  ],
+
+  "model.commandlist.unregisterpermission.description": [
+    "Permet de supprimer une permission qui aurait au préalable été enregistrée"
+  ],
+  "model.commandlist.unregisterpermission.process.wrong_format": [
+    "%% => On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
+  ],
+  "model.commandlist.unregisterpermission.process.wrong_user": [
+    "%% => On a un souci. Je ne sais pas pour qui tu veux retirer la permission, là. Il me faut l'id du membre, hein ? Au pire, identifie-le avec @, je me débrouillerai avec ça."
+  ],
+  "model.commandlist.unregisterpermission.process.not_found": [
+    "%% => La permission que tu me demandes de supprimer n'existe déjà pas. J'imagine que c'est une bonne nouvelle, non ?"
+  ],
+  "model.commandlist.unregisterpermission.process.success": [
+    "%% => La permission a bien été supprimée :) !"
+  ],
+  "model.commandlist.unregisterpermission.process.fail": [
+    "%% => Il y a eu une erreur durant la suppression, désolé :/ ."
+  ],
+
+  "model.commandlist.registerpermission.description": [
+    "Permet d'autoriser ou interdire quelqu'un à l'utilisation d'une commande"
+  ],
+  "model.commandlist.registerpermission.process.wrong_format": [
+    "%% => On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
+  ],
+  "model.commandlist.registerpermission.process.wrong_user": [
+    "%% => On a un souci. Je ne sais pas pour qui tu veux définir la permission, là. Il me faut l'id du membre, hein ? Au pire, identifie-le avec @, je me débrouillerai avec ça."
+  ],
+  "model.commandlist.registerpermission.process.granted_parse_error": [
+    "%% => Tu veux donner ou retirer l'autorisation, là ? C'est pas vraiment clair ._. ..."
+  ],
+  "model.commandlist.registerpermission.process.success": [
+    "%% => La permission a bien été créée :) !"
+  ],
+  "model.commandlist.registerpermission.process.fail": [
+    "%% => Il y a eu une erreur durant la création, désolé :/ ."
+  ],
+
+  "model.commandlist.deletetagfromblacklist.description": [
+    "Permet de supprimer l'interdiction d'un tag lors des recherches e621 et e926."
+  ],
+  "model.commandlist.deletetagfromblacklist.wrong_format": [
+    "%% => On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
+  ],
+  "model.commandlist.deletetagfromblacklist.not_found": [
+    "%% => Le tag que tu me demandes de retirer de la liste noire n'existe déjà pas. J'imagine que c'est une bonne nouvelle, non ?"
+  ],
+  "model.commandlist.deletetagfromblacklist.fail": [
+    "%% => Nope, ça n'a pas fonctionné : %%"
+  ],
+  "model.commandlist.deletetagfromblacklist.success": [
+    "%% => Compris, c'est supprimé !"
+  ],
+
+  "model.commandlist.avatar.description": [
+    "Permet d'afficher l'avatar d'un membre en plus grand"
+  ],
+  "model.commandlist.avatar.process.not_found": [
+    "Désolé %%, mais je n'ai pas trouvé ce membre..."
+  ],
+  "model.commandlist.avatar.process.client_avatar_author": [
+    "Mon avatar a été créé par Yamavu : %%"
+  ],
+
+  "model.commandlist.e621.description": [
+    "Permet de rechercher des images furry (ou non, 'paraît qu'il y a de tout là-bas) potentiellement nsfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
+  ],
+
+  "model.commandlist.e926.description": [
+    "Permet de rechercher des images furry (ou non, 'paraît qu'il y a de tout là-bas) sfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
+  ],
+
+  "model.commandlist.gelbooru.description": [
+    "Permet de rechercher des images style manga potentiellement nsfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
+  ],
+
+  "model.commandlist.safebooru.description": [
+    "Permet de rechercher des images style manga sfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
+  ],
+
+  "model.commandlist.eval.description": [
+    "Permet d'exécuter des commandes javascript et d'afficher le retour"
+  ],
+  "model.commandlist.eval.process.exception": [
+    "Bravo, %%, ton code a faillit me faire planter !"
+  ],
+
+  "model.commandlist.getblacklistedtags.description": [
+    "Permet d'afficher la liste des tags blacklistés sur le serveur courant, ou sur le serveur passé en paramètre"
+  ],
+  "model.commandlist.getblacklistedtags.process.fail": [
+    "%% => Nope, ça n'a pas fonctionné, désolé"
+  ],
+  "model.commandlist.getblacklistedtags.process.success": [
+    "%% => Voici tous les tags blacklistés pour le serveur : \n%%"
+  ],
+
+  "model.commandlist.getserverid.description": [
+    "Affiche l'ID du serveur courant"
+  ],
+  "model.commandlist.getserverod.process.private_conversation": [
+    "%% => On est en conversation privée, y'a pas d'ID de serveur."
+  ],
+  "model.commandlist.getserverod.process.answer": [
+    "%% => L'ID de ce serveur est le suivant : %%"
+  ],
+
+  "model.commandlist.getuserid.description": [
+    "Permet de récupérer l'ID d'un utilisateur du chat à partir de son pseudo."
+  ],
+  "model.commandlist.getuserid.process.no_args": [
+    "Si tu ne me précise pas de quel utilisateur tu veux l'ID, %%, je vais avoir du mal à le trouver :/ ..."
+  ],
+  "model.commandlist.getuserid.process.not_found": [
+    "Désolé, %%, je n'ai pas trouvé d'utilisateur correspondant à ta recherche :/ ."
+  ],
+  "model.commandlist.getuserid.process.answer_panic": [
+    "L'ID du membre %%... Hey mais... C'EST MOI D: ! POURQUOI TU VEUX CETTE INFO %% ??\n\n...\n\nBon ok. Le voici : %%"
+  ],
+  "model.commandlist.getuserid.process.answer": [
+    "%% => L'ID du membre %% est le suivant : %%"
+  ],
+
+  "model.commandlist.hug.description": [
+    "Tout le monde a besoin de tendresse à un moment ou à un autre. Hey, c'est pas parce que je suis un robot que je ne suis pas capable de démontrer de l'amour"
+  ],
+  "model.commandlist.hug.process.self_hug.1": [
+    "**Se transforme en poulpe pour s'enlacer lui-même dans ses tentacules <3**"
+  ],
+  "model.commandlist.hug.process.self_hug.2": [
+    "**Enroule ses pattes autour de son torse pour se faire un câlin à lui-même <3**"
+  ],
+  "model.commandlist.hug.process.self_hug.3": [
+    "**Attrape un coussin, dessine son avatar dessus et lui fait un câlin <3**"
+  ],
+  "model.commandlist.hug.process.hug.1": [
+    "**Avance discrètement dans les hautes herbes, se plaque au sol, remue la queue, et BONDIT sur %% pour lui faire un gros câlin !**"
+  ],
+  "model.commandlist.hug.process.hug.2": [
+    "**Fait un câlin poilu à %%**"
+  ],
+  "model.commandlist.hug.process.hug.3": [
+    "Viens ici que je te fasse un câlin, %% ! **serre fort**"
+  ],
+  "model.commandlist.hug.process.hug.4": [
+    "**Tombe d'une branche d'arbre pour faire un câlin à %%**"
+  ],
+  "model.commandlist.hug.process.hug.5": [
+    "**Rampe discrètement dans un trou et jaillit de terre en prenant %% dans les bras**"
+  ],
+  "model.commandlist.hug.process.hug.6": [
+    "**Se balance de liane en liane pour atterrir dans les bras de %%**"
+  ],
+  "model.commandlist.hug.process.hug.7": [
+    "**Jette un ours en peluche criant \"HUG\" à la tête de %%**"
+  ],
+  "model.commandlist.hug.process.hug.8": [
+    "**Se transforme en poulpe et agrippe %% avec ses tentacules**"
+  ],
+  "model.commandlist.hug.process.hug.9": [
+    "**Se transforme en serpent et vient faire une étreinte à %%**"
+  ],
+
+  "model.commandlist.joke.description": [
+    "Je peux raconter des blagues. Oui oui ! Vous pouvez même rechercher un ou plusieurs mots si vous voulez une blague en particulier"
+  ],
+  "model.commandlist.joke.process.not_found": [
+    "Désolé %%, je n'ai pas trouvé de blague :/ ..."
+  ],
+  "model.commandlist.joke.process.answer": [
+    "%% => Blague N°%% : \n%%"
+  ],
+
+  "model.commandlist.meme.description": [
+    "Permet de générer un meme de type (type) avec le texte (top text) en haut et le texte (bottom text) en bas s'il a été renseigné"
+  ],
+  "model.commandlist.meme.process.parse_error": [
+    "Désolé %%, mais la commande n'a pas été écrite correctement, je ne comprends pas ce que tu me demandes."
+  ],
+  "model.commandlist.meme.process.not_found": [
+    "Désolé %%, mais ce type de meme n'existe pas... Tu devrais essayer !memelist pour avoir la liste des types de memes qui existent !"
+  ],
+  "model.commandlist.meme.process.fail": [
+    "Désolé %%, il semblerait que Imgflip ait planté..."
+  ],
+
+  "model.commandlist.memelist.description": [
+    "Je t'envoie en privé la liste des memes disponibles"
+  ],
+  "model.commandlist.memelist.process.finished": [
+    "Je t'ai envoyé en privé la liste des memes disponibles %% !"
+  ],
+
+  "model.commandlist.wiki.description": [
+    "Je peux rechercher un article sur Wikipédia et vous afficher le début ici si vous voulez"
+  ],
+  "model.commandlist.wiki.process.parse_error": [
+    "%% => Tu veux faire une recherche sur Wikipédia sans... Termes à rechercher ?"
+  ],
+  "model.commandlist.wiki.process.fail": [
+    "Il semblerait que Wikipédia ait planté. Je ne pensais pas que ça arriverait un jour ! Désolé %% !"
+  ],
+  "model.commandlist.wiki.process.not_found": [
+    "23 19, ON A UN 23 19 !! Ah non, c'est une 404, désolé. Enfin, la page demandée n'existe pas sur Wikipédia, quoi. Désolé, %% !"
+  ],
+
+  "model.commandlist.youtube.description": [
+    "Permet de rechercher une vidéo sur YouTube"
+  ],
+  "model.commandlist.youtube.process.wait": [
+    "Un instant, %%, je demande à YouTube s'il a quelque chose..."
+  ],
+  "model.commandlist.youtube.process.fail": [
+    "Bon... YouTube a l'air d'avoir planté, étrange... Je suis désolé %% :( ..."
+  ],
+  "model.commandlist.youtube.process.error": [
+    "Bon... YouTube m'a retourné une erreur. Je pense qu'on a atteint le quota de recherches pour la journée ! Je suis désolé %% :( ..."
+  ],
+  "model.commandlist.youtube.process.not_found": [
+    "Bon... YouTube n'a pas trouvé de résultat pour cette recherche. Je suis désolé %% :( ..."
+  ],
+
+
+
+  "model.mangapicture.searchpicture.sql_error": [
+    "Bon... Ma base de données m'a envoyé ballader... Je suis désolé %% :( ..."
+  ],
+  "model.mangapicture.searchpicture.forbidden_search_message_to_owner": [
+    "L'utilisateur %% a tenté de faire une recherche d'image manga comportant le(s) tag(s) interdit(s) suivant(s) : %%."
+  ],
+  "model.mangapicture.searchpicture.forbidden_search_public_message": [
+    "%% => Tu viens de faire une recherche comportant au moins un tag blacklisté. C'est pas très propre. Voici le(s) tag(s) incriminé(s) : %%"
+  ],
+  "model.mangapicture.searchpicture.wait": [
+    "Un petit instant, %%, faut que je demande à %% s'il a ça en stock..."
+  ],
+  "model.mangapicture.proxypicturefoundhandler.no_valid_picture_found": [
+    "Désolé %%, mais je n'ai trouvé aucune image qui aurait été autorisée sur ce serveur... Tu peux réessayer, si tu veux, si ça se trouve, je trouverai ce coup-ci ! Mais ne spamme pas pour autant, si après quelques essais je trouve toujours pas, laisse tomber, ça marchera pas."
+  ],
+
+
+
+  "model.entity.permission.register.error_data_format": [
+    "Format de données incorrect"
+  ],
+  "model.entity.permission.register.error_sql_server_retrieval": [
+    "Le serveur SQL a retourné une erreur lors de la récupération"
+  ],
+  "model.entity.permission.register.error_sql_server_saving": [
+    "Le serveur SQL a retourné une erreur lors de l'enregistrement"
+  ],
+  "model.entity.permission.unregister.error_data_format": [
+    "Format de données incorrect"
+  ],
+  "model.entity.permission.unregister.error_sql_server_retrieval": [
+    "Le serveur SQL a retourné une erreur lors de la récupération"
+  ],
+  "model.entity.permission.unregister.error_sql_server_deleting": [
+    "Le serveur SQL a retourné une erreur lors de la suppression"
+  ],
+  "model.entity.permission.unregister.error_404": [
+    "La permission en question n'existe pas"
+  ],
+
+
+
+  "model.command.requestexecutecommand.message_to_owner": [
+    "%% a essayé d'exécuter la commande %% avec les arguments \"%%\" alors qu'il n'a pas les droits."
+  ],
+  "model.command.requestexecutecommand.message_to_member": [
+    "Désolé, %%, tu n'as pas l'autorisation d'exécuter cette commande."
+  ],
+
+  "model.command.handleunknowncommand.answer": [
+    "%% ? Je ne connais pas cette commande, désolé, %%... Tu peux voir la liste des commandes en tapant !help :) ."
+  ],
+
+  "model.command.displayhelpdialog.sql_error": [
+    "%% => Désolé, la base de données a retourné une erreur, je ne sais pas à quelles commandes tu as accès :/ ."
+  ],
+  "model.command.displayhelpdialog.introduction": [
+    "Bot **Ylias** pour **Discord** - besoin d'aide ? Voici une liste des commandes auxquelles je peux répondre :"
+  ],
+  "model.command.displayhelpdialog.end": [
+    "Comme vous pouvez le voir, certaines commandes peuvent prendre des paramètres. Un paramètre est indiqué par un groupe de parenthèses. Lorsque vous tapperez la commande, il ne faut pas reporter ces parenthèses. Si vous voyez des paramètres en *italique*, ça signifie qu'ils sont optionnels. Si vous avez besoin de plus d'aide, demandez à **Elian Wonhalf**. C'est lui l'idiot qui m'a codé, il devrait savoir."
+  ],
+  "model.command.displayhelpdialog.message_to_member": [
+    "Je t'ai envoyé la liste des commandes auxquelles je réponds par message privé, %%"
+  ],
+
+
+
+  "net.mangapictureproxy.initializequerycompletehandler.host_crashed": [
+    "Bon... %% a planté, apparemment. Je suis désolé %% :( ..."
+  ],
+  "net.mangapictureproxy.initializequerycompletehandler.no_result": [
+    "Bon... %% m'a dit qu'il n'avait rien. Je suis désolé %% :( ..."
+  ],
+
+
+
+  "utils.humanify.getimagedeliverysentence.1": [
+    "Et voilà !"
+  ],
+  "utils.humanify.getimagedeliverysentence.2": [
+    "Eeeeeeeeet en voilà !"
+  ],
+  "utils.humanify.getimagedeliverysentence.3": [
+    "Tu aimes mon choix ?"
+  ],
+  "utils.humanify.getimagedeliverysentence.4": [
+    "J'ai trouvé ça !"
+  ],
+  "utils.humanify.getimagedeliverysentence.5": [
+    "Quelqu'un m'a chaudement recommandé ça. Je dirai pas qui c: ."
+  ],
+
+  "utils.humanify.getchoicedeliverysentence.1": [
+    "Je choisis %% !"
+  ],
+  "utils.humanify.getchoicedeliverysentence.2": [
+    "Franchement, %%, sans hésiter."
+  ],
+  "utils.humanify.getchoicedeliverysentence.3": [
+    "Tu rigoles ? Faut choisir %%, c'est évident !"
+  ],
+  "utils.humanify.getchoicedeliverysentence.4": [
+    "C'est une grande responsabilité que de devoir faire ce choix. Mais je l'assume. Je choisis %%."
+  ],
+
+
+
+
+  "utils.discordutils.getlocationstringfrommessage.location_private": [
+    "C'était sur une conversation privée (date : %%)."
+  ],
+  "utils.discordutils.getlocationstringfrommessage.location_public": [
+    "C'était sur le serveur %% et sur le channel #%% (date : %%)."
+  ]
+}

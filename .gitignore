@@ -1,0 +1,10 @@
+# Project files
+*.iml
+.idea
+node_modules
+
+# Private files
+src/config/AuthDetails.hx
+
+# Compiler output
+out
