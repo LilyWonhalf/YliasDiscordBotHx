@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project basedir="." name="myproject" default="deploy-local" >
+    <property file="discord.properties"/>
     <property file="build.properties"/>
 
     <target name="deploy">
+        <antcall target="set-token"/>
         <antcall target="package"/>
         <antcall target="upload"/>
         <antcall target="remove-package"/>
         <antcall target="unpack"/>
         <antcall target="delete-package"/>
+    </target>
+
+    <target name="set-token">
+        <replace
+            file="out/release/bot.js"
+            token="${debugToken}"
+            value="${prodToken}"
+        />
     </target>
 
     <target name="package">
