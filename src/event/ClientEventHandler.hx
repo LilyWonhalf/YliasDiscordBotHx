@@ -1,5 +1,6 @@
 package event;
 
+import config.Config;
 import model.Command;
 import model.Chat;
 import translations.L;
@@ -28,7 +29,7 @@ class ClientEventHandler extends EventHandler<Client> {
 
     private function messageHandler(msg: Message) {
         var client: Client = cast NodeJS.global.client;
-        var messageIsCommand = msg.content.indexOf('!') == 0;
+        var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
         var messageIsPrivate = msg.author != client.user && msg.channel.isPrivate && !messageIsCommand;
         var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, client.user) && !messageIsCommand;
         var info = 'from ' + msg.author.username;

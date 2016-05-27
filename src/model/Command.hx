@@ -70,7 +70,7 @@ class Command {
     }
 
     public function requestExecuteCommand(msg: Message, command: String, args: Array<String>): Void {
-        if (command != '!') {
+        if (command != Config.COMMAND_IDENTIFIER) {
             var serverId: String = '0';
 
             if (!msg.channel.isPrivate) {
@@ -122,7 +122,7 @@ class Command {
             _commands.set(commandName.toLowerCase(), cast Type.resolveClass('model.commandlist.' + commandName));
         }
 
-        _commands.set('!', cast RepeatCommand);
+        _commands.set(Config.COMMAND_IDENTIFIER, cast RepeatCommand);
     }
 
     private function displayHelpDialog(msg: Message): Void {
@@ -150,7 +150,7 @@ class Command {
                     var description = instance.description;
 
                     if (!hidden && deniedCommandList.indexOf(cmd) < 0) {
-                        output += '\t**!' + cmd + ' ' + usage + '**\n\t\t*' + description + '*\n\n';
+                        output += '\t**' + Config.COMMAND_IDENTIFIER + cmd + ' ' + usage + '**\n\t\t*' + description + '*\n\n';
                     }
                 }
 
