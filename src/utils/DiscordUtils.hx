@@ -28,7 +28,7 @@ class DiscordUtils {
     }
 
     public static function isHightlight(str: String): Bool {
-        return ~/<@\d+>/ig.match(str);
+        return ~/<@!?\d+>/ig.match(str);
     }
 
     public static function getIdFromHighlight(str: String): String {
