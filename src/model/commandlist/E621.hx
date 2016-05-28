@@ -15,6 +15,7 @@ class E621 implements ICommandDefinition {
             host: 'e621.net',
             limitKey: 'limit',
             tagsKey: 'tags',
+            tagsKeySeparator: ',',
             pageKey: 'page',
             pathToPosts: '/post/index.xml?login=' + AuthDetails.E621_LOGIN + '&password_hash=' + AuthDetails.E621_PASSWORD_HASH,
             isJson: false,

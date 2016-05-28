@@ -146,7 +146,7 @@ class MangaPictureProxy {
 
             if (jsonData != null) {
                 var posts: Array<Dynamic> = cast Reflect.field(jsonData, infos.postsField);
-                _nbPosts = Std.parseInt(cast Reflect.field(jsonData, infos.nbPostsField));
+                _nbPosts = cast Reflect.field(jsonData, infos.nbPostsField);
 
                 if (posts.length > 0) {
                     if (_nbPosts > 0) {
@@ -159,7 +159,7 @@ class MangaPictureProxy {
                     }
                 } else {
                     Logger.error('Failed to load a picture (step 2), URL: ' + _path);
-                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
                 }
             } else {
                 Logger.error('Failed to load a picture (step 1), URL: ' + _path);
@@ -201,6 +201,7 @@ typedef MangaPictureProxyInfo = {
     host: String,
     limitKey: String,
     tagsKey: String,
+    tagsKeySeparator: String,
     pageKey: String,
     pathToPosts: String,
     isJson: Bool,

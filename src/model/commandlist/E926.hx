@@ -14,6 +14,7 @@ class E926 implements ICommandDefinition {
             host: 'e926.net',
             limitKey: 'limit',
             tagsKey: 'tags',
+            tagsKeySeparator: ',',
             pageKey: 'page',
             pathToPosts: '/post/index.xml',
             isJson: false,

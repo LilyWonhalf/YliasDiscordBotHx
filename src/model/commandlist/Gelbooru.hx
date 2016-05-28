@@ -14,6 +14,7 @@ class Gelbooru implements ICommandDefinition {
             host: 'gelbooru.com',
             limitKey: 'limit',
             tagsKey: 'tags',
+            tagsKeySeparator: ',',
             pageKey: 'pid',
             pathToPosts: '/index.php?page=dapi&s=post&q=index',
             isJson: false,

@@ -14,6 +14,7 @@ class Safebooru implements ICommandDefinition {
             host: 'safebooru.org',
             limitKey: 'limit',
             tagsKey: 'tags',
+            tagsKeySeparator: ',',
             pageKey: 'pid',
             pathToPosts: '/index.php?page=dapi&s=post&q=index',
             isJson: false,
