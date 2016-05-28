@@ -1,6 +1,5 @@
 package model.commandlist;
 
-import config.AuthDetails;
 import translations.L;
 import external.discord.message.Message;
 
