@@ -1,5 +1,6 @@
 package net;
 
+import haxe.Json;
 import js.html.Text;
 import nodejs.http.HTTP.HTTPMethod;
 import js.html.Element;
@@ -20,6 +21,7 @@ class MangaPictureProxy {
     private var _path: String;
     private var _initializationCallback: Int->Void;
     private var _nbPosts: Int;
+    private var _nbPostsByPage: Int;
 
     public function new(msg: Message, infos: MangaPictureProxyInfo) {
         this.infos = infos;
@@ -37,10 +39,15 @@ class MangaPictureProxy {
 
         _tags = tags;
         _initializationCallback = callback;
-        _path = infos.pathToPosts + separator + infos.limitKey + '=1';
+        _path = infos.pathToPosts;
+
+        if (infos.limitKey != null) {
+             _path += separator + infos.limitKey + '=1';
+            separator = '&';
+        }
 
         if (_tags.length > 0) {
-            _path += '&' + infos.tagsKey + '=' + _tags.join(',');
+            _path += separator + infos.tagsKey + '=' + _tags.join(',');
         }
 
         HttpUtils.query(infos.secured, infos.host, _path, cast HTTPMethod.Get, initializeQueryCompleteHandler);
@@ -48,68 +55,143 @@ class MangaPictureProxy {
 
     public function findPicture(callback: Array<String>->String->Bool->Void): Void {
         var newPath = _path + '&' + infos.pageKey + '=';
+        var maxPage = Math.ceil(_nbPosts / _nbPostsByPage);
 
-        HttpUtils.query(infos.secured, infos.host, newPath + Math.round(Math.random() * _nbPosts), cast HTTPMethod.Get, function (data) {
-            var parser: DOMParser = new DOMParser();
-            var xmlDoc = parser.parseFromString(data, 'text/xml');
-            var client: Client = cast NodeJS.global.client;
+        HttpUtils.query(infos.secured, infos.host, newPath + Math.round(Math.random() * maxPage), cast HTTPMethod.Get, function (data) {
+            if (infos.isJson) {
+                var jsonData: Dynamic = null;
+                var client: Client = cast NodeJS.global.client;
 
-            if (xmlDoc != null) {
-                var posts = xmlDoc.getElementsByTagName('post');
+                try {
+                    jsonData = cast Json.parse(data);
+                } catch (e: Dynamic) {
+                    Logger.exception(e);
+                }
 
-                if (posts.length > 0) {
-                    var post: Element = posts[0];
-                    var tags:Array<String>;
-                    var fileUrl: String;
-                    var nsfw: Bool;
+                if (jsonData != null) {
+                    var posts: Array<Dynamic> = cast Reflect.field(jsonData, infos.postsField);
 
-                    if (infos.postDataInAttributes) {
-                        tags = post.getAttribute('tags').split(' ');
-                        fileUrl = post.getAttribute('file_url');
-                        nsfw = post.getAttribute('rating') == 'e';
+                    if (posts.length > 0) {
+                        var post: Dynamic = cast posts[0];
+                        var tags:Array<String> = cast Reflect.field(post, infos.tagsField).split(infos.tagsSeparator);
+                        var fileUrl: String = cast Reflect.field(post, infos.fileUrlField);
+                        var nsfw: Bool = false;
+
+                        if (infos.ratingField != null) {
+                            nsfw = Reflect.field(post, infos.ratingField) == 'e';
+                        }
+
+                        callback(tags, fileUrl, nsfw);
                     } else {
-                        tags = post.getElementsByTagName('tags')[0].childNodes[0].nodeValue.split(' ');
-                        fileUrl = post.getElementsByTagName('file_url')[0].childNodes[0].nodeValue;
-                        nsfw = post.getElementsByTagName('rating')[0].childNodes[0].nodeValue == 'e';
+                        Logger.error('Failed to load a picture (step 5), URL: ' + _path);
+                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
                     }
-
-                    callback(tags, fileUrl, nsfw);
                 } else {
-                    Logger.error('Failed to load a picture (step 5), URL: ' + _path);
+                    Logger.error('Failed to load a picture (step 4), URL: ' + _path);
                     client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
                 }
             } else {
-                Logger.error('Failed to load a picture (step 4), URL: ' + _path);
-                client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                var parser: DOMParser = new DOMParser();
+                var xmlDoc = parser.parseFromString(data, 'text/xml');
+                var client: Client = cast NodeJS.global.client;
+
+                if (xmlDoc != null) {
+                    var posts = xmlDoc.getElementsByTagName(infos.postField);
+
+                    if (posts.length > 0) {
+                        var post: Element = posts[0];
+                        var tags:Array<String>;
+                        var fileUrl: String;
+                        var nsfw: Bool = false;
+
+                        if (infos.postDataInAttributes) {
+                            tags = post.getAttribute(infos.tagsField).split(infos.tagsSeparator);
+                            fileUrl = post.getAttribute(infos.fileUrlField);
+
+                            if (infos.ratingField != null) {
+                                nsfw = post.getAttribute(infos.ratingField) == 'e';
+                            }
+                        } else {
+                            tags = post.getElementsByTagName(infos.tagsField)[0].childNodes[0].nodeValue.split(infos.tagsSeparator);
+                            fileUrl = post.getElementsByTagName(infos.fileUrlField)[0].childNodes[0].nodeValue;
+
+                            if (infos.ratingField != null) {
+                                nsfw = post.getElementsByTagName(infos.ratingField)[0].childNodes[0].nodeValue == 'e';
+                            }
+                        }
+
+                        callback(tags, fileUrl, nsfw);
+                    } else {
+                        Logger.error('Failed to load a picture (step 5), URL: ' + _path);
+                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                    }
+                } else {
+                    Logger.error('Failed to load a picture (step 4), URL: ' + _path);
+                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                }
             }
         });
     }
 
     private function initializeQueryCompleteHandler(data: String): Void {
-        var parser: DOMParser = new DOMParser();
-        var xmlDoc = parser.parseFromString(data, 'text/xml');
-        var client: Client = cast NodeJS.global.client;
+        if (infos.isJson) {
+            var jsonData: Dynamic = null;
+            var client: Client = cast NodeJS.global.client;
 
-        if (xmlDoc != null) {
-            var postsTags: Array<Element> = cast xmlDoc.getElementsByTagName('posts');
+            try {
+                jsonData = cast Json.parse(data);
+            } catch (e: Dynamic) {
+                Logger.exception(e);
+            }
 
-            if (postsTags.length > 0) {
-                _nbPosts = Std.int(cast postsTags[0].getAttribute('count'));
+            if (jsonData != null) {
+                var posts: Array<Dynamic> = cast Reflect.field(jsonData, infos.postsField);
+                _nbPosts = Std.parseInt(cast Reflect.field(jsonData, infos.nbPostsField));
 
-                if (_nbPosts > 0) {
-                    _initializationCallback(_nbPosts);
+                if (posts.length > 0) {
+                    if (_nbPosts > 0) {
+                        _nbPostsByPage = posts.length;
+                        _initializationCallback(_nbPosts);
+                    } else {
+                        Logger.error('Failed to load a picture (step 3), URL: ' + _path);
+                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
+                        _initializationCallback(_nbPosts);
+                    }
                 } else {
-                    Logger.error('Failed to load a picture (step 3), URL: ' + _path);
-                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
-                    _initializationCallback(_nbPosts);
+                    Logger.error('Failed to load a picture (step 2), URL: ' + _path);
+                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
                 }
             } else {
-                Logger.error('Failed to load a picture (step 2), URL: ' + _path);
+                Logger.error('Failed to load a picture (step 1), URL: ' + _path);
                 client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
             }
         } else {
-            Logger.error('Failed to load a picture (step 1), URL: ' + _path);
-            client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+            var parser: DOMParser = new DOMParser();
+            var xmlDoc = parser.parseFromString(data, 'text/xml');
+            var client: Client = cast NodeJS.global.client;
+
+            if (xmlDoc != null) {
+                var postsTags: Array<Element> = cast xmlDoc.getElementsByTagName(infos.postsField);
+
+                if (postsTags.length > 0) {
+                    _nbPosts = Std.int(cast postsTags[0].getAttribute(infos.nbPostsField));
+
+                    if (_nbPosts > 0) {
+                        _nbPostsByPage = postsTags[0].getElementsByTagName(infos.postField).length;
+                        _initializationCallback(_nbPosts);
+                    } else {
+                        Logger.error('Failed to load a picture (step 3), URL: ' + _path);
+                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
+                        _initializationCallback(_nbPosts);
+                    }
+                } else {
+                    Logger.error('Failed to load a picture (step 2), URL: ' + _path);
+                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                }
+            } else {
+                Logger.error('Failed to load a picture (step 1), URL: ' + _path);
+                client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+            }
         }
     }
 }
@@ -121,5 +203,13 @@ typedef MangaPictureProxyInfo = {
     tagsKey: String,
     pageKey: String,
     pathToPosts: String,
-    postDataInAttributes: Bool
+    isJson: Bool,
+    postDataInAttributes: Bool,
+    nbPostsField: String,
+    postsField: String,
+    postField: String,
+    tagsField: String,
+    fileUrlField: String,
+    ratingField: String,
+    tagsSeparator: String
 }

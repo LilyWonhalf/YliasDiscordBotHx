@@ -16,7 +16,15 @@ class Gelbooru implements ICommandDefinition {
             tagsKey: 'tags',
             pageKey: 'pid',
             pathToPosts: '/index.php?page=dapi&s=post&q=index',
-            postDataInAttributes: true
+            isJson: false,
+            postDataInAttributes: true,
+            nbPostsField: 'count',
+            postsField: 'posts',
+            postField: 'post',
+            tagsField: 'tags',
+            fileUrlField: 'file_url',
+            ratingField: 'rating',
+            tagsSeparator: ' '
         });
 
         searchEngine.searchPicture(args);

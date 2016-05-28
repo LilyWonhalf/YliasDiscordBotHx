@@ -1,6 +1,5 @@
 package model.commandlist;
 
-import config.AuthDetails;
 import translations.L;
 import external.discord.message.Message;
 
@@ -17,7 +16,15 @@ class E926 implements ICommandDefinition {
             tagsKey: 'tags',
             pageKey: 'page',
             pathToPosts: '/post/index.xml',
-            postDataInAttributes: false
+            isJson: false,
+            postDataInAttributes: false,
+            nbPostsField: 'count',
+            postsField: 'posts',
+            postField: 'post',
+            tagsField: 'tags',
+            fileUrlField: 'file_url',
+            ratingField: 'rating',
+            tagsSeparator: ' '
         });
 
         searchEngine.searchPicture(args);

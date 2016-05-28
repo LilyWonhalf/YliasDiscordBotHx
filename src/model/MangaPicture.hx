@@ -99,10 +99,3 @@ class MangaPicture {
         }
     }
 }
-
-enum MangaPictureHost {
-    e621;
-    e926;
-    gelbooru;
-    safebooru;
-}

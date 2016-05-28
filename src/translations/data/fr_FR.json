@@ -168,6 +168,10 @@
     "Permet de rechercher des images style manga sfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
   ],
 
+  "model.commandlist.derpibooru.description": [
+    "Permet de rechercher des images brony (des poneys) potentiellement nsfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
+  ],
+
   "model.commandlist.eval.description": [
     "Permet d'exécuter des commandes javascript et d'afficher le retour"
   ],

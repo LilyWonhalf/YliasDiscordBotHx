@@ -17,7 +17,15 @@ class E621 implements ICommandDefinition {
             tagsKey: 'tags',
             pageKey: 'page',
             pathToPosts: '/post/index.xml?login=' + AuthDetails.E621_LOGIN + '&password_hash=' + AuthDetails.E621_PASSWORD_HASH,
-            postDataInAttributes: false
+            isJson: false,
+            postDataInAttributes: false,
+            nbPostsField: 'count',
+            postsField: 'posts',
+            postField: 'post',
+            tagsField: 'tags',
+            fileUrlField: 'file_url',
+            ratingField: 'rating',
+            tagsSeparator: ' '
         });
 
         searchEngine.searchPicture(args);

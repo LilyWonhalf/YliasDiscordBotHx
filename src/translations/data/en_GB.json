@@ -149,6 +149,10 @@
     "Allows you to search for manga pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
   ],
 
+  "model.commandlist.derpibooru.description": [
+    "Allows you to search for brony (poney) pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
+  ],
+
   "model.commandlist.eval.description": [
     "Allows you to execute javascript commands and display the return value."
   ],
