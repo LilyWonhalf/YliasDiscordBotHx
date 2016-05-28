@@ -1,5 +1,7 @@
 package model.commandlist;
 
+import js.RegExp;
+import utils.Logger;
 import StringTools;
 import translations.L;
 import nodejs.NodeJS;
@@ -89,8 +91,8 @@ class Scream implements ICommandDefinition {
             emoji: ':ok_hand:'
         });
 
-        if (args.length > 0 && StringTools.trim(args[0]).length > 0) {
-            scream = args[0].toLowerCase();
+        if (args.length > 0 && StringTools.trim(args.join(' ')).length > 0) {
+            scream = args.join(' ').toLowerCase();
             emoji = '';
         }
 
@@ -106,19 +108,42 @@ class Scream implements ICommandDefinition {
         }
 
         if (renderedScream == null) {
-            if (~/[aeiouy]/.match(scream)) {
+            if (~/[aeiouy]/g.match(scream)) {
                 var vowel: String = null;
-                var vowelsOnlyScream: String = null;
-                var doubleVowelsRegexp: EReg = ~/([aeiouy])\1/;
+                var vowelPosition: Int = null;
+                var regexpResult: RegExpMatch = null;
 
-                if (doubleVowelsRegexp.match(scream)) {
-                    vowelsOnlyScream = doubleVowelsRegexp.matched(0);
+                if (~/([aeiouy])\1/g.match(scream)) {
+                    var doubleVowelsRegexp: RegExp = new RegExp('([aeiouy])\\1', 'g');
+
+                    do {
+                        if (regexpResult != null) {
+                            vowel = regexpResult[1];
+                            vowelPosition = regexpResult.index;
+                        }
+
+                        regexpResult = doubleVowelsRegexp.exec(scream);
+                    } while (regexpResult != null);
                 } else {
-                    vowelsOnlyScream = ~/[^aeiouy]/g.replace(scream, '');
-                }
+                    var simpleVowelsRegexp: RegExp = new RegExp('([aeiouy])', 'g');
+                    var consonantRegexp: EReg = ~/([^aeiouy])/g;
+                    var screamReadyForSearch: String = scream;
+                    var lastCharacterIsE = scream.charAt(scream.length - 1) == 'e';
+                    var penultimateCharacterIsConsonant = consonantRegexp.match(scream.charAt(scream.length - 2));
 
-                vowel = vowelsOnlyScream.charAt(Math.floor(Math.random() * (vowelsOnlyScream.length)));
-                var vowelPosition = scream.lastIndexOf(vowel);
+                    if (lastCharacterIsE && penultimateCharacterIsConsonant) {
+                        screamReadyForSearch = scream.substr(0, scream.length - 1);
+                    }
+
+                    do {
+                        if (regexpResult != null) {
+                            vowel = regexpResult[1];
+                            vowelPosition = regexpResult.index;
+                        }
+
+                        regexpResult = simpleVowelsRegexp.exec(screamReadyForSearch);
+                    } while (regexpResult != null);
+                }
 
                 renderedScream = scream.substr(0, vowelPosition + 1) + '%%' + scream.substr(vowelPosition + 1);
                 renderedScream = renderedScream.toUpperCase();
