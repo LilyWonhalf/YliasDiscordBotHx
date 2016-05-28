@@ -93,9 +93,9 @@ class MangaPicture {
                 message += '\n\nNSFW';
             }
 
-            client.sendMessage(_msg.channel, _msg.author + ' => ' + message, cast {tts: false}, function(err: Dynamic, msg: Message) {
-                client.sendMessage(_msg.channel, _msg.author + ' => ' + fileUrl);
-            });
+            message += '\n\n' + fileUrl;
+
+            client.sendMessage(_msg.channel, _msg.author + ' => ' + message);
         }
     }
 }
