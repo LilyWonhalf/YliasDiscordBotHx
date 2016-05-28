@@ -22,7 +22,7 @@ class Server extends Entity {
         ]
     };
 
-    public var id: Int;
+    public var id: String;
     public var name: String;
 
     public static function registerServers(): Void {
@@ -31,7 +31,7 @@ class Server extends Entity {
                 Logger.exception(err);
             } else {
                 var client: Client = NodeJS.global.client;
-                var ids = new Array<String>;
+                var ids = new Array<String>();
 
                 for (result in results) {
                     ids.push(result.id);

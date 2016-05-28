@@ -1,5 +1,7 @@
 package event;
 
+import model.entity.User;
+import model.entity.Server;
 import config.Config;
 import model.Command;
 import model.Chat;
@@ -24,6 +26,8 @@ class ClientEventHandler extends EventHandler<Client> {
 
     private function readyHandler() {
         Logger.info('Connected! Serving in ' + _eventEmitter.channels.length + ' channels.');
+        Server.registerServers();
+        User.registerUsers();
         Chat.initialize();
     }
 
@@ -31,7 +35,7 @@ class ClientEventHandler extends EventHandler<Client> {
         var client: Client = cast NodeJS.global.client;
         var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
         var messageIsPrivate = msg.author != client.user && msg.channel.isPrivate && !messageIsCommand;
-        var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, client.user) && !messageIsCommand;
+        var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, client.user) && msg.author.id != client.user.id && !messageIsCommand;
         var info = 'from ' + msg.author.username;
 
         if (msg.channel.isPrivate) {
@@ -52,6 +56,7 @@ class ClientEventHandler extends EventHandler<Client> {
 
     private function serverNewMemberHandler() {
         Logger.info('New member joined!');
+        User.registerUsers();
     }
 
     private function disconnectedHandler() {

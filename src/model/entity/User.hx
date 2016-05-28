@@ -22,7 +22,7 @@ class User extends Entity {
         ]
     };
 
-    public var id: Int;
+    public var id: String;
     public var name: String;
 
     public static function registerUsers(): Void {
@@ -31,7 +31,7 @@ class User extends Entity {
                 Logger.exception(err);
             } else {
                 var client: Client = NodeJS.global.client;
-                var ids = new Array<String>;
+                var ids = new Array<String>();
 
                 for (result in results) {
                     ids.push(result.id);
@@ -43,7 +43,7 @@ class User extends Entity {
                             var newUser = new User();
 
                             newUser.id = user.id;
-                            newUser.name = user.name;
+                            newUser.name = user.username;
                             newUser.save();
 
                             ids.push(user.id);
