@@ -10,6 +10,7 @@
         <antcall target="remove-package"/>
         <antcall target="unpack"/>
         <antcall target="delete-package"/>
+        <antcall target="unset-token"/>
     </target>
 
     <target name="set-token">
@@ -64,5 +65,13 @@
             trust="true"
             command="rm ${sshFolder}/${archiveFilename}"
         />
+    </target>
+
+    <target name="unset-token">
+        <replace
+                file="out/release/bot.js"
+                token="${prodToken}"
+                value="${debugToken}"
+                />
     </target>
 </project>
