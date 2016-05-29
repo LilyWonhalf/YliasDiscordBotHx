@@ -129,7 +129,7 @@ class Command {
                 var content = new Array<String>();
 
                 for (cmd in _commands.keys()) {
-                    var instance: ICommandDefinition = cast Type.createInstance(cast _commands.get(cmd), []);
+                    var instance: ICommandDefinition = cast Type.createInstance(cast _commands.get(cmd), [context]);
 
                     var hidden = instance.hidden;
                     var usage = instance.paramsUsage;
