@@ -6,7 +6,7 @@ import StringTools;
 import translations.LangCenter;
 
 class AddTagToBlacklist implements ICommandDefinition {
-    public var paramsUsage = '(tag) *(server id)*';
+    public var paramsUsage = '(tag)';
     public var description: String;
     public var hidden = false;
 
@@ -23,14 +23,8 @@ class AddTagToBlacklist implements ICommandDefinition {
         var author = _context.getMessage().author;
 
         if (args.length > 0) {
-            var tag: String = StringTools.trim(args[0]);
-            var idServer: String;
-
-            if (args.length > 1 && StringTools.trim(args[1]).length > 0) {
-                idServer = StringTools.trim(args[1]);
-            } else {
-                idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
-            }
+            var tag: String = StringTools.trim(args.join(' '));
+            var idServer: String = DiscordUtils.getServerIdFromMessage(_context.getMessage());
 
             var newTag: TagBlacklist = new TagBlacklist();
 

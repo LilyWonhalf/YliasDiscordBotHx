@@ -27,7 +27,7 @@ class GetBlacklistedTags implements ICommandDefinition {
             serverId = StringTools.trim(args[0]);
         }
 
-        TagBlacklist.getAll(serverId, function(err: Dynamic, tags: Array<String>) {
+        TagBlacklist.getAllForServer(serverId, function(err: Dynamic, tags: Array<String>) {
             if (err != null) {
                 Logger.exception(err);
                 _context.sendToChannel('model.commandlist.getblacklistedtags.process.fail', cast [cast author]);

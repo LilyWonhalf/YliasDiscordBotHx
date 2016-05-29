@@ -29,7 +29,7 @@ class MangaPicture {
             return n != null && n.length > 0;
         });
 
-        TagBlacklist.getAll(idServer, function (err: Dynamic, blacklistedTags: Array<String>) {
+        TagBlacklist.getAllForServer(idServer, function (err: Dynamic, blacklistedTags: Array<String>) {
             if (err != null) {
                 Logger.exception(err);
                 _context.sendToChannel('model.mangapicture.searchpicture.sql_error', cast [author]);

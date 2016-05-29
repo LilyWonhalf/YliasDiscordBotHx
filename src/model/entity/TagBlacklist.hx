@@ -24,7 +24,7 @@ class TagBlacklist extends Entity {
     public var idServer: String;
     public var tag: String;
 
-    public static function getAll(idServer: String, callback: Dynamic->Array<String>->Void): Void {
+    public static function getAllForServer(idServer: String, callback: Dynamic->Array<String>->Void): Void {
         var query: String = 'SELECT DISTINCT tag FROM tag_blacklist WHERE id_server = ?';
         var values = new Array<String>();
 
