@@ -1,19 +1,26 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import utils.ArrayUtils;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class Hug implements ICommandDefinition {
     public var paramsUsage = '*(who)*';
-    public var description = L.a.n.g('model.commandlist.hug.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
-        var target: String = msg.author.mention();
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.hug.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var target: String = _context.getMessage().author.mention();
+        var idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
         var hugs: Array<String>;
         var hug: String;
 
@@ -21,28 +28,27 @@ class Hug implements ICommandDefinition {
             target = args.join(' ');
         }
 
-        if (target.indexOf(client.user.id) > -1) {
+        if (target.indexOf(Core.userInstance.id) > -1) {
             hugs = [
-                L.a.n.g('model.commandlist.hug.process.self_hug.1'),
-                L.a.n.g('model.commandlist.hug.process.self_hug.2'),
-                L.a.n.g('model.commandlist.hug.process.self_hug.3')
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.self_hug.1'),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.self_hug.2'),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.self_hug.3')
             ];
         } else {
             hugs = [
-                L.a.n.g('model.commandlist.hug.process.hug.1', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.2', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.3', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.4', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.5', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.6', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.7', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.8', cast [target]),
-                L.a.n.g('model.commandlist.hug.process.hug.9', cast [target])
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.1', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.2', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.3', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.4', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.5', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.6', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.7', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.8', cast [target]),
+                LangCenter.instance.translate(idServer, 'model.commandlist.hug.process.hug.9', cast [target])
             ];
         }
 
         hug = ArrayUtils.random(hugs);
-
-        client.sendMessage(msg.channel, hug);
+        _context.rawSendToChannel(hug);
     }
 }

@@ -1,5 +1,6 @@
 package ;
 
+import model.Core;
 import external.discord.client.Client;
 import event.ProcessEventHandler;
 import event.ClientEventHandler;
@@ -32,13 +33,8 @@ class Bot {
         var clientEventHandler = new ClientEventHandler(client);
         var processEventHandler = new ProcessEventHandler(NodeJS.process);
 
+        Core.initialize(client);
         Logger.info('Logging in...');
-        client.loginWithToken(AuthDetails.DISCORD_TOKEN, null, null, function (err: Dynamic, token: String): Void {
-            if (err != null) {
-                Logger.exception(err);
-            }
-        });
-
-        NodeJS.global.client = client;
+        Core.instance.connect();
     }
 }

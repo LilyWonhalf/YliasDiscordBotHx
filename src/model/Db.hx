@@ -89,7 +89,7 @@ class Db {
         }
     }
 
-    public function close(callback: Void->Void): Void {
+    public function close(?callback: Void->Void): Void {
         _db.end(callback);
     }
 

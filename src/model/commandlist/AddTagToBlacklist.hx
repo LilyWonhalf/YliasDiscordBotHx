@@ -1,20 +1,26 @@
 package model.commandlist;
 
-import external.discord.channel.TextChannel;
+import utils.DiscordUtils;
 import model.entity.TagBlacklist;
 import StringTools;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class AddTagToBlacklist implements ICommandDefinition {
     public var paramsUsage = '(tag) *(server id)*';
-    public var description = L.a.n.g('model.commandlist.addtagtoblacklist.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.addtagtoblacklist.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
 
         if (args.length > 0) {
             var tag: String = StringTools.trim(args[0]);
@@ -23,13 +29,7 @@ class AddTagToBlacklist implements ICommandDefinition {
             if (args.length > 1 && StringTools.trim(args[1]).length > 0) {
                 idServer = StringTools.trim(args[1]);
             } else {
-                if (msg.channel.isPrivate) {
-                    idServer = '0';
-                } else {
-                    var channel: TextChannel = cast msg.channel;
-
-                    idServer = channel.server.id;
-                }
+                idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
             }
 
             var newTag: TagBlacklist = new TagBlacklist();
@@ -39,13 +39,13 @@ class AddTagToBlacklist implements ICommandDefinition {
 
             newTag.save(function (err: Dynamic) {
                 if (err != null) {
-                    client.sendMessage(msg.channel, L.a.n.g('model.commandlist.addtagtoblacklist.fail', cast [msg.author, err]));
+                    _context.sendToChannel('model.commandlist.addtagtoblacklist.fail', cast [author, err]);
                 } else {
-                    client.sendMessage(msg.channel, L.a.n.g('model.commandlist.addtagtoblacklist.success', cast [msg.author]));
+                    _context.sendToChannel('model.commandlist.addtagtoblacklist.success', cast [author]);
                 }
             });
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.addtagtoblacklist.wrong_format', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.addtagtoblacklist.wrong_format', cast [author]);
         }
     }
 }

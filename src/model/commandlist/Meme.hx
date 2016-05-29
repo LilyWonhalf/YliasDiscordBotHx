@@ -1,21 +1,28 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import external.imgflipper.Imgflipper;
 import config.AuthDetails;
 import utils.Logger;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 import model.entity.Meme as MemeEntity;
 
 class Meme implements ICommandDefinition {
     public var paramsUsage = '(type) "(top text)" *"(bottom text)"*';
-    public var description = L.a.n.g('model.commandlist.meme.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.meme.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
         var nbQuotes = ~/[^"]*/g.replace(args.join(' '), '').length;
 
         if (nbQuotes == 2 || nbQuotes == 4) {
@@ -43,17 +50,17 @@ class Meme implements ICommandDefinition {
                         if (err) {
                             Logger.exception(err);
                             Logger.debug(meme);
-                            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.meme.process.fail', cast [msg.author]));
+                            _context.sendToChannel('model.commandlist.meme.process.fail', cast [author]);
                         } else {
-                            client.sendMessage(msg.channel, msg.author + ' => ' + image);
+                            _context.rawSendToChannel(author + ' => ' + image);
                         }
                     });
                 } else {
-                    client.sendMessage(msg.channel, L.a.n.g('model.commandlist.meme.process.not_found', cast [msg.author]));
+                    _context.sendToChannel('model.commandlist.meme.process.not_found', cast [author]);
                 }
             });
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.meme.process.parse_error', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.meme.process.parse_error', cast [author]);
         }
     }
 }

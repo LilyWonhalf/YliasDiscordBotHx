@@ -30,14 +30,13 @@ class User extends Entity {
             if (err != null) {
                 Logger.exception(err);
             } else {
-                var client: Client = NodeJS.global.client;
                 var ids = new Array<String>();
 
                 for (result in results) {
                     ids.push(result.id);
                 }
 
-                for (server in client.servers) {
+                for (server in Core.instance.getServers()) {
                     for (user in server.members) {
                         if (ids.indexOf(user.id) < 0) {
                             var newUser = new User();

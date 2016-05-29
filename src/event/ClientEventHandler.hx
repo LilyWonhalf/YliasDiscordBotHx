@@ -1,17 +1,15 @@
 package event;
 
-import model.entity.User;
+import external.discord.user.User;
+import model.Core;
+import model.entity.User as UserEntity;
 import model.entity.Server;
 import config.Config;
 import model.Command;
 import model.Chat;
-import translations.L;
 import utils.DiscordUtils;
 import external.discord.channel.TextChannel;
-import external.discord.channel.PMChannel;
 import haxe.Timer;
-import config.AuthDetails;
-import nodejs.NodeJS;
 import external.discord.message.Message;
 import external.discord.client.Client;
 import utils.Logger;
@@ -27,15 +25,15 @@ class ClientEventHandler extends EventHandler<Client> {
     private function readyHandler() {
         Logger.info('Connected! Serving in ' + _eventEmitter.channels.length + ' channels.');
         Server.registerServers();
-        User.registerUsers();
+        UserEntity.registerUsers();
         Chat.initialize();
     }
 
     private function messageHandler(msg: Message) {
-        var client: Client = cast NodeJS.global.client;
+        var user: User = Core.userInstance;
         var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
-        var messageIsPrivate = msg.author != client.user && msg.channel.isPrivate && !messageIsCommand;
-        var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, client.user) && msg.author.id != client.user.id && !messageIsCommand;
+        var messageIsPrivate = msg.author != user && msg.channel.isPrivate && !messageIsCommand;
+        var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, user) && msg.author.id != user.id && !messageIsCommand;
         var info = 'from ' + msg.author.username;
 
         if (msg.channel.isPrivate) {
@@ -56,17 +54,15 @@ class ClientEventHandler extends EventHandler<Client> {
 
     private function serverNewMemberHandler() {
         Logger.info('New member joined!');
-        User.registerUsers();
+        UserEntity.registerUsers();
     }
 
     private function disconnectedHandler() {
         Logger.info('Disconnected!');
 
         Timer.delay(function () {
-            var client: Client = cast NodeJS.global.client;
-
             Logger.info('Trying to reconnect...');
-            client.loginWithToken(AuthDetails.DISCORD_TOKEN);
+            Core.instance.connect();
         }, 1000);
     }
 }

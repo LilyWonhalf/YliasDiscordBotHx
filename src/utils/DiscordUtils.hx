@@ -1,30 +1,21 @@
 package utils;
 
-import translations.L;
+import model.Core;
+import translations.LangCenter;
 import external.discord.channel.TextChannel;
 import config.Config;
 import external.discord.message.Message;
 import external.discord.channel.PMChannel;
 import config.AuthDetails;
-import nodejs.NodeJS;
-import external.discord.client.Client;
 import external.discord.user.User;
 
 class DiscordUtils {
     public static function getOwnerInstance(): User {
-        var client: Client = cast NodeJS.global.client;
-
-        return client.privateChannels.filter(
+        return Core.instance.getPrivateChannels().filter(
             function(e: PMChannel) {
                 return e.recipient.id == AuthDetails.OWNER_ID;
             }
         )[0].recipient;
-    }
-
-    public static function sendMessageToOwner(msg: String): Void {
-        var client: Client = cast NodeJS.global.client;
-
-        client.sendMessage(getOwnerInstance(), msg);
     }
 
     public static function isHightlight(str: String): Bool {
@@ -92,7 +83,8 @@ class DiscordUtils {
         var location: String;
 
         if (msg.channel.isPrivate) {
-            location = L.a.n.g(
+            location = LangCenter.instance.translate(
+                Config.KEY_ALL,
                 'utils.discordutils.getlocationstringfrommessage.location_private',
                 [
                     Date.now().toString()
@@ -101,7 +93,8 @@ class DiscordUtils {
         } else {
             var channel: TextChannel = cast msg.channel;
 
-            location = L.a.n.g(
+            location = LangCenter.instance.translate(
+                channel.server.id,
                 'utils.discordutils.getlocationstringfrommessage.location_public',
                 [
                     channel.server.name,

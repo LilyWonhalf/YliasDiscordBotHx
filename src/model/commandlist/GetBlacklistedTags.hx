@@ -3,19 +3,25 @@ package model.commandlist;
 import utils.Logger;
 import model.entity.TagBlacklist;
 import utils.DiscordUtils;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class GetBlacklistedTags implements ICommandDefinition {
     public var paramsUsage = '*(server id)*';
-    public var description = L.a.n.g('model.commandlist.getblacklistedtags.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
-        var serverId: String = DiscordUtils.getServerIdFromMessage(msg);
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.getblacklistedtags.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
+        var serverId: String = DiscordUtils.getServerIdFromMessage(_context.getMessage());
 
         if (args.length > 0 && StringTools.trim(args[0]).length > 0) {
             serverId = StringTools.trim(args[0]);
@@ -24,9 +30,9 @@ class GetBlacklistedTags implements ICommandDefinition {
         TagBlacklist.getAll(serverId, function(err: Dynamic, tags: Array<String>) {
             if (err != null) {
                 Logger.exception(err);
-                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.getblacklistedtags.process.fail', cast [cast msg.author]));
+                _context.sendToChannel('model.commandlist.getblacklistedtags.process.fail', cast [cast author]);
             } else {
-                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.getblacklistedtags.process.success', cast [cast msg.author, tags.join('\n')]));
+                _context.sendToChannel('model.commandlist.getblacklistedtags.process.success', cast [cast author, tags.join('\n')]);
             }
         });
     }

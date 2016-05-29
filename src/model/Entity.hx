@@ -120,7 +120,7 @@ class Entity {
                     query += ', ';
                 }
 
-                query += columns + ' = ?';
+                query += column + ' = ?';
             }
 
             values.push(

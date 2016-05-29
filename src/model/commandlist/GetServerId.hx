@@ -1,25 +1,32 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import external.discord.channel.TextChannel;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class GetServerId implements ICommandDefinition {
     public var paramsUsage = '';
-    public var description = L.a.n.g('model.commandlist.getserverid.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
 
-        if (msg.channel.isPrivate) {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.getserverod.process.private_conversation', cast [msg.author]));
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.getserverid.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
+
+        if (_context.getMessage().channel.isPrivate) {
+            _context.sendToChannel('model.commandlist.getserverod.process.private_conversation', cast [author]);
         } else {
-            var channel: TextChannel = cast msg.channel;
+            var channel: TextChannel = cast _context.getMessage().channel;
 
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.getserverod.process.answer', cast [cast msg.author, channel.server.id]));
+            _context.sendToChannel('model.commandlist.getserverod.process.answer', cast [cast author, channel.server.id]);
         }
     }
 }

@@ -295,13 +295,26 @@
     "Welp... YouTube didn't find anything for you. I'm sorry %% :( ..."
   ],
 
+  "model.commandlist.setlang.description": [
+    "Allows you to change my lang"
+  ],
+  "model.commandlist.setlang.process.wrong_format": [
+    "You forgot to tell me in which lang I should speak..."
+  ],
+  "model.commandlist.setlang.process.wrong_lang": [
+    "I am sorry, but I don't know this lang :/ ..."
+  ],
+  "model.commandlist.setlang.process.answer": [
+    "Okay, my lang has been successfully changed :) !"
+  ],
+
 
 
   "model.mangapicture.searchpicture.sql_error": [
     "Welp... Seems like my database is not in the mood... I am sorry %% :( ..."
   ],
   "model.mangapicture.searchpicture.forbidden_search_message_to_owner": [
-    "The user %% tried to search a manga picture with the following forbidden tag(s): %%."
+    "The user %% tried to search a manga picture with the following forbidden tag(s): %%. %%"
   ],
   "model.mangapicture.searchpicture.forbidden_search_public_message": [
     "%% => You just made a search that involved at least one blacklisted tag. That's nasty. Here are the incriminated tags: %%"
@@ -337,7 +350,7 @@
     "This permission doesn't exist"
   ],
   "model.command.requestexecutecommand.message_to_owner": [
-    "%% tried to execute command %% with arguments \"%%\" but doesn't have the right to."
+    "%% tried to execute command %% with arguments \"%%\" but doesn't have the right to. %%"
   ],
   "model.command.requestexecutecommand.message_to_member": [
     "Sorry, %%, you don't have the right to execute this command."

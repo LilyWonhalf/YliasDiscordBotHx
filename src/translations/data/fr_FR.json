@@ -314,13 +314,26 @@
     "Bon... YouTube n'a pas trouvé de résultat pour cette recherche. Je suis désolé %% :( ..."
   ],
 
+  "model.commandlist.setlang.description": [
+    "Vous permet de changer la langue dans laquelle je parle"
+  ],
+  "model.commandlist.setlang.process.wrong_format": [
+    "Tu as oublié de me préciser la langue dans laquelle tu veux que je parle..."
+  ],
+  "model.commandlist.setlang.process.wrong_lang": [
+    "Je suis désolé, mais je ne connais pas cette langue :/ ..."
+  ],
+  "model.commandlist.setlang.process.answer": [
+    "C'est bon, ma langue a bien été changée :) !"
+  ],
+
 
 
   "model.mangapicture.searchpicture.sql_error": [
     "Bon... Ma base de données m'a envoyé ballader... Je suis désolé %% :( ..."
   ],
   "model.mangapicture.searchpicture.forbidden_search_message_to_owner": [
-    "L'utilisateur %% a tenté de faire une recherche d'image manga comportant le(s) tag(s) interdit(s) suivant(s) : %%."
+    "L'utilisateur %% a tenté de faire une recherche d'image manga comportant le(s) tag(s) interdit(s) suivant(s) : %%. %%"
   ],
   "model.mangapicture.searchpicture.forbidden_search_public_message": [
     "%% => Tu viens de faire une recherche comportant au moins un tag blacklisté. C'est pas très propre. Voici le(s) tag(s) incriminé(s) : %%"
@@ -359,7 +372,7 @@
 
 
   "model.command.requestexecutecommand.message_to_owner": [
-    "%% a essayé d'exécuter la commande %% avec les arguments \"%%\" alors qu'il n'a pas les droits."
+    "%% a essayé d'exécuter la commande %% avec les arguments \"%%\" alors qu'il n'a pas les droits. %%"
   ],
   "model.command.requestexecutecommand.message_to_member": [
     "Désolé, %%, tu n'as pas l'autorisation d'exécuter cette commande."

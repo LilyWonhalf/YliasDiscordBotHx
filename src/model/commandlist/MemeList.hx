@@ -1,23 +1,27 @@
 package model.commandlist;
 
 import utils.DiscordUtils;
-import utils.Logger;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
+import translations.LangCenter;
 import external.discord.message.Message;
 import model.entity.Meme;
 
 class MemeList implements ICommandDefinition {
     public var paramsUsage = '';
-    public var description = L.a.n.g('model.commandlist.memelist.description');
+    public var description: String;
     public var hidden = false;
 
     private var _splittedResult: Array<String>;
     private var _index: Int;
-    private var _msg: Message;
+    private var _context: CommunicationContext;
 
-    public function process(msg: Message, args: Array<String>): Void {
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.memelist.description');
+    }
+
+    public function process(args: Array<String>): Void {
         Entity.getAll(Meme, function (memes: Array<Meme>): Void {
             var result: String = '';
 
@@ -27,20 +31,17 @@ class MemeList implements ICommandDefinition {
 
             _splittedResult = DiscordUtils.splitLongMessage(result);
             _index = 0;
-            _msg = msg;
 
             sendMessage(null, null);
         });
     }
 
     private function sendMessage(err: Dynamic, msg: Message): Void {
-        var client: Client = cast NodeJS.global.client;
-
         if (_index > _splittedResult.length - 1) {
-            client.sendMessage(_msg.channel, L.a.n.g('model.commandlist.memelist.process.finished', cast [_msg.author]));
+            _context.sendToChannel('model.commandlist.memelist.process.finished', cast [_context.getMessage().author]);
         } else {
             _index++;
-            client.sendMessage(_msg.author, _splittedResult[_index - 1], cast {tts: false}, sendMessage);
+            _context.rawSendToAuthor(_splittedResult[_index - 1], sendMessage);
         }
     }
 }

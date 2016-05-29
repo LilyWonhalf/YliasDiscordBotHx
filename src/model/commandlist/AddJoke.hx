@@ -1,28 +1,35 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import utils.Logger;
 import model.entity.Joke;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class AddJoke implements ICommandDefinition {
     public var paramsUsage = '(the joke)';
-    public var description = L.a.n.g('model.commandlist.addjoke.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.addjoke.description');
+    }
+
+    public function process(args: Array<String>): Void {
         var joke = new Joke();
+        var author = _context.getMessage().author;
 
         joke.content = args.join(' ');
         joke.save(function (err) {
             if (err != null) {
                 Logger.exception(err);
-                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.addjoke.fail', cast [msg.author]));
+                _context.sendToChannel('model.commandlist.addjoke.fail', cast [author]);
             } else {
-                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.addjoke.success', cast [msg.author]));
+                _context.sendToChannel('model.commandlist.addjoke.success', cast [author]);
             }
         });
     }

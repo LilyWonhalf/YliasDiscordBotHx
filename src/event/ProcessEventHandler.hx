@@ -1,6 +1,7 @@
 package event;
 
-import external.discord.client.Client;
+import model.Db;
+import model.Core;
 import nodejs.NodeJS;
 import utils.Logger;
 import nodejs.Process;
@@ -14,15 +15,12 @@ class ProcessEventHandler extends EventHandler<Process> {
 
     private function uncaughtExceptionHandler(e: Dynamic) {
         Logger.exception(e.stack);
-
-        if (NodeJS.global.client != null) {
-            var client: Client = cast NodeJS.global.client;
-
-            client.logout();
-        }
+        Core.instance.disconnect();
     }
 
     private function signalInterruptionHandler() {
+        Core.instance.disconnect();
+        Db.instance.close();
         Logger.end();
         NodeJS.process.exit(0);
     }

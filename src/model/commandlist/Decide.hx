@@ -1,29 +1,38 @@
 package model.commandlist;
 
+import translations.LangCenter;
+import utils.DiscordUtils;
 import utils.Humanify;
 import utils.ArrayUtils;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class Decide implements ICommandDefinition {
     public var paramsUsage = '';
-    public var description = L.a.n.g('model.commandlist.decide.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
 
-        args = args.join(' ').split(' ' + L.a.n.g('model.commandlist.decide.process.split') + ' ');
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.decide.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
+        var idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
+
+        args = args.join(' ').split(' ' + LangCenter.instance.translate(idServer, 'model.commandlist.decide.process.split') + ' ');
 
         if (args.length > 1) {
             var picked = ArrayUtils.random(args);
-            var sentence = Humanify.getChoiceDeliverySentence(picked);
+            var sentence = LangCenter.instance.translate(idServer, Humanify.getChoiceDeliverySentence(), [picked]);
 
-            client.sendMessage(msg.channel, msg.author + ' => ' + sentence);
+            _context.rawSendToChannel(author + ' => ' + sentence);
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.decide.process.wrong_format', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.decide.process.wrong_format', cast [author]);
         }
     }
 }

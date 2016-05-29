@@ -1,22 +1,26 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import js.RegExp;
-import utils.Logger;
 import StringTools;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class Scream implements ICommandDefinition {
     public var paramsUsage = '';
-    public var description = L.a.n.g('model.commandlist.scream.description');
+    public var description: String;
     public var hidden = false;
 
+    private var _context: CommunicationContext;
     private var _screamList: Array<ScreamDetail>;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.scream.description');
+    }
+
+    public function process(args: Array<String>): Void {
         var scream: String = 'awoo';
         var emoji: String = ':waxing_gibbous_moon:';
         var renderedScream: String = null;
@@ -163,8 +167,7 @@ class Scream implements ICommandDefinition {
         }
 
         renderedScream = StringTools.replace(renderedScream, '%%', multipliedLetter);
-
-        client.sendMessage(msg.channel, msg.author + ' => ' + emoji + ' ' + renderedScream);
+        _context.rawSendToChannel(_context.getMessage().author + ' => ' + emoji + ' ' + renderedScream);
     }
 }
 

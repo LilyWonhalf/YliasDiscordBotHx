@@ -5,18 +5,24 @@ import model.entity.Permission;
 import utils.DiscordUtils;
 import external.discord.channel.TextChannel;
 import config.Config;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class UnregisterPermission implements ICommandDefinition {
     public var paramsUsage = '(user ID) (command) *(server ID)*';
-    public var description = L.a.n.g('model.commandlist.unregisterpermission.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.unregisterpermission.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
 
         if (args.length > 1 && StringTools.trim(args[0]).length > 0 && StringTools.trim(args[1]).length > 0) {
             var idUser: String = StringTools.trim(args[0]);
@@ -26,12 +32,7 @@ class UnregisterPermission implements ICommandDefinition {
             if (args.length > 2 && StringTools.trim(args[2]).length > 0) {
                 idServer = StringTools.trim(args[2]);
             } else {
-                if (msg.channel.isPrivate) {
-                    idServer = Config.KEY_ALL;
-                } else {
-                    var channel: TextChannel = cast msg.channel;
-                    idServer = channel.server.id;
-                }
+                idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
             }
 
             if (DiscordUtils.isHightlight(idUser)) {
@@ -51,20 +52,20 @@ class UnregisterPermission implements ICommandDefinition {
                         permission.remove(function (err: Dynamic) {
                             if (err != null) {
                                 Logger.exception(err);
-                                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.unregisterpermission.process.fail', cast [msg.author]));
+                                _context.sendToChannel('model.commandlist.unregisterpermission.process.fail', cast [author]);
                             } else {
-                                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.unregisterpermission.process.success', cast [msg.author]));
+                                _context.sendToChannel('model.commandlist.unregisterpermission.process.success', cast [author]);
                             }
                         });
                     } else {
-                        client.sendMessage(msg.channel, L.a.n.g('model.commandlist.unregisterpermission.process.not_found', cast [msg.author]));
+                        _context.sendToChannel('model.commandlist.unregisterpermission.process.not_found', cast [author]);
                     }
                 });
             } else {
-                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.unregisterpermission.process.wrong_user', cast [msg.author]));
+                _context.sendToChannel('model.commandlist.unregisterpermission.process.wrong_user', cast [author]);
             }
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.unregisterpermission.process.wrong_format', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.unregisterpermission.process.wrong_format', cast [author]);
         }
     }
 }

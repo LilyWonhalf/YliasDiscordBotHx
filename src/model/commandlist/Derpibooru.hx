@@ -1,15 +1,25 @@
 package model.commandlist;
 
-import translations.L;
+import utils.DiscordUtils;
+import translations.LangCenter;
 import external.discord.message.Message;
 
 class Derpibooru implements ICommandDefinition {
     public var paramsUsage = '*(tag 1)* *(tag 2)* *(tag n)*';
-    public var description = L.a.n.g('model.commandlist.derpibooru.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var searchEngine = new MangaPicture(msg, {
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.derpibooru.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var searchEngine = new MangaPicture(_context, {
             secured: true,
             host: 'derpibooru.org',
             limitKey: null,

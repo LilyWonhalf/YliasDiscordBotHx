@@ -1,21 +1,28 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import nodejs.http.HTTP.HTTPMethod;
 import utils.Logger;
 import haxe.Json;
 import utils.HttpUtils;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class Cat implements ICommandDefinition {
     public var paramsUsage = '';
-    public var description = L.a.n.g('model.commandlist.cat.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.cat.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
 
         HttpUtils.query(false, 'random.cat', '/meow', cast HTTPMethod.Get, function (data: String) {
             var response: Dynamic = null;
@@ -27,10 +34,10 @@ class Cat implements ICommandDefinition {
             }
 
             if (response != null && Reflect.hasField(response, 'file')) {
-                client.sendMessage(msg.channel, msg.author + ' => ' + response.file);
+                _context.rawSendToChannel(author + ' => ' + response.file);
             } else {
                 Logger.error('Failed to load a cat picture');
-                client.sendMessage(msg.channel, L.a.n.g('model.commandlist.cat.process.fail', cast [msg.author]));
+                _context.sendToChannel('model.commandlist.cat.process.fail', cast [author]);
             }
         });
     }

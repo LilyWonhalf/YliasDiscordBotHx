@@ -1,7 +1,5 @@
 package model.entity;
 
-import nodejs.NodeJS;
-import external.discord.client.Client;
 import model.Entity.EntityProperties;
 import utils.Logger;
 
@@ -30,14 +28,13 @@ class Server extends Entity {
             if (err != null) {
                 Logger.exception(err);
             } else {
-                var client: Client = NodeJS.global.client;
                 var ids = new Array<String>();
 
                 for (result in results) {
                     ids.push(result.id);
                 }
 
-                for (server in client.servers) {
+                for (server in Core.instance.getServers()) {
                     if (ids.indexOf(server.id) < 0) {
                         var newServer = new Server();
 

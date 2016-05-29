@@ -1,26 +1,24 @@
 package utils;
 
-import translations.L;
-
 class Humanify {
     public static function getMultimediaContentDeliverySentence(): String {
         var imageDeliverySentences: Array<String> = [
-            L.a.n.g('utils.humanify.getimagedeliverysentence.1'),
-            L.a.n.g('utils.humanify.getimagedeliverysentence.2'),
-            L.a.n.g('utils.humanify.getimagedeliverysentence.3'),
-            L.a.n.g('utils.humanify.getimagedeliverysentence.4'),
-            L.a.n.g('utils.humanify.getimagedeliverysentence.5')
+            'utils.humanify.getimagedeliverysentence.1',
+            'utils.humanify.getimagedeliverysentence.2',
+            'utils.humanify.getimagedeliverysentence.3',
+            'utils.humanify.getimagedeliverysentence.4',
+            'utils.humanify.getimagedeliverysentence.5'
         ];
 
         return ArrayUtils.random(imageDeliverySentences);
     }
 
-    public static function getChoiceDeliverySentence(choice: String): String {
+    public static function getChoiceDeliverySentence(): String {
         var choiceDeliverySentences: Array<String> = [
-            L.a.n.g('utils.humanify.getchoicedeliverysentence.1', [choice]),
-            L.a.n.g('utils.humanify.getchoicedeliverysentence.2', [choice]),
-            L.a.n.g('utils.humanify.getchoicedeliverysentence.3', [choice]),
-            L.a.n.g('utils.humanify.getchoicedeliverysentence.4', [choice])
+            'utils.humanify.getchoicedeliverysentence.1',
+            'utils.humanify.getchoicedeliverysentence.2',
+            'utils.humanify.getchoicedeliverysentence.3',
+            'utils.humanify.getchoicedeliverysentence.4'
         ];
 
         return ArrayUtils.random(choiceDeliverySentences);

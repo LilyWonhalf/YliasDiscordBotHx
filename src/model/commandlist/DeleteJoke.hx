@@ -1,19 +1,26 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import utils.Logger;
 import model.entity.Joke;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class DeleteJoke implements ICommandDefinition {
     public var paramsUsage = '(the joke ID)';
-    public var description = L.a.n.g('model.commandlist.deletejoke.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.deletejoke.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
 
         if (args.length > 0 && Std.is(args[0], Int)) {
             var joke: Joke = new Joke();
@@ -23,20 +30,20 @@ class DeleteJoke implements ICommandDefinition {
 
             joke.retrieve(primaryValues, function(found: Bool) {
                 if (!found) {
-                    client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletejoke.process.not_found', cast [msg.author]));
+                    _context.sendToChannel('model.commandlist.deletejoke.process.not_found', cast [author]);
                 } else {
                     joke.remove(function (err: Dynamic) {
                         if (err != null) {
                             Logger.exception(err);
-                            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletejoke.process.failed', cast [msg.author]));
+                            _context.sendToChannel('model.commandlist.deletejoke.process.failed', cast [author]);
                         } else {
-                            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletejoke.process.success', cast [msg.author]));
+                            _context.sendToChannel('model.commandlist.deletejoke.process.success', cast [author]);
                         }
                     });
                 }
             });
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletejoke.process.wong_format', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.deletejoke.process.wong_format', cast [author]);
         }
     }
 }

@@ -1,39 +1,35 @@
 package model.commandlist;
 
-import external.discord.channel.TextChannel;
+import utils.DiscordUtils;
 import model.entity.TagBlacklist;
-import utils.Logger;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class DeleteTagFromBlacklist implements ICommandDefinition {
     public var paramsUsage = '(tag) *(server ID)*';
-    public var description = L.a.n.g('model.commandlist.deletetagfromblacklist.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.deletetagfromblacklist.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
 
         if (args.length > 0) {
             var tag: String = StringTools.trim(args[0]);
-            var idServer: String;
+            var idServer: String = DiscordUtils.getServerIdFromMessage(_context.getMessage());
+            var tagToDelete: TagBlacklist = new TagBlacklist();
+            var primaryValues = new Map<String, String>();
 
             if (args.length > 1 && StringTools.trim(args[1]).length > 0) {
                 idServer = StringTools.trim(args[1]);
-            } else {
-                if (msg.channel.isPrivate) {
-                    idServer = '0';
-                } else {
-                    var channel: TextChannel = cast msg.channel;
-
-                    idServer = channel.server.id;
-                }
             }
-
-            var tagToDelete: TagBlacklist = new TagBlacklist();
-            var primaryValues = new Map<String, String>();
 
             primaryValues.set('idServer', idServer);
             primaryValues.set('tag', tag);
@@ -42,17 +38,17 @@ class DeleteTagFromBlacklist implements ICommandDefinition {
                 if (found) {
                     tagToDelete.remove(function (err: Dynamic) {
                         if (err != null) {
-                            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletetagfromblacklist.fail', cast [msg.author, err]));
+                            _context.sendToChannel('model.commandlist.deletetagfromblacklist.fail', cast [author, err]);
                         } else {
-                            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletetagfromblacklist.success', cast [msg.author]));
+                            _context.sendToChannel('model.commandlist.deletetagfromblacklist.success', cast [author]);
                         }
                     });
                 } else {
-                    client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletetagfromblacklist.not_found', cast [msg.author]));
+                    _context.sendToChannel('model.commandlist.deletetagfromblacklist.not_found', cast [author]);
                 }
             });
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.deletetagfromblacklist.wrong_format', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.deletetagfromblacklist.wrong_format', cast [author]);
         }
     }
 }

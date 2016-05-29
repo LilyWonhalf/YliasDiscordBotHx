@@ -1,17 +1,23 @@
 package model.commandlist;
 
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import utils.DiscordUtils;
+import translations.LangCenter;
 
 class Ping implements ICommandDefinition {
     public var paramsUsage = '';
-    public var description = L.a.n.g('model.commandlist.ping.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
-        client.sendMessage(msg.channel, L.a.n.g('model.commandlist.ping.process.answer', cast [msg.author]));
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.ping.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        _context.sendToChannel('model.commandlist.ping.process.answer', cast [_context.getMessage().author]);
     }
 }

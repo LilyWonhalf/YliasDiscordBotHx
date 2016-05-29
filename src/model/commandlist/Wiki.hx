@@ -1,26 +1,33 @@
 package model.commandlist;
 
+import utils.DiscordUtils;
 import utils.Logger;
 import haxe.Json;
 import nodejs.http.HTTP.HTTPMethod;
 import utils.HttpUtils;
-import translations.L;
-import nodejs.NodeJS;
-import external.discord.client.Client;
-import external.discord.message.Message;
+import translations.LangCenter;
 
 class Wiki implements ICommandDefinition {
     public var paramsUsage = '(search)';
-    public var description = L.a.n.g('model.commandlist.wiki.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
+
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.commandlist.wiki.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        var author = _context.getMessage().author;
         var host = '.wikipedia.org';
         var path = '/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&redirects=1&titles=';
 
-        switch (L.a.getLang()) {
-            case Language.fr_FR:
+        switch (LangCenter.instance.getLang(DiscordUtils.getServerIdFromMessage(_context.getMessage()))) {
+            case Lang.fr_FR:
                 host = 'fr' + host;
 
             default:
@@ -44,18 +51,18 @@ class Wiki implements ICommandDefinition {
 
                     if (firstPageId != '-1' && Reflect.hasField(parsedData, firstPageId) && Reflect.hasField(Reflect.field(parsedData, firstPageId), 'extract')) {
                         parsedData = Reflect.field(parsedData, firstPageId);
-                        client.sendMessage(msg.channel, msg.author + ' => ' + Reflect.field(parsedData, 'extract'));
+                        _context.rawSendToChannel(author + ' => ' + Reflect.field(parsedData, 'extract'));
                     } else {
                         Logger.error('Failed to search on wikipedia (step 2)');
-                        client.sendMessage(msg.channel, L.a.n.g('model.commandlist.wiki.process.not_found', cast [msg.author]));
+                        _context.sendToChannel('model.commandlist.wiki.process.not_found', cast [author]);
                     }
                 } else {
                     Logger.error('Failed to search on wikipedia (step 1)');
-                    client.sendMessage(msg.channel, L.a.n.g('model.commandlist.wiki.process.fail', cast [msg.author]));
+                    _context.sendToChannel('model.commandlist.wiki.process.fail', cast [author]);
                 }
             });
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.commandlist.wiki.process.parse_error', cast [msg.author]));
+            _context.sendToChannel('model.commandlist.wiki.process.parse_error', cast [author]);
         }
     }
 }

@@ -1,7 +1,8 @@
 package model;
 
+import external.discord.user.User;
 import utils.Logger;
-import translations.L;
+import translations.LangCenter;
 import nodejs.NodeJS;
 import external.discord.client.Client;
 import StringTools;
@@ -32,13 +33,14 @@ class Chat {
     }
 
     public function ask(msg: Message) {
-        var client: Client = cast NodeJS.global.client;
+        var user: User = Core.userInstance;
+        var context = Core.instance.createCommunicationContext(msg);
 
         if (_ready) {
             var content = StringTools.trim(
                 StringTools.replace(
                     msg.content,
-                    client.user.mention(),
+                    user.mention(),
                     ''
                 )
             );
@@ -52,10 +54,10 @@ class Chat {
 
                 output += _html5Entities.decode(response.message);
 
-                client.sendMessage(msg.channel, output);
+                context.rawSendToChannel(output);
             });
         } else {
-            client.sendMessage(msg.channel, L.a.n.g('model.chat.ask.not_ready', cast [msg.author]));
+            context.sendToChannel('model.chat.ask.not_ready', cast [msg.author]);
         }
     }
 

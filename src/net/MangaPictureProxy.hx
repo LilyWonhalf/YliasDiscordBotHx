@@ -1,11 +1,12 @@
 package net;
 
+import model.CommunicationContext;
 import haxe.Json;
 import js.html.Text;
 import nodejs.http.HTTP.HTTPMethod;
 import js.html.Element;
 import js.html.HTMLCollection;
-import translations.L;
+import translations.LangCenter;
 import external.discord.message.Message;
 import nodejs.NodeJS;
 import external.discord.client.Client;
@@ -16,17 +17,17 @@ import external.xmldom.DOMParser;
 class MangaPictureProxy {
     public var infos: MangaPictureProxyInfo;
 
-    private var _msg: Message;
+    private var _context: CommunicationContext;
     private var _tags: Array<String>;
     private var _path: String;
     private var _initializationCallback: Int->Void;
     private var _nbPosts: Int;
     private var _nbPostsByPage: Int;
 
-    public function new(msg: Message, infos: MangaPictureProxyInfo) {
+    public function new(context: CommunicationContext, infos: MangaPictureProxyInfo) {
         this.infos = infos;
 
-        _msg = msg;
+        _context = context;
         _tags = new Array<String>();
     }
 
@@ -56,11 +57,11 @@ class MangaPictureProxy {
     public function findPicture(callback: Array<String>->String->Bool->Void): Void {
         var newPath = _path + '&' + infos.pageKey + '=';
         var maxPage = Math.ceil(_nbPosts / _nbPostsByPage);
+        var author = _context.getMessage().author;
 
         HttpUtils.query(infos.secured, infos.host, newPath + Math.round(Math.random() * maxPage), cast HTTPMethod.Get, function (data) {
             if (infos.isJson) {
                 var jsonData: Dynamic = null;
-                var client: Client = cast NodeJS.global.client;
 
                 try {
                     jsonData = cast Json.parse(data);
@@ -84,16 +85,15 @@ class MangaPictureProxy {
                         callback(tags, fileUrl, nsfw);
                     } else {
                         Logger.error('Failed to load a picture (step 5), URL: ' + _path);
-                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                        _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
                     }
                 } else {
                     Logger.error('Failed to load a picture (step 4), URL: ' + _path);
-                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                    _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
                 }
             } else {
                 var parser: DOMParser = new DOMParser();
                 var xmlDoc = parser.parseFromString(data, 'text/xml');
-                var client: Client = cast NodeJS.global.client;
 
                 if (xmlDoc != null) {
                     var posts = xmlDoc.getElementsByTagName(infos.postField);
@@ -123,20 +123,21 @@ class MangaPictureProxy {
                         callback(tags, fileUrl, nsfw);
                     } else {
                         Logger.error('Failed to load a picture (step 5), URL: ' + _path);
-                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                        _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
                     }
                 } else {
                     Logger.error('Failed to load a picture (step 4), URL: ' + _path);
-                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                    _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
                 }
             }
         });
     }
 
     private function initializeQueryCompleteHandler(data: String): Void {
+        var author = _context.getMessage().author;
+
         if (infos.isJson) {
             var jsonData: Dynamic = null;
-            var client: Client = cast NodeJS.global.client;
 
             try {
                 jsonData = cast Json.parse(data);
@@ -154,21 +155,20 @@ class MangaPictureProxy {
                         _initializationCallback(_nbPosts);
                     } else {
                         Logger.error('Failed to load a picture (step 3), URL: ' + _path);
-                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
+                        _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast author]);
                         _initializationCallback(_nbPosts);
                     }
                 } else {
                     Logger.error('Failed to load a picture (step 2), URL: ' + _path);
-                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
+                    _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast author]);
                 }
             } else {
                 Logger.error('Failed to load a picture (step 1), URL: ' + _path);
-                client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
             }
         } else {
             var parser: DOMParser = new DOMParser();
             var xmlDoc = parser.parseFromString(data, 'text/xml');
-            var client: Client = cast NodeJS.global.client;
 
             if (xmlDoc != null) {
                 var postsTags: Array<Element> = cast xmlDoc.getElementsByTagName(infos.postsField);
@@ -181,16 +181,16 @@ class MangaPictureProxy {
                         _initializationCallback(_nbPosts);
                     } else {
                         Logger.error('Failed to load a picture (step 3), URL: ' + _path);
-                        client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast _msg.author]));
+                        _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.no_result', cast [infos.host, cast author]);
                         _initializationCallback(_nbPosts);
                     }
                 } else {
                     Logger.error('Failed to load a picture (step 2), URL: ' + _path);
-                    client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                    _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
                 }
             } else {
                 Logger.error('Failed to load a picture (step 1), URL: ' + _path);
-                client.sendMessage(_msg.channel, L.a.n.g('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast _msg.author]));
+                _context.sendToChannel('net.mangapictureproxy.initializequerycompletehandler.host_crashed', cast [infos.host, cast author]);
             }
         }
     }

@@ -6,7 +6,7 @@ import js.html.Text;
 import external.discord.channel.TextChannel;
 import config.Config;
 import utils.Logger;
-import translations.L;
+import translations.LangCenter;
 import nodejs.NodeJS;
 import external.discord.client.Client;
 import system.FileSystem;
@@ -31,6 +31,7 @@ class Command {
     }
 
     public function process(msg: Message): Void {
+        var context = Core.instance.createCommunicationContext(msg);
         var content = msg.content;
 
         if (content.indexOf(Config.COMMAND_IDENTIFIER) == 0) {
@@ -41,72 +42,62 @@ class Command {
         var command = args.shift().toLowerCase();
 
         if (_commands.exists(command)) {
-            requestExecuteCommand(msg, command, args);
+            requestExecuteCommand(context, command, args);
         } else {
             if (command == 'help') {
-                displayHelpDialog(msg);
+                displayHelpDialog(context);
             } else {
-                handleUnknownCommand(msg, command);
+                handleUnknownCommand(context, command);
             }
         }
     }
 
-    public function retrieveLastCommand(msg: Message): CommandCaller {
-        var ret: CommandCaller = null;
+    public function requestExecuteLastCommand(context: CommunicationContext, additionnalArgs: Array<String>): Void {
+        var lastCommand = retrieveLastCommand(context);
 
-        if (msg.channel.isPrivate) {
-            if (_lastCommand.exists('0')) {
-                ret = _lastCommand.get('0');
-            }
+        if (lastCommand == null) {
+            context.sendToChannel('model.repeatcommand.process.no_last_command', cast [context.getMessage().author]);
         } else {
-            var channel: TextChannel = cast msg.channel;
+            requestExecuteCommand(context, lastCommand.name, lastCommand.args.concat(additionnalArgs));
+        }
+    }
 
-            if (_lastCommand.exists(channel.server.id)) {
-                ret = _lastCommand.get(channel.server.id);
-            }
+    private function retrieveLastCommand(context: CommunicationContext): CommandCaller {
+        var ret: CommandCaller = null;
+        var serverId: String = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        if (_lastCommand.exists(serverId)) {
+            ret = _lastCommand.get(serverId);
         }
 
         return ret;
     }
 
-    public function requestExecuteCommand(msg: Message, command: String, args: Array<String>): Void {
+    private function requestExecuteCommand(context: CommunicationContext, command: String, args: Array<String>): Void {
         if (command != Config.COMMAND_IDENTIFIER) {
-            var serverId: String = '0';
+            var author = context.getMessage().author;
+            var serverId: String = DiscordUtils.getServerIdFromMessage(context.getMessage());
 
-            if (!msg.channel.isPrivate) {
-                var channel: TextChannel = cast msg.channel;
-                serverId = channel.server.id;
-            }
-
-            Permission.check(msg.author.id, serverId, command, function (granted: Bool) {
+            Permission.check(author.id, serverId, command, function (granted: Bool) {
                 if (granted) {
                     _lastCommand.set(serverId, {
                         name: command,
                         args: args
                     });
-                    var instance: ICommandDefinition = cast Type.createInstance(cast _commands.get(command), []);
-                    instance.process(msg, args);
+                    var instance: ICommandDefinition = cast Type.createInstance(cast _commands.get(command), [context]);
+                    instance.process(args);
                 } else {
-                    var location = DiscordUtils.getLocationStringFromMessage(msg);
-                    var client: Client = cast NodeJS.global.client;
+                    var location = DiscordUtils.getLocationStringFromMessage(context.getMessage());
 
-                    Logger.notice('User ' + msg.author.username + ' (' + msg.author.id + ') tried to execute command ' + command + ' with arguments "' + args.join(' ') + '" but doesn\'t have rights.');
-                    DiscordUtils.sendMessageToOwner(
-                        L.a.n.g(
-                            'model.command.requestexecutecommand.message_to_owner',
-                            [
-                                msg.author.username,
-                                command,
-                                args.join(' ')
-                            ]
-                        ) + '' + location
-                    );
-                    client.sendMessage(msg.channel, L.a.n.g('model.command.requestexecutecommand.message_to_member', cast [msg.author]));
+                    Logger.notice('User ' + author.username + ' (' + author.id + ') tried to execute command ' + command + ' with arguments "' + args.join(' ') + '" but doesn\'t have rights.');
+
+                    context.sendToOwner('model.command.requestexecutecommand.message_to_owner', cast [author.username, command, args.join(' '), location]);
+                    context.sendToChannel('model.command.requestexecutecommand.message_to_member', cast [author]);
                 }
             });
         } else {
-            var instance: ICommandDefinition = cast Type.createInstance(cast _commands.get(command), []);
-            instance.process(msg, args);
+            var instance: ICommandDefinition = cast Type.createInstance(cast _commands.get(command), [context]);
+            instance.process(args);
         }
     }
 
@@ -125,21 +116,16 @@ class Command {
         _commands.set(Config.COMMAND_IDENTIFIER, cast RepeatCommand);
     }
 
-    private function displayHelpDialog(msg: Message): Void {
-        var serverId: String = '0';
-        var client: Client = cast NodeJS.global.client;
+    private function displayHelpDialog(context: CommunicationContext): Void {
+        var serverId: String = DiscordUtils.getServerIdFromMessage(context.getMessage());
+        var author = context.getMessage().author;
 
-        if (!msg.channel.isPrivate) {
-            var channel: TextChannel = cast msg.channel;
-            serverId = channel.server.id;
-        }
-
-        Permission.getDeniedCommandList(msg.author.id, serverId, function (err: Dynamic, deniedCommandList: Array<String>) {
+        Permission.getDeniedCommandList(author.id, serverId, function (err: Dynamic, deniedCommandList: Array<String>) {
             if (err != null) {
                 Logger.exception(err);
-                client.sendMessage(msg.channel, L.a.n.g('model.command.displayhelpdialog.sql_error', cast [msg.author]));
+                context.sendToChannel('model.command.displayhelpdialog.sql_error', cast [author]);
             } else {
-                var output: String = L.a.n.g('model.command.displayhelpdialog.introduction') + '\n\n\n';
+                var output: String = LangCenter.instance.translate(serverId, 'model.command.displayhelpdialog.introduction') + '\n\n\n';
                 var content = new Array<String>();
 
                 for (cmd in _commands.keys()) {
@@ -154,55 +140,55 @@ class Command {
                     }
                 }
 
-                output += '\n' + L.a.n.g('model.command.displayhelpdialog.end');
+                output += '\n' + LangCenter.instance.translate(serverId, 'model.command.displayhelpdialog.end');
                 content = DiscordUtils.splitLongMessage(output);
 
-                sendHelpDialog(msg, content, 0, function (msg: Message) {
-                    client.sendMessage(msg.channel, L.a.n.g('model.command.displayhelpdialog.message_to_member', cast [msg.author]));
+                sendHelpDialog(context, content, 0, function (context: CommunicationContext) {
+                    context.sendToChannel('model.command.displayhelpdialog.message_to_member', cast [author]);
                 });
             }
         });
     }
 
-    private function sendHelpDialog(msg: Message, content: Array<String>, index: Int, callback: Message->Void): Void {
-        var client: Client = cast NodeJS.global.client;
+    private function sendHelpDialog(context: CommunicationContext, content: Array<String>, index: Int, callback: CommunicationContext->Void): Void {
         var messageSentCallback: Dynamic->Message->Void;
 
         if (index >= content.length - 1) {
-            messageSentCallback = function(err: Dynamic, helpMsg: Message) {
-                callback(msg);
+            messageSentCallback = function(err: Dynamic, msg: Message) {
+                callback(context);
             };
         } else {
-            messageSentCallback = function(err: Dynamic, helpMsg: Message) {
-                sendHelpDialog(msg, content, index + 1, callback);
+            messageSentCallback = function(err: Dynamic, msg: Message) {
+                sendHelpDialog(context, content, index + 1, callback);
             };
         }
 
-        client.sendMessage(msg.author, content[index], cast {tts: false}, messageSentCallback);
+        context.rawSendToAuthor(content[index], messageSentCallback);
     }
 
-    private function handleUnknownCommand(msg: Message, command: String): Void {
+    private function handleUnknownCommand(context: CommunicationContext, command: String): Void {
         if (Config.ANSWER_TO_UNKNOWN_COMMAND) {
-            var client: Client = cast NodeJS.global.client;
-            client.sendMessage(msg.channel, L.a.n.g('model.command.handleunknowncommand.answer', cast [command, cast msg.author]));
+            context.sendToChannel('model.command.handleunknowncommand.answer', cast [command, cast context.getMessage().author]);
         }
     }
 }
 
 class RepeatCommand implements ICommandDefinition {
     public var paramsUsage = '*(additionnal parameters)*';
-    public var description = L.a.n.g('model.repeatcommand.description');
+    public var description: String;
     public var hidden = false;
 
-    public function process(msg: Message, args: Array<String>): Void {
-        var lastCommand = Command.instance.retrieveLastCommand(msg);
-        var client: Client = cast NodeJS.global.client;
+    private var _context: CommunicationContext;
 
-        if (lastCommand == null) {
-            client.sendMessage(msg.channel, L.a.n.g('model.repeatcommand.process.no_last_command', cast [msg.author]));
-        } else {
-            Command.instance.requestExecuteCommand(msg, lastCommand.name, lastCommand.args);
-        }
+    public function new(context: CommunicationContext) {
+        var serverId = DiscordUtils.getServerIdFromMessage(context.getMessage());
+
+        _context = context;
+        description = LangCenter.instance.translate(serverId, 'model.repeatcommand.description');
+    }
+
+    public function process(args: Array<String>): Void {
+        Command.instance.requestExecuteLastCommand(_context, args);
     }
 }
 
