@@ -64,10 +64,9 @@ class Command {
 
     private function retrieveLastCommand(context: CommunicationContext): CommandCaller {
         var ret: CommandCaller = null;
-        var serverId: String = DiscordUtils.getServerIdFromMessage(context.getMessage());
 
-        if (_lastCommand.exists(serverId)) {
-            ret = _lastCommand.get(serverId);
+        if (_lastCommand.exists(context.getMessage().channel.id)) {
+            ret = _lastCommand.get(context.getMessage().channel.id);
         }
 
         return ret;
@@ -80,7 +79,7 @@ class Command {
 
             Permission.check(author.id, serverId, command, function (granted: Bool) {
                 if (granted) {
-                    _lastCommand.set(serverId, {
+                    _lastCommand.set(context.getMessage().channel.id, {
                         name: command,
                         args: args
                     });
