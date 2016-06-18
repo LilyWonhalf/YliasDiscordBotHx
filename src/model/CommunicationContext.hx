@@ -1,5 +1,8 @@
 package model;
 
+import utils.Logger;
+import external.discord.message.MessageOptions;
+import external.discord.Resolvables.ChannelResolvable;
 import config.Config;
 import utils.DiscordUtils;
 import translations.LangCenter;
@@ -7,12 +10,20 @@ import external.discord.message.Message;
 import external.discord.client.Client;
 
 class CommunicationContext {
+    private static inline var MAX_RETRIES = 30;
+
     private var _client: Client;
     private var _msg: Message;
+    private var _pool: Array<DelayedMessage>;
+    private var _isBusy: Bool;
+    private var _retriesLeft: Int;
 
     public function new(client: Client, msg: Message) {
         _client = client;
         _msg = msg;
+        _pool = new Array<DelayedMessage>();
+        _isBusy = false;
+        _retriesLeft = MAX_RETRIES;
     }
 
     public function getMessage(): Message {
@@ -34,14 +45,75 @@ class CommunicationContext {
     }
 
     public function rawSendToChannel(text: String, ?callback: Dynamic->Message->Void): Void {
-        _client.sendMessage(_msg.channel, text, cast {tts: false}, callback);
+        sendMessage(_msg.channel, text, callback);
     }
 
     public function rawSendToAuthor(text: String, ?callback: Dynamic->Message->Void): Void {
-        _client.sendMessage(_msg.author, text, cast {tts: false}, callback);
+        sendMessage(_msg.author, text, callback);
     }
 
     public function rawSendToOwner(text: String, ?callback: Dynamic->Message->Void): Void {
-        _client.sendMessage(DiscordUtils.getOwnerInstance(), text, cast {tts: false}, callback);
+        sendMessage(DiscordUtils.getOwnerInstance(), text, callback);
     }
+
+    private function sendMessage(destination: ChannelResolvable, content: String, ?callback: Dynamic->Message->Void, flushing: Bool = false): Void {
+        if (!_isBusy || flushing) {
+            trySendingMessage(destination, content, callback);
+        } else {
+            _pool.push({
+                destination: destination,
+                content: content,
+                callback: callback
+            });
+        }
+    }
+
+    private function trySendingMessage(destination: ChannelResolvable, content: String, ?callback: Dynamic->Message->Void): Void {
+        _client.sendMessage(destination, content, cast {tts: false}, function (err: Dynamic, msg: Message): Void {
+            if (err != null && _retriesLeft > 0) {
+                Logger.error('Message not sent, retrying...');
+
+                _isBusy = true;
+                _retriesLeft--;
+
+                trySendingMessage(destination, content, callback);
+            } else {
+                if (err != null) {
+                    Logger.error('Could not send message, giving up');
+                } else if (_isBusy) {
+                    Logger.info('Message successfully sent after retries');
+                }
+
+                callback(err, msg);
+                resetBusyState();
+            }
+        });
+    }
+
+    private function resetBusyState() {
+        flushPool();
+    }
+
+    private function flushPool() {
+        if (_pool.length > 0) {
+            var message = _pool.shift();
+
+            sendMessage(message.destination, message.content, function (err: Dynamic, msg: Message): Void {
+                if (message.callback != null) {
+                    message.callback(err, msg);
+                }
+
+                flushPool();
+            }, true);
+        } else {
+            _isBusy = false;
+            _retriesLeft = MAX_RETRIES;
+        }
+    }
+}
+
+typedef DelayedMessage = {
+    destination: ChannelResolvable,
+    content: String,
+    callback: Dynamic->Message->Void
 }
