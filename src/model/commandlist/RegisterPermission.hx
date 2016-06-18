@@ -8,7 +8,7 @@ import translations.LangCenter;
 import external.discord.message.Message;
 
 class RegisterPermission implements ICommandDefinition {
-    public var paramsUsage = '(user ID) (command) (granted) *(server ID)*';
+    public var paramsUsage = '(user ID) (command) (granted) *(channel ID)*';
     public var description: String;
     public var hidden = false;
 
@@ -28,12 +28,13 @@ class RegisterPermission implements ICommandDefinition {
             var idUser: String = StringTools.trim(args[0]);
             var command: String = StringTools.trim(args[1]);
             var granted: String = StringTools.trim(args[2]);
-            var idServer: String = null;
+            var idChannel: String = null;
+            var idServer: String = DiscordUtils.getServerIdFromMessage(_context.getMessage());
 
             if (args.length > 3 && StringTools.trim(args[3]).length > 0) {
-                idServer = StringTools.trim(args[3]);
+                idChannel = StringTools.trim(args[3]);
             } else {
-                idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
+                idChannel = _context.getMessage().channel.id;
             }
 
             if (DiscordUtils.isHightlight(idUser)) {
@@ -48,6 +49,7 @@ class RegisterPermission implements ICommandDefinition {
                     var primaryValues = new Map<String, String>();
 
                     primaryValues.set('idUser', idUser);
+                    primaryValues.set('idChannel', idChannel);
                     primaryValues.set('idServer', idServer);
                     primaryValues.set('command', command);
 
@@ -55,6 +57,7 @@ class RegisterPermission implements ICommandDefinition {
                         if (!found) {
                             permission.idUser = idUser;
                             permission.command = command;
+                            permission.idChannel = idChannel;
                             permission.idServer = idServer;
                         }
 

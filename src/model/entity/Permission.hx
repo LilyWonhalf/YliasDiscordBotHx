@@ -1,5 +1,6 @@
 package model.entity;
 
+import config.Config;
 import model.Entity.EntityProperties;
 import utils.Logger;
 
@@ -10,6 +11,11 @@ class Permission extends Entity {
             {
                 name: 'id_user',
                 mappedBy: 'idUser',
+                primary: true
+            },
+            {
+                name: 'id_channel',
+                mappedBy: 'idChannel',
                 primary: true
             },
             {
@@ -31,25 +37,34 @@ class Permission extends Entity {
     };
 
     public var idUser: String;
+    public var idChannel: String;
     public var idServer: String;
     public var command: String;
     public var granted: Bool;
 
-    public static function check(idUser: String, idServer: String, command: String, callback: Bool->Void): Void {
+    public static function check(idUser: String, idChannel, idServer: String, command: String, callback: Bool->Void): Void {
         Db.instance.get(
             'SELECT IF(' +
-            '    (SELECT COUNT(*) FROM permission WHERE id_user = "' + idUser + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
-            '    (SELECT granted FROM permission WHERE id_user = "' + idUser + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '    (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '    (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
             '    IF(' +
-            '        (SELECT COUNT(*) FROM permission WHERE id_user = "' + idUser + '" AND id_server = "0" AND command = "' + command + '"),' +
-            '        (SELECT granted FROM permission WHERE id_user = "' + idUser + '" AND id_server = "0" AND command = "' + command + '"),' +
+            '        (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '        (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
             '        IF(' +
-            '            (SELECT COUNT(*) FROM permission WHERE id_user = "0" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
-            '            (SELECT granted FROM permission WHERE id_user = "0" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '            (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = "' + command + '"),' +
+            '            (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = "' + command + '"),' +
             '            IF(' +
-            '                (SELECT COUNT(*) FROM permission WHERE id_user = "0" AND id_server = "0" AND command = "' + command + '"),' +
-            '                (SELECT granted FROM permission WHERE id_user = "0" AND id_server = "0" AND command = "' + command + '"),' +
-            '                1' +
+            '                (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '                (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '                IF(' +
+            '                    (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '                    (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = "' + command + '"),' +
+            '                    IF(' +
+            '                        (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = "' + command + '"),' +
+            '                        (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = "' + command + '"),' +
+            '                        1' +
+            '                    )' +
+            '                )' +
             '            )' +
             '        )' +
             '    )' +
@@ -65,28 +80,36 @@ class Permission extends Entity {
         );
     }
 
-    public static function getDeniedCommandList(idUser: String, idServer, callback: Dynamic->Array<String>->Void): Void {
+    public static function getDeniedCommandList(idUser: String, idChannel, idServer, callback: Dynamic->Array<String>->Void): Void {
         Db.instance.getAll(
             'SELECT DISTINCT command AS cmd, (' +
             '    SELECT IF(' +
-            '        (SELECT COUNT(*) FROM permission WHERE id_user = "' + idUser + '" AND id_server = "' + idServer + '" AND command = cmd),' +
-            '        (SELECT granted FROM permission WHERE id_user = "' + idUser + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '        (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '        (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = cmd),' +
             '        IF(' +
-            '            (SELECT COUNT(*) FROM permission WHERE id_user = "' + idUser + '" AND id_server = "0" AND command = cmd),' +
-            '            (SELECT granted FROM permission WHERE id_user = "' + idUser + '" AND id_server = "0" AND command = cmd),' +
+            '            (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '            (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = cmd),' +
             '            IF(' +
-            '                (SELECT COUNT(*) FROM permission WHERE id_user = "0" AND id_server = "' + idServer + '" AND command = cmd),' +
-            '                (SELECT granted FROM permission WHERE id_user = "0" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '                (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = cmd),' +
+            '                (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + idUser + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = cmd),' +
             '                IF(' +
-            '                    (SELECT COUNT(*) FROM permission WHERE id_user = "0" AND id_server = "0" AND command = cmd),' +
-            '                    (SELECT granted FROM permission WHERE id_user = "0" AND id_server = "0" AND command = cmd),' +
-            '                    1' +
+            '                    (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '                    (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + idChannel + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '                    IF(' +
+            '                        (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '                        (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + idServer + '" AND command = cmd),' +
+            '                        IF(' +
+            '                            (SELECT COUNT(*) FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = cmd),' +
+            '                            (SELECT granted FROM ' + properties.tableName + ' WHERE id_user = "' + Config.KEY_ALL + '" AND id_channel = "' + Config.KEY_ALL + '" AND id_server = "' + Config.KEY_ALL + '" AND command = cmd),' +
+            '                            1' +
+            '                        )' +
+            '                    )' +
             '                )' +
             '            )' +
             '        )' +
             '    )' +
             ') AS authorized ' +
-            'FROM permission ' +
+            'FROM ' + properties.tableName + ' ' +
             'HAVING authorized = 0',
             [],
             function (err: Dynamic, results: Array<Dynamic>) {

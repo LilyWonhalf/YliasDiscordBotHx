@@ -32,9 +32,9 @@ class Chat {
         return _instance;
     }
 
-    public function ask(msg: Message) {
+    public function ask(context: CommunicationContext) {
         var user: User = Core.userInstance;
-        var context = Core.instance.createCommunicationContext(msg);
+        var msg: Message = context.getMessage();
 
         if (_ready) {
             var content = StringTools.trim(

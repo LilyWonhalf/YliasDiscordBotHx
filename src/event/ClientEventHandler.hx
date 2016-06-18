@@ -1,5 +1,7 @@
 package event;
 
+import model.CommunicationContext;
+import model.entity.Channel;
 import external.discord.user.User;
 import model.Core;
 import model.entity.User as UserEntity;
@@ -25,11 +27,13 @@ class ClientEventHandler extends EventHandler<Client> {
     private function readyHandler() {
         Logger.info('Connected! Serving in ' + _eventEmitter.channels.length + ' channels.');
         Server.registerServers();
+        Channel.registerChannels();
         UserEntity.registerUsers();
         Chat.initialize();
     }
 
     private function messageHandler(msg: Message) {
+        var context = Core.instance.createCommunicationContext(msg);
         var user: User = Core.userInstance;
         var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
         var messageIsPrivate = msg.author != user && msg.channel.isPrivate && !messageIsCommand;
@@ -45,10 +49,10 @@ class ClientEventHandler extends EventHandler<Client> {
 
         if (messageIsCommand) {
             Logger.info('Received command ' + info + ': ' + msg.content);
-            Command.instance.process(msg);
+            Command.instance.process(context);
         } else if (messageIsPrivate || messageIsForMe) {
             Logger.info('Received message ' + info);
-            Chat.instance.ask(msg);
+            Chat.instance.ask(context);
         }
     }
 

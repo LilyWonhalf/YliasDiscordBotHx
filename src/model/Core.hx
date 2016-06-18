@@ -1,5 +1,7 @@
 package model;
 
+import external.discord.channel.ServerChannel;
+import external.discord.channel.Channel;
 import external.discord.channel.PMChannel;
 import external.discord.Cache;
 import external.discord.Server;
@@ -31,6 +33,10 @@ class Core {
 
     public function getServers(): Cache<Server> {
         return _client.servers;
+    }
+
+    public function getChannels(): Cache<ServerChannel> {
+        return _client.channels;
     }
 
     public function getPrivateChannels(): Cache<PMChannel> {

@@ -8,7 +8,7 @@ import config.Config;
 import translations.LangCenter;
 
 class UnregisterPermission implements ICommandDefinition {
-    public var paramsUsage = '(user ID) (command) *(server ID)*';
+    public var paramsUsage = '(user ID) (command) *(channel ID)*';
     public var description: String;
     public var hidden = false;
 
@@ -27,12 +27,13 @@ class UnregisterPermission implements ICommandDefinition {
         if (args.length > 1 && StringTools.trim(args[0]).length > 0 && StringTools.trim(args[1]).length > 0) {
             var idUser: String = StringTools.trim(args[0]);
             var command: String = StringTools.trim(args[1]);
-            var idServer: String = null;
+            var idChannel: String = null;
+            var idServer: String = DiscordUtils.getServerIdFromMessage(_context.getMessage());
 
             if (args.length > 2 && StringTools.trim(args[2]).length > 0) {
-                idServer = StringTools.trim(args[2]);
+                idChannel = StringTools.trim(args[2]);
             } else {
-                idServer = DiscordUtils.getServerIdFromMessage(_context.getMessage());
+                idChannel = _context.getMessage().channel.id;
             }
 
             if (DiscordUtils.isHightlight(idUser)) {
@@ -44,6 +45,7 @@ class UnregisterPermission implements ICommandDefinition {
                 var primaryValues = new Map<String, String>();
 
                 primaryValues.set('idUser', idUser);
+                primaryValues.set('idChannel', idChannel);
                 primaryValues.set('idServer', idServer);
                 primaryValues.set('command', command);
 

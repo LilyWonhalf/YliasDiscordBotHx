@@ -30,8 +30,8 @@ class Command {
         return _instance;
     }
 
-    public function process(msg: Message): Void {
-        var context = Core.instance.createCommunicationContext(msg);
+    public function process(context: CommunicationContext): Void {
+        var msg: Message = context.getMessage();
         var content = msg.content;
 
         if (content.indexOf(Config.COMMAND_IDENTIFIER) == 0) {
@@ -77,7 +77,7 @@ class Command {
             var author = context.getMessage().author;
             var serverId: String = DiscordUtils.getServerIdFromMessage(context.getMessage());
 
-            Permission.check(author.id, serverId, command, function (granted: Bool) {
+            Permission.check(author.id, context.getMessage().channel.id, serverId, command, function (granted: Bool) {
                 if (granted) {
                     _lastCommand.set(context.getMessage().channel.id, {
                         name: command,
@@ -119,7 +119,7 @@ class Command {
         var serverId: String = DiscordUtils.getServerIdFromMessage(context.getMessage());
         var author = context.getMessage().author;
 
-        Permission.getDeniedCommandList(author.id, serverId, function (err: Dynamic, deniedCommandList: Array<String>) {
+        Permission.getDeniedCommandList(author.id, context.getMessage().channel.id, serverId, function (err: Dynamic, deniedCommandList: Array<String>) {
             if (err != null) {
                 Logger.exception(err);
                 context.sendToChannel('model.command.displayhelpdialog.sql_error', cast [author]);
