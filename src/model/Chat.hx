@@ -87,9 +87,11 @@ class Chat {
                     context.rawSendToChannel(output);
                 });
             } else {
+                Logger.error('Bot suspected, not replying anymore for now');
                 context.sendToChannel('model.chat.ask.bot_suspected', cast [msg.author.username]);
             }
         } else {
+            Logger.error('Received direct message when not ready to answer');
             context.sendToChannel('model.chat.ask.not_ready', cast [msg.author]);
         }
     }
