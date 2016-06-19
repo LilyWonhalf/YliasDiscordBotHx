@@ -1,4 +1,8 @@
 {
+  "event.clickeventhandler.servernewmemberhandler.fail": [
+    "The member %% just joined server %%, but I couldn't send him a private message because of a database error... Can you handle it?"
+  ],
+
   "model.chat.ask.bot_suspected": [
     "**whispers to the others** Hey people... I don't mean to freak you out, but I think that %% is a bot. He answers way too quickly..."
   ],
@@ -47,6 +51,29 @@
     "%% => Got it, saved it!"
   ],
 
+  "model.commandlist.setwelcomemessage.description": [
+    "Allows you to set the welcome message that will be sent to the members who join this server"
+  ],
+  "model.commandlist.setwelcomemessage.process.wrong_format": [
+    "%% => We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
+  ],
+  "model.commandlist.setwelcomemessage.process.fail": [
+    "%% => Nope, didn't work : %%"
+  ],
+  "model.commandlist.setwelcomemessage.process.success": [
+    "%% => Got it, saved it!"
+  ],
+
+  "model.commandlist.getwelcomemessage.description": [
+    "Allows you to see the welcome message that will be sent to the members who join this server"
+  ],
+  "model.commandlist.getwelcomemessage.process.fail": [
+    "%% => Nope, didn't work : %%"
+  ],
+  "model.commandlist.getwelcomemessage.process.success": [
+    "%% => The welcome message for this server is the following:\n\n%%"
+  ],
+
   "model.commandlist.scream.description": [
     "I can imitate lots of animals"
   ],
@@ -92,7 +119,7 @@
   ],
 
   "model.commandlist.unregisterpermission.description": [
-    "Allows you to delete a previously registered permission."
+    "Allows you to delete a previously registered permission"
   ],
   "model.commandlist.unregisterpermission.process.wrong_format": [
     "%% => We got a problem. I think you made a mistake while typing the command, I didn't understand a thing."
@@ -111,7 +138,7 @@
   ],
 
   "model.commandlist.deletetagfromblacklist.description": [
-    "Allows you to un-forbid a tag while searching on e621 or e926."
+    "Allows you to un-forbid a tag while searching on e621 or e926"
   ],
   "model.commandlist.deletetagfromblacklist.wrong_format": [
     "%% => We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
@@ -123,6 +150,19 @@
     "%% => Nope, didn't work : %%"
   ],
   "model.commandlist.deletetagfromblacklist.success": [
+    "%% => Got it, deleted it!"
+  ],
+
+  "model.commandlist.deletewelcomemessage.description": [
+    "Allows you to delete a server's welcome message"
+  ],
+  "model.commandlist.deletewelcomemessage.process.not_found": [
+    "%% => The welcome message you're asking me to delete doesn't exist. I guess it's good news?"
+  ],
+  "model.commandlist.deletewelcomemessage.process.fail": [
+    "%% => Nope, didn't work : %%"
+  ],
+  "model.commandlist.deletewelcomemessage.process.success": [
     "%% => Got it, deleted it!"
   ],
 

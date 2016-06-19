@@ -56,7 +56,7 @@ class Entity {
             queryWhere += getColumnNameFromMappedName(key) + ' = "' + primaryValues.get(key) + '"';
         }
 
-        Db.instance.get('SELECT * FROM ' + _properties.tableName + ' WHERE ' + queryWhere, function(error: Dynamic, row: Dynamic) {
+        Db.instance.get('SELECT * FROM ' + _properties.tableName + ' WHERE ' + queryWhere, [], function(error: Dynamic, row: Dynamic) {
             if (error != null || row == null) {
                 _isNew = true;
             } else {

@@ -20,7 +20,7 @@ class CommunicationContext {
     private var _isBusy: Bool;
     private var _retriesLeft: Int;
 
-    public function new(client: Client, msg: Message) {
+    public function new(client: Client, ?msg: Message) {
         _client = client;
         _msg = msg;
         _pool = new Array<DelayedMessage>();
@@ -46,6 +46,10 @@ class CommunicationContext {
         rawSendToOwner(LangCenter.instance.translate(Config.KEY_ALL, translationId, vars, variant), callback);
     }
 
+    public function sendTo(destination: ChannelResolvable, translationId: String, ?vars: Array<String>, variant: Int = 0, ?callback: Dynamic->Message->Void): Void {
+        rawSendToOwner(LangCenter.instance.translate(Config.KEY_ALL, translationId, vars, variant), callback);
+    }
+
     public function rawSendToChannel(text: String, ?callback: Dynamic->Message->Void): Void {
         sendMessage(_msg.channel, text, callback);
     }
@@ -56,6 +60,10 @@ class CommunicationContext {
 
     public function rawSendToOwner(text: String, ?callback: Dynamic->Message->Void): Void {
         sendMessage(DiscordUtils.getOwnerInstance(), text, callback);
+    }
+
+    public function rawSendTo(destination: ChannelResolvable, text: String, ?callback: Dynamic->Message->Void): Void {
+        sendMessage(destination, text, callback);
     }
 
     private function sendMessage(destination: ChannelResolvable, content: String, ?callback: Dynamic->Message->Void, flushing: Bool = false): Void {

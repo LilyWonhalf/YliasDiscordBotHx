@@ -1,5 +1,7 @@
 package event;
 
+import config.Config;
+import model.entity.WelcomeMessage;
 import model.CommunicationContext;
 import model.entity.Channel;
 import external.discord.user.User;
@@ -36,7 +38,7 @@ class ClientEventHandler extends EventHandler<Client> {
         var context = Core.instance.createCommunicationContext(msg);
         var user: User = Core.userInstance;
         var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
-        var messageIsPrivate = msg.author != user && msg.channel.isPrivate && !messageIsCommand;
+        var messageIsPrivate = Config.CHAT_IN_PRIVATE && (msg.author != user && msg.channel.isPrivate && !messageIsCommand);
         var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, user) && msg.author.id != user.id && !messageIsCommand;
         var info = 'from ' + msg.author.username;
 
@@ -56,9 +58,22 @@ class ClientEventHandler extends EventHandler<Client> {
         }
     }
 
-    private function serverNewMemberHandler() {
+    private function serverNewMemberHandler(server: Server, user: User) {
         Logger.info('New member joined!');
         UserEntity.registerUsers();
+
+        var context: CommunicationContext = Core.instance.createCommunicationContext();
+
+        WelcomeMessage.getForServer(server.id, function(err: Dynamic, message: String) {
+            if (err != null) {
+                Logger.exception(err);
+                context.sendToOwner('event.clickeventhandler.servernewmemberhandler.fail', cast [user.username, server.name]);
+            } else {
+                if (message != null) {
+                    context.rawSendTo(user.id, message);
+                }
+            }
+        });
     }
 
     private function disconnectedHandler() {

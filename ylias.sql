@@ -112,6 +112,18 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Table structure for table `welcome_message`
+--
+
+CREATE TABLE IF NOT EXISTS `welcome_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message` text,
+  `id_server` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_server` (`id_server`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -134,3 +146,9 @@ ALTER TABLE `server_lang`
 --
 ALTER TABLE `tag_blacklist`
   ADD CONSTRAINT `tag_blacklist_ibfk_1` FOREIGN KEY (`id_server`) REFERENCES `server` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `welcome_message`
+--
+ALTER TABLE `welcome_message`
+ADD CONSTRAINT `welcome_message_ibfk_1` FOREIGN KEY (`id_server`) REFERENCES `server` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

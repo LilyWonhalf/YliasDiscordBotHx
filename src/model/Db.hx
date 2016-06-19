@@ -24,9 +24,9 @@ class Db {
         return _instance;
     }
 
-    public function get(query: String, callback: Dynamic->Dynamic->Void) {
+    public function get(query: String, values: Array<Dynamic>, callback: Dynamic->Dynamic->Void) {
         if (isConnectionRunning()) {
-            _db.query(query + ' LIMIT 1', cast function (err: Dynamic, results: Array<Dynamic>, fields: Array<String>) {
+            _db.query(query + ' LIMIT 1', cast values, cast function (err: Dynamic, results: Array<Dynamic>, fields: Array<String>) {
                 if (err != null) {
                     callback(err, null);
                 } else {

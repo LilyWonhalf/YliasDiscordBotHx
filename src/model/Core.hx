@@ -43,7 +43,7 @@ class Core {
         return _client.privateChannels;
     }
 
-    public function createCommunicationContext(msg: Message): CommunicationContext {
+    public function createCommunicationContext(?msg: Message): CommunicationContext {
         return new CommunicationContext(_client, msg);
     }
 

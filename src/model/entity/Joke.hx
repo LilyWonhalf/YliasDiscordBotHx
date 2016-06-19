@@ -40,7 +40,7 @@ class Joke extends Entity {
 
         query += ' ORDER BY RAND()';
 
-        Db.instance.get(query, cast function(err: Dynamic, row: Dynamic) {
+        Db.instance.get(query, [], cast function(err: Dynamic, row: Dynamic) {
             var output: Joke = null;
 
             if (row != null) {

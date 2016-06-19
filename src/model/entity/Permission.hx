@@ -69,6 +69,7 @@ class Permission extends Entity {
             '        )' +
             '    )' +
             ') AS granted',
+            [],
             function (err: Dynamic, result: Dynamic) {
                 if (err) {
                     Logger.exception(err);

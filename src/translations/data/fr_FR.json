@@ -1,4 +1,8 @@
 {
+  "event.clickeventhandler.servernewmemberhandler.fail": [
+    "Le membre %% vient de rejoindre le serveur %%, mais je n'ai pas pu lui envoyer de message privé à cause d'une erreur de BDD... J'te laisse t'en charger ?"
+  ],
+
   "model.chat.ask.bot_suspected": [
     "**chuchote aux autres** Dîtes les gens... J'veux pas vous affoler, mais je crois que %% est un bot. Il répond beaucoup trop vite à mon goût..."
   ],
@@ -45,6 +49,32 @@
   ],
   "model.commandlist.addtagtoblacklist.success": [
     "%% => Compris, c'est dans la boîte !"
+  ],
+
+  "model.commandlist.setwelcomemessage.description": [
+    "Permet de définir le message de bienvenue qui sera envoyé par message privé aux personnes qui rejoindront ce salon"
+  ],
+  "model.commandlist.setwelcomemessage.process.wrong_format": [
+    "%% => On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
+  ],
+  "model.commandlist.setwelcomemessage.process.fail": [
+    "%% => Nope, ça n'a pas fonctionné : %%"
+  ],
+  "model.commandlist.setwelcomemessage.process.success": [
+    "%% => Compris, c'est dans la boîte !"
+  ],
+
+  "model.commandlist.getwelcomemessage.description": [
+    "Permet de voir le message de bienvenue qui sera envoyé par message privé aux personnes qui rejoindront ce salon"
+  ],
+  "model.commandlist.getwelcomemessage.process.fail": [
+    "%% => Nope, ça n'a pas fonctionné : %%"
+  ],
+  "model.commandlist.getwelcomemessage.process.success": [
+    "%% => Le message de bienvenue pour ce serveur est le suivant :\n\n%%"
+  ],
+  "model.commandlist.getwelcomemessage.process.not_found": [
+    "%% => Je n'ai pas trouvé de message de bienvenue pour ce serveur"
   ],
 
   "model.commandlist.scream.description": [
@@ -130,7 +160,7 @@
   ],
 
   "model.commandlist.deletetagfromblacklist.description": [
-    "Permet de supprimer l'interdiction d'un tag lors des recherches e621 et e926."
+    "Permet de supprimer l'interdiction d'un tag lors des recherches e621 et e926"
   ],
   "model.commandlist.deletetagfromblacklist.wrong_format": [
     "%% => On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
@@ -142,6 +172,19 @@
     "%% => Nope, ça n'a pas fonctionné : %%"
   ],
   "model.commandlist.deletetagfromblacklist.success": [
+    "%% => Compris, c'est supprimé !"
+  ],
+
+  "model.commandlist.deletewelcomemessage.description": [
+    "Permet de supprimer le message de bienvenue d'un serveur"
+  ],
+  "model.commandlist.deletewelcomemessage.process.not_found": [
+    "%% => Le message de bienvenue que tu me demandes de supprimer n'existe déjà pas. J'imagine que c'est une bonne nouvelle, non ?"
+  ],
+  "model.commandlist.deletewelcomemessage.process.fail": [
+    "%% => Nope, ça n'a pas fonctionné : %%"
+  ],
+  "model.commandlist.deletewelcomemessage.process.success": [
     "%% => Compris, c'est supprimé !"
   ],
 
