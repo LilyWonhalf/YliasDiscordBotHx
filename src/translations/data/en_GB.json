@@ -1,4 +1,7 @@
 {
+  "model.chat.ask.bot_suspected": [
+    "**whispers to the others** Hey people... I don't mean to freak you out, but I think that %% is a bot. He answers way too quickly..."
+  ],
   "model.chat.ask.not_ready": [
     "Wait wait %%, I didn't even have enough time to wake up properly, Elian just started me right now... Can I get some coffee?"
   ],

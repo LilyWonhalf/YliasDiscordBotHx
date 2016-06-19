@@ -14,6 +14,8 @@ class CommunicationContext {
 
     private var _client: Client;
     private var _msg: Message;
+
+    // Message error handling
     private var _pool: Array<DelayedMessage>;
     private var _isBusy: Bool;
     private var _retriesLeft: Int;
