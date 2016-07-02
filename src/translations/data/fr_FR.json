@@ -77,6 +77,19 @@
     "%% => Je n'ai pas trouvé de message de bienvenue pour ce serveur"
   ],
 
+  "model.commandlist.setavatar.description": [
+    "Permet de changer mon avatar"
+  ],
+  "model.commandlist.setavatar.process.network_error": [
+    "%% => La requête a échoué, t'es sûr que l'adresse est correcte ?"
+  ],
+  "model.commandlist.setavatar.process.fail": [
+    "%% => Le changement d'avatar n'a pas fonctionné, t'es sûr que c'est bien une image que tu m'as passé ?"
+  ],
+  "model.commandlist.setavatar.process.answer": [
+    "%% => Mon avatar a bien été changé :D !"
+  ],
+
   "model.commandlist.scream.description": [
     "Je sais imiter pas mal de cris d'animaux"
   ],
@@ -86,6 +99,13 @@
   ],
   "model.commandlist.cat.process.fail": [
     "Bon... random.cat a planté on dirait. Je suis désolé %% :( ..."
+  ],
+
+  "model.commandlist.penguin.description": [
+    "Affiche un manchot aléatoire"
+  ],
+  "model.commandlist.penguin.process.fail": [
+    "Bon... penguin.wtf a planté on dirait. Je suis désolé %% :( ..."
   ],
 
   "model.commandlist.crash.description": [

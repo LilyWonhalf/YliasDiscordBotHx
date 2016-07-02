@@ -1,15 +1,16 @@
 package model;
 
-import external.discord.channel.ServerChannel;
-import external.discord.channel.Channel;
-import external.discord.channel.PMChannel;
-import external.discord.Cache;
-import external.discord.Server;
+import discordhx.Resolvables.Base64Resolvable;
+import discordhx.channel.ServerChannel;
+import discordhx.channel.Channel;
+import discordhx.channel.PMChannel;
+import discordhx.Cache;
+import discordhx.Server;
 import utils.Logger;
 import config.AuthDetails;
-import external.discord.user.User;
-import external.discord.message.Message;
-import external.discord.client.Client;
+import discordhx.user.User;
+import discordhx.message.Message;
+import discordhx.client.Client;
 
 class Core {
     public static var instance(get, null): Core;
@@ -43,12 +44,16 @@ class Core {
         return _client.privateChannels;
     }
 
+    public function setClientAvatar(data: Base64Resolvable, ?callback: Dynamic->Void): Void {
+        _client.setAvatar(data, callback);
+    }
+
     public function createCommunicationContext(?msg: Message): CommunicationContext {
         return new CommunicationContext(_client, msg);
     }
 
     public function connect(): Void {
-        _client.loginWithToken(AuthDetails.DISCORD_TOKEN, null, null, function (err: Dynamic, token: String): Void {
+        _client.loginWithToken(AuthDetails.DISCORD_TOKEN, AuthDetails.DISCORD_EMAIL, AuthDetails.DISCORD_PASSWORD, function (err: Dynamic, token: String): Void {
             if (err != null) {
                 Logger.exception(err);
             }

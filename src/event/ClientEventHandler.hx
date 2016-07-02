@@ -4,7 +4,7 @@ import config.Config;
 import model.entity.WelcomeMessage;
 import model.CommunicationContext;
 import model.entity.Channel;
-import external.discord.user.User;
+import discordhx.user.User;
 import model.Core;
 import model.entity.User as UserEntity;
 import model.entity.Server;
@@ -12,10 +12,10 @@ import config.Config;
 import model.Command;
 import model.Chat;
 import utils.DiscordUtils;
-import external.discord.channel.TextChannel;
+import discordhx.channel.TextChannel;
 import haxe.Timer;
-import external.discord.message.Message;
-import external.discord.client.Client;
+import discordhx.message.Message;
+import discordhx.client.Client;
 import utils.Logger;
 
 class ClientEventHandler extends EventHandler<Client> {

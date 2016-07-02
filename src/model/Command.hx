@@ -3,16 +3,16 @@ package model;
 import utils.DiscordUtils;
 import model.entity.Permission;
 import js.html.Text;
-import external.discord.channel.TextChannel;
+import discordhx.channel.TextChannel;
 import config.Config;
 import utils.Logger;
 import translations.LangCenter;
 import nodejs.NodeJS;
-import external.discord.client.Client;
+import discordhx.client.Client;
 import system.FileSystem;
 import model.ICommandDefinition;
-import external.discord.Server;
-import external.discord.message.Message;
+import discordhx.Server;
+import discordhx.message.Message;
 
 class Command {
     public static var instance(get, null): Command;

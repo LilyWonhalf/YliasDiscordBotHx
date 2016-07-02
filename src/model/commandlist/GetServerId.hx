@@ -1,7 +1,7 @@
 package model.commandlist;
 
 import utils.DiscordUtils;
-import external.discord.channel.TextChannel;
+import discordhx.channel.TextChannel;
 import translations.LangCenter;
 
 class GetServerId implements ICommandDefinition {

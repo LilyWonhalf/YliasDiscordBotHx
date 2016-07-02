@@ -1,7 +1,7 @@
 package model.entity;
 
 import nodejs.NodeJS;
-import external.discord.client.Client;
+import discordhx.client.Client;
 import model.Entity.EntityProperties;
 import utils.Logger;
 

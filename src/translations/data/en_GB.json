@@ -74,6 +74,19 @@
     "%% => The welcome message for this server is the following:\n\n%%"
   ],
 
+  "model.commandlist.setavatar.description": [
+    "Allows you to change my avatar"
+  ],
+  "model.commandlist.setavatar.process.network_error": [
+    "%% => The request failed, are you sure the address is correct?"
+  ],
+  "model.commandlist.setavatar.process.fail": [
+    "%% => The avatar change didn't work, are you sure your URL goes to an image?"
+  ],
+  "model.commandlist.setavatar.process.answer": [
+    "%% => My avatar has been successfully changed :D !"
+  ],
+
   "model.commandlist.scream.description": [
     "I can imitate lots of animals"
   ],
@@ -83,6 +96,13 @@
   ],
   "model.commandlist.cat.process.fail": [
     "Welp... Seems like random.cat just crashed. I'm sorry %% :( ..."
+  ],
+
+  "model.commandlist.penguin.description": [
+    "Displays a random penguin"
+  ],
+  "model.commandlist.penguin.process.fail": [
+    "Welp... Seems like penguin.wtf just crashed. I'm sorry %% :( ..."
   ],
 
   "model.commandlist.crash.description": [
@@ -135,6 +155,25 @@
   ],
   "model.commandlist.unregisterpermission.process.fail": [
     "%% => There has been an error during unregistering, sorry :/ ."
+  ],
+
+  "model.commandlist.registerpermission.description": [
+    "Allows you to allow or deny a command access to someone"
+  ],
+  "model.commandlist.registerpermission.process.wrong_format": [
+    "%% => We got a problem. I think you made a mistake while typing the command, I didn't understand a thing."
+  ],
+  "model.commandlist.registerpermission.process.wrong_user": [
+    "%% => We got a problem. I don't know which member you want to register a permission from. I need the member ID, right? Well, you can highlight him with an @, I will translate it."
+  ],
+  "model.commandlist.registerpermission.process.granted_parse_error": [
+    "%% => You wanna grant or deny, there? It's not really crystal clear ._. ..."
+  ],
+  "model.commandlist.registerpermission.process.success": [
+    "%% => The permission has been successfully registered :) !"
+  ],
+  "model.commandlist.registerpermission.process.fail": [
+    "%% => There has been an error during registering, sorry :/ ."
   ],
 
   "model.commandlist.deletetagfromblacklist.description": [

@@ -2,7 +2,7 @@ package model.commandlist;
 
 import utils.DiscordUtils;
 import translations.LangCenter;
-import external.discord.message.Message;
+import discordhx.message.Message;
 
 class Gelbooru implements ICommandDefinition {
     public var paramsUsage = '*(tag 1)* *(tag 2)* *(tag n)*';

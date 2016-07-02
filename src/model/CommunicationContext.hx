@@ -1,13 +1,13 @@
 package model;
 
 import utils.Logger;
-import external.discord.message.MessageOptions;
-import external.discord.Resolvables.ChannelResolvable;
+import discordhx.message.MessageOptions;
+import discordhx.Resolvables.ChannelResolvable;
 import config.Config;
 import utils.DiscordUtils;
 import translations.LangCenter;
-import external.discord.message.Message;
-import external.discord.client.Client;
+import discordhx.message.Message;
+import discordhx.client.Client;
 
 class CommunicationContext {
     private static inline var MAX_RETRIES = 30;

@@ -1,13 +1,13 @@
 package model;
 
-import external.discord.user.User;
+import discordhx.user.User;
 import utils.Logger;
 import translations.LangCenter;
 import nodejs.NodeJS;
-import external.discord.client.Client;
+import discordhx.client.Client;
 import StringTools;
 import StringTools;
-import external.discord.message.Message;
+import discordhx.message.Message;
 import external.htmlentities.Html5Entities;
 import external.cleverbotnode.Cleverbot;
 

@@ -1,7 +1,7 @@
 package ;
 
 import model.Core;
-import external.discord.client.Client;
+import discordhx.client.Client;
 import event.ProcessEventHandler;
 import event.ClientEventHandler;
 import utils.Logger;

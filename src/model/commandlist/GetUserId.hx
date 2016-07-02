@@ -1,9 +1,9 @@
 package model.commandlist;
 
 import utils.DiscordUtils;
-import external.discord.channel.TextChannel;
-import external.discord.user.User;
-import external.discord.channel.PMChannel;
+import discordhx.channel.TextChannel;
+import discordhx.user.User;
+import discordhx.channel.PMChannel;
 import translations.LangCenter;
 
 class GetUserId implements ICommandDefinition {

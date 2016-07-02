@@ -2,7 +2,7 @@ package model.commandlist;
 
 import utils.DiscordUtils;
 import translations.LangCenter;
-import external.discord.message.Message;
+import discordhx.message.Message;
 import model.entity.Meme;
 
 class MemeList implements ICommandDefinition {

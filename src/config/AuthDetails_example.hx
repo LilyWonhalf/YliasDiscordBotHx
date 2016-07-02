@@ -5,6 +5,8 @@ package config;
 class AuthDetails_example {
     // Discord
     public static inline var DISCORD_TOKEN = '';
+    public static inline var DISCORD_EMAIL = '';
+    public static inline var DISCORD_PASSWORD = '';
     public static inline var OWNER_ID = 0;
 
     // Database
@@ -21,7 +23,7 @@ class AuthDetails_example {
     public static inline var IMGFLIP_USERNAME = '';
     public static inline var IMGFLIP_PASSWORD = '';
 
-// e621 API
+    // e621 API
     public static inline var E621_LOGIN = '';
     public static inline var E621_PASSWORD_HASH = '';
 }

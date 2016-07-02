@@ -1,11 +1,11 @@
 package model.commandlist;
 
 import utils.DiscordUtils;
-import external.discord.channel.TextChannel;
-import external.discord.channel.PMChannel;
-import external.discord.user.User;
+import discordhx.channel.TextChannel;
+import discordhx.channel.PMChannel;
+import discordhx.user.User;
 import translations.LangCenter;
-import external.discord.message.Message;
+import discordhx.message.Message;
 
 class Avatar implements ICommandDefinition {
     public var paramsUsage = '';

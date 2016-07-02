@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project basedir="." name="myproject" default="deploy-local" >
+<project basedir="." name="myproject" default="deploy" >
     <property file="discord.properties"/>
     <property file="build.properties"/>
+    <property name="ProdToken" value="${OAuthProdToken}"/>
 
     <target name="deploy">
         <antcall target="set-token"/>
@@ -16,8 +17,8 @@
     <target name="set-token">
         <replace
             file="out/release/bot.js"
-            token="${debugToken}"
-            value="${prodToken}"
+            token="${DebugToken}"
+            value="${ProdToken}"
         />
     </target>
 
@@ -70,8 +71,8 @@
     <target name="unset-token">
         <replace
                 file="out/release/bot.js"
-                token="${prodToken}"
-                value="${debugToken}"
+                token="${ProdToken}"
+                value="${DebugToken}"
                 />
     </target>
 </project>

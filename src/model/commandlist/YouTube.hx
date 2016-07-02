@@ -9,7 +9,7 @@ import nodejs.http.HTTP.HTTPMethod;
 import utils.HttpUtils;
 import config.AuthDetails;
 import translations.LangCenter;
-import external.discord.message.Message;
+import discordhx.message.Message;
 
 class YouTube implements ICommandDefinition {
     public var paramsUsage = '';

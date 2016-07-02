@@ -5,7 +5,7 @@ import utils.Humanify;
 import model.entity.Permission;
 import utils.DiscordUtils;
 import translations.LangCenter;
-import external.discord.message.Message;
+import discordhx.message.Message;
 
 class RegisterPermission implements ICommandDefinition {
     public var paramsUsage = '(user ID) (command) (granted) *(channel ID)*';

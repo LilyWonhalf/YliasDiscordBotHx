@@ -2,12 +2,12 @@ package utils;
 
 import model.Core;
 import translations.LangCenter;
-import external.discord.channel.TextChannel;
+import discordhx.channel.TextChannel;
 import config.Config;
-import external.discord.message.Message;
-import external.discord.channel.PMChannel;
+import discordhx.message.Message;
+import discordhx.channel.PMChannel;
 import config.AuthDetails;
-import external.discord.user.User;
+import discordhx.user.User;
 
 class DiscordUtils {
     public static function getOwnerInstance(): User {

@@ -3,7 +3,7 @@ package model.commandlist;
 import utils.Logger;
 import model.entity.Permission;
 import utils.DiscordUtils;
-import external.discord.channel.TextChannel;
+import discordhx.channel.TextChannel;
 import config.Config;
 import translations.LangCenter;
 

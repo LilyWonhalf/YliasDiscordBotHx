@@ -8,7 +8,7 @@ import translations.LangCenter;
 import utils.Logger;
 import model.entity.TagBlacklist;
 import utils.DiscordUtils;
-import external.discord.message.Message;
+import discordhx.message.Message;
 
 class MangaPicture {
     private var _proxy: MangaPictureProxy;

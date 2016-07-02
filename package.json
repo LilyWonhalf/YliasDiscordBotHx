@@ -5,13 +5,12 @@
   "main": "./bot.js",
   "author": "Elian Wonhalf <elianwonhalf@gmail.com>",
   "dependencies": {
-    "discord.js": "^6.0.0",
     "cleverbot-node": "^0.2.1",
     "xmldom": "^0.1.22",
     "html-entities": "^1.2.0",
     "mysql": "^2.10.2",
     "imgflipper": "^1.0.1",
-    "nodehx": "1.0.10"
+    "discordhx": "^1.0.0"
   },
   "engines": {
     "node": ">=0.12.7"
