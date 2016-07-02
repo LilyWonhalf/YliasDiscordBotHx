@@ -4,6 +4,10 @@
   "description": "A Discord bot",
   "main": "./bot.js",
   "author": "Elian Wonhalf <elianwonhalf@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ElianWonhalf/YliasDiscordBotHx.git"
+  },
   "dependencies": {
     "cleverbot-node": "^0.2.1",
     "xmldom": "^0.1.22",
@@ -14,5 +18,6 @@
   },
   "engines": {
     "node": ">=0.12.7"
-  }
+  },
+  "license": "MIT"
 }
