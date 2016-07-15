@@ -1,5 +1,6 @@
 package event;
 
+import model.entity.Staff;
 import config.Config;
 import model.entity.WelcomeMessage;
 import model.CommunicationContext;
@@ -22,11 +23,12 @@ class ClientEventHandler extends EventHandler<Client> {
     private override function process(): Void {
         _eventEmitter.on(cast ClientEventType.READY, readyHandler);
         _eventEmitter.on(cast ClientEventType.MESSAGE, messageHandler);
+        _eventEmitter.on(cast ClientEventType.MESSAGE_UPDATED, messageUpdatedHandler);
         _eventEmitter.on(cast ClientEventType.SERVER_NEW_MEMBER, serverNewMemberHandler);
         _eventEmitter.on(cast ClientEventType.DISCONNECTED, disconnectedHandler);
     }
 
-    private function readyHandler() {
+    private function readyHandler(): Void {
         Logger.info('Connected! Serving in ' + _eventEmitter.channels.length + ' channels.');
         Server.registerServers();
         Channel.registerChannels();
@@ -34,7 +36,16 @@ class ClientEventHandler extends EventHandler<Client> {
         Chat.initialize();
     }
 
-    private function messageHandler(msg: Message) {
+    private function messageHandler(msg: Message): Void {
+        handleMessage(msg);
+    }
+
+    private function messageUpdatedHandler(oldMsg: Message, newMsg: Message): Void {
+        Logger.info('Handling edited message from ' + oldMsg.author.username + '. Was\n\n' + oldMsg.cleanContent + '\n\nIs now\n\n' + newMsg.cleanContent + '\n\n');
+        handleMessage(newMsg, true);
+    }
+
+    private function handleMessage(msg: Message, edited = false, oldMsg: Message = null): Void {
         var context = Core.instance.createCommunicationContext(msg);
         var user: User = Core.userInstance;
         var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
@@ -58,9 +69,11 @@ class ClientEventHandler extends EventHandler<Client> {
         }
     }
 
-    private function serverNewMemberHandler(server: Server, user: User) {
+    private function serverNewMemberHandler(server: Server, user: User): Void {
         Logger.info('New member joined!');
         UserEntity.registerUsers();
+        Server.registerServers();
+        Channel.registerChannels();
 
         var context: CommunicationContext = Core.instance.createCommunicationContext();
 
@@ -74,9 +87,17 @@ class ClientEventHandler extends EventHandler<Client> {
                 }
             }
         });
+
+        Staff.getStaffToNotifyAboutNewMember(server.id, function (staffToNotify: Array<Staff>): Void {
+            if (staffToNotify != null && staffToNotify.length > 0) {
+                for (staff in staffToNotify) {
+                    context.sendTo(staff.idUser, 'event.clickeventhandler.servernewmemberhandler.notification_to_staff', cast [user.username, server.name]);
+                }
+            }
+        });
     }
 
-    private function disconnectedHandler() {
+    private function disconnectedHandler(): Void {
         Logger.info('Disconnected!');
 
         Timer.delay(function () {

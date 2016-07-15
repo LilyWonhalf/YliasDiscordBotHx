@@ -2,6 +2,9 @@
   "event.clickeventhandler.servernewmemberhandler.fail": [
     "Le membre %% vient de rejoindre le serveur %%, mais je n'ai pas pu lui envoyer de message privé à cause d'une erreur de BDD... J'te laisse t'en charger ?"
   ],
+  "event.clickeventhandler.servernewmemberhandler.notification_to_staff": [
+    "Le membre %% vient de rejoindre le serveur %% !"
+  ],
 
   "model.chat.ask.bot_suspected": [
     "**chuchote aux autres** Dîtes les gens... J'veux pas vous affoler, mais je crois que %% est un bot. Il répond beaucoup trop vite à mon goût..."
@@ -26,6 +29,41 @@
   ],
   "model.commandlist.ping.process.answer": [
     "%%  => Pong !"
+  ],
+
+  "model.commandlist.registerstaff.description": [
+    "Permet d'enregistrer un membre du staff et de l'inscrire aux notifications de nouveau membre sur le serveur"
+  ],
+  "model.commandlist.registerstaff.process.private_channel_error": [
+    "%% => J'ai besoin que tu exécutes cette commande sur un serveur pour que je puisse savoir duquel tu parles."
+  ],
+  "model.commandlist.registerstaff.process.no_mention": [
+    "%% => Tu n'as mentionné personne dans ton message, comment je suis censé savoir qui inscrire ?"
+  ],
+  "model.commandlist.registerstaff.process.fail": [
+    "%% => Il y a eu une erreur durant la sauvegarde, désolé :/ ..."
+  ],
+  "model.commandlist.registerstaff.process.success": [
+    "%% => Le membre a bien été enregistré dans le staff et été inscrit aux notifications :) !"
+  ],
+
+  "model.commandlist.unregisterstaff.description": [
+    "Permet de supprimer un membre du staff et des notifications de nouveau membre sur le serveur"
+  ],
+  "model.commandlist.unregisterstaff.process.private_channel_error": [
+    "%% => J'ai besoin que tu exécutes cette commande sur un serveur pour que je puisse savoir duquel tu parles."
+  ],
+  "model.commandlist.unregisterstaff.process.no_mention": [
+    "%% => Tu n'as mentionné personne dans ton message, comment je suis censé savoir qui supprimer ?"
+  ],
+  "model.commandlist.unregisterstaff.process.not_found": [
+    "%% => Le membre que tu veux supprimer du staff ne s'y trouve déjà pas, j'imagine que c'est une bonne nouvelle ?"
+  ],
+  "model.commandlist.unregisterstaff.process.fail": [
+    "%% => Il y a eu une erreur durant la sauvegarde, désolé :/ ..."
+  ],
+  "model.commandlist.unregisterstaff.process.success": [
+    "%% => Le membre a bien été supprimé du staff :) !"
   ],
 
   "model.commandlist.addjoke.description": [
