@@ -42,8 +42,9 @@ class ClientEventHandler extends EventHandler<Client> {
     }
 
     private function messageUpdatedHandler(oldMsg: Message, newMsg: Message): Void {
-        Logger.info('Handling edited message from ' + oldMsg.author.username + '. Was\n\n' + oldMsg.cleanContent + '\n\nIs now\n\n' + newMsg.cleanContent + '\n\n');
-        handleMessage(newMsg, true);
+        if (oldMsg.content != newMsg.content) {
+            handleMessage(newMsg, true, oldMsg);
+        }
     }
 
     private function handleMessage(msg: Message, edited = false, oldMsg: Message = null): Void {
@@ -62,9 +63,17 @@ class ClientEventHandler extends EventHandler<Client> {
         }
 
         if (messageIsCommand) {
+            if (edited) {
+                Logger.info('Handling edited message from ' + oldMsg.author.username + '. Was\n\n' + oldMsg.cleanContent + '\n\nIs now\n\n' + msg.cleanContent + '\n\n');
+            }
+
             Logger.info('Received command ' + info + ': ' + msg.content);
             Command.instance.process(context);
         } else if (messageIsPrivate || messageIsForMe) {
+            if (edited) {
+                Logger.info('Handling edited message from ' + oldMsg.author.username + '. Was\n\n' + oldMsg.cleanContent + '\n\nIs now\n\n' + msg.cleanContent + '\n\n');
+            }
+
             Logger.info('Received message ' + info);
 
             if (msg.author.id != AuthDetails.OWNER_ID) {
