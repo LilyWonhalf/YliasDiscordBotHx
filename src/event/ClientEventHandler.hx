@@ -76,11 +76,11 @@ class ClientEventHandler extends EventHandler<Client> {
 
             Logger.info('Received message ' + info);
 
-            if (msg.author.id != AuthDetails.OWNER_ID) {
+            if (messageIsPrivate && msg.author.id != AuthDetails.OWNER_ID) {
                 context.rawSendToOwner('Message entrant de **' + msg.author.username + '** :\n' + msg.content);
             }
 
-            if (Config.CHAT_IN_PRIVATE) {
+            if (!messageIsPrivate || Config.CHAT_IN_PRIVATE) {
                 Chat.instance.ask(context);
             }
         }
