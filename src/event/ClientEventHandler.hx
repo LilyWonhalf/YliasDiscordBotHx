@@ -1,5 +1,6 @@
 package event;
 
+import config.AuthDetails;
 import model.entity.Staff;
 import config.Config;
 import model.entity.WelcomeMessage;
@@ -49,7 +50,7 @@ class ClientEventHandler extends EventHandler<Client> {
         var context = Core.instance.createCommunicationContext(msg);
         var user: User = Core.userInstance;
         var messageIsCommand = msg.content.indexOf(Config.COMMAND_IDENTIFIER) == 0;
-        var messageIsPrivate = Config.CHAT_IN_PRIVATE && (msg.author != user && msg.channel.isPrivate && !messageIsCommand);
+        var messageIsPrivate = msg.author != user && msg.channel.isPrivate && !messageIsCommand;
         var messageIsForMe = DiscordUtils.isMentionned(msg.mentions, user) && msg.author.id != user.id && !messageIsCommand;
         var info = 'from ' + msg.author.username;
 
@@ -65,7 +66,14 @@ class ClientEventHandler extends EventHandler<Client> {
             Command.instance.process(context);
         } else if (messageIsPrivate || messageIsForMe) {
             Logger.info('Received message ' + info);
-            Chat.instance.ask(context);
+
+            if (msg.author.id != AuthDetails.OWNER_ID) {
+                context.rawSendToOwner('Message entrant de **' + msg.author.username + '** :\n' + msg.content);
+            }
+
+            if (Config.CHAT_IN_PRIVATE) {
+                Chat.instance.ask(context);
+            }
         }
     }
 
