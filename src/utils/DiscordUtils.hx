@@ -10,14 +10,6 @@ import config.AuthDetails;
 import discordhx.user.User;
 
 class DiscordUtils {
-    public static function getOwnerInstance(): User {
-        return Core.instance.getPrivateChannels().filter(
-            function(e: PMChannel) {
-                return e.recipient.id == AuthDetails.OWNER_ID;
-            }
-        )[0].recipient;
-    }
-
     public static function isHightlight(str: String): Bool {
         return ~/<@!?\d+>/ig.match(str);
     }

@@ -1,5 +1,6 @@
 package model;
 
+import config.AuthDetails;
 import utils.Logger;
 import discordhx.message.MessageOptions;
 import discordhx.Resolvables.ChannelResolvable;
@@ -67,7 +68,7 @@ class CommunicationContext {
     }
 
     public function rawSendToOwner(text: String, ?callback: Dynamic->Message->Void): Void {
-        sendMessage(DiscordUtils.getOwnerInstance(), text, callback);
+        sendMessage(AuthDetails.OWNER_ID, text, callback);
     }
 
     public function rawSendTo(destination: ChannelResolvable, text: String, ?callback: Dynamic->Message->Void): Void {
