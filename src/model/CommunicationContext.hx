@@ -38,6 +38,10 @@ class CommunicationContext {
         rawSendToChannel(LangCenter.instance.translate(serverId, translationId, vars, variant), callback);
     }
 
+    public function reply(translationId: String, ?vars: Array<String>, variant: Int = 0, ?callback: Dynamic->Message->Void): Void {
+        sendToChannel(translationId, vars, variant, callback);
+    }
+
     public function sendToAuthor(translationId: String, ?vars: Array<String>, variant: Int = 0, ?callback: Dynamic->Message->Void): Void {
         rawSendToAuthor(LangCenter.instance.translate(Config.KEY_ALL, translationId, vars, variant), callback);
     }
@@ -47,11 +51,15 @@ class CommunicationContext {
     }
 
     public function sendTo(destination: ChannelResolvable, translationId: String, ?vars: Array<String>, variant: Int = 0, ?callback: Dynamic->Message->Void): Void {
-        rawSendToOwner(LangCenter.instance.translate(Config.KEY_ALL, translationId, vars, variant), callback);
+        rawSendTo(destination, LangCenter.instance.translate(Config.KEY_ALL, translationId, vars, variant), callback);
     }
 
     public function rawSendToChannel(text: String, ?callback: Dynamic->Message->Void): Void {
         sendMessage(_msg.channel, text, callback);
+    }
+
+    public function rawReply(text: String, ?callback: Dynamic->Message->Void): Void {
+        rawSendToChannel(text, callback);
     }
 
     public function rawSendToAuthor(text: String, ?callback: Dynamic->Message->Void): Void {
