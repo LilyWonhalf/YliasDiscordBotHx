@@ -94,6 +94,12 @@ class Scream implements ICommandDefinition {
             multipliedLetter: 'I',
             emoji: ':ok_hand:'
         });
+        _screamList.push({
+            scream: 'yiff',
+            renderedScream: 'YI%%FF',
+            multipliedLetter: 'I',
+            emoji: ':underage:'
+        });
 
         if (args.length > 0 && StringTools.trim(args.join(' ')).length > 0) {
             scream = args.join(' ').toLowerCase();
