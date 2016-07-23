@@ -69,7 +69,7 @@ class ClientEventHandler extends EventHandler<Client> {
 
             Logger.info('Received command ' + info + ': ' + msg.content);
             Command.instance.process(context);
-        } else if (messageIsPrivate || messageIsForMe) {
+        } else if (!msg.author.bot && (messageIsPrivate || messageIsForMe)) {
             if (edited) {
                 Logger.info('Handling edited message from ' + oldMsg.author.username + '. Was\n\n' + oldMsg.cleanContent + '\n\nIs now\n\n' + msg.cleanContent + '\n\n');
             }
