@@ -6,7 +6,7 @@ import StringTools;
 import translations.LangCenter;
 
 class Scream implements ICommandDefinition {
-    public var paramsUsage = '';
+    public var paramsUsage = '(custom scream)';
     public var description: String;
     public var hidden = false;
 
