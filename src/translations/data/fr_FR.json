@@ -146,6 +146,13 @@
     "Bon... random.dog a planté on dirait. Je suis désolé %% :( ..."
   ],
 
+  "model.commandlist.aww.description": [
+    "Affiche un AWW aléatoire"
+  ],
+  "model.commandlist.aww.process.fail": [
+    "Bon... Reddit a planté on dirait. Je suis désolé %% :( ..."
+  ],
+
   "model.commandlist.penguin.description": [
     "Affiche un manchot aléatoire"
   ],

@@ -143,6 +143,13 @@
     "Welp... Seems like random.dog just crashed. I'm sorry %% :( ..."
   ],
 
+  "model.commandlist.aww.description": [
+    "Displays a random AWW"
+  ],
+  "model.commandlist.aww.process.fail": [
+    "Welp... Seems like Reddit just crashed. I'm sorry %% :( ..."
+  ],
+
   "model.commandlist.penguin.description": [
     "Displays a random penguin"
   ],
