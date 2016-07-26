@@ -136,6 +136,13 @@
     "Welp... Seems like random.cat just crashed. I'm sorry %% :( ..."
   ],
 
+  "model.commandlist.dog.description": [
+    "Displays a random dog"
+  ],
+  "model.commandlist.dog.process.fail": [
+    "Welp... Seems like random.dog just crashed. I'm sorry %% :( ..."
+  ],
+
   "model.commandlist.penguin.description": [
     "Displays a random penguin"
   ],
