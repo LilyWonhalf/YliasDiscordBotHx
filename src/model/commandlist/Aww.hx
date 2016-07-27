@@ -1,5 +1,6 @@
 package model.commandlist;
 
+import StringTools;
 import utils.ArrayUtils;
 import haxe.Json;
 import utils.DiscordUtils;
@@ -24,8 +25,19 @@ class Aww implements ICommandDefinition {
 
     public function process(args: Array<String>): Void {
         var author = _context.getMessage().author;
+        var bestArray: Array<String> = new Array<String>();
+        var path = '/r/aww/new.json?count=100';
 
-        HttpUtils.query(true, 'www.reddit.com', '/r/aww/.json?count=100', cast HTTPMethod.Get, function (data: String) {
+        bestArray.push('best');
+        bestArray.push('top');
+        bestArray.push('better');
+        bestArray.push('hot');
+
+        if (args.length > 0 && bestArray.indexOf(StringTools.trim(args[0])) > -1) {
+            path = '/r/aww/.json?count=100';
+        }
+
+        HttpUtils.query(true, 'www.reddit.com', path, cast HTTPMethod.Get, function (data: String) {
             var response: Dynamic = null;
 
             try {
@@ -47,7 +59,7 @@ class Aww implements ICommandDefinition {
 
                 var picture = ArrayUtils.random(children);
 
-                _context.rawSendToChannel(author + ' => ' + picture.data.preview.images[0].source.url);
+                _context.rawSendToChannel(author + ' => ' + ~/&amp;/g.replace(picture.data.url, '&') + '\n\nLien vers le topic : <https://www.reddit.com' + picture.data.permalink + '>');
             } else {
                 Logger.error('Failed to load a cat picture');
                 _context.sendToChannel('model.commandlist.aww.process.fail', cast [author]);
