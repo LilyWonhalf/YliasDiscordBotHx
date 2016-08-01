@@ -41,6 +41,12 @@ class Scream implements ICommandDefinition {
             emoji: ':full_moon:'
         });
         _screamList.push({
+            scream: 'bae',
+            renderedScream: 'BAE%%',
+            multipliedLetter: 'E',
+            emoji: ':sheep:'
+        });
+        _screamList.push({
             scream: 'bark',
             renderedScream: 'BRR%% BARK',
             multipliedLetter: 'R',
