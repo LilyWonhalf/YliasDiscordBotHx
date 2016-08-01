@@ -76,7 +76,7 @@ class ClientEventHandler extends EventHandler<Client> {
 
             Logger.info('Received message ' + info);
 
-            if (messageIsPrivate && msg.author.id != AuthDetails.OWNER_ID) {
+            if (msg.author.id != AuthDetails.OWNER_ID && messageIsPrivate) {
                 context.rawSendToOwner('Message entrant de **' + msg.author.username + '** :\n' + msg.content);
             }
 
