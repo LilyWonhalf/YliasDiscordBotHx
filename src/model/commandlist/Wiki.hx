@@ -51,7 +51,7 @@ class Wiki implements ICommandDefinition {
 
                     if (firstPageId != '-1' && Reflect.hasField(parsedData, firstPageId) && Reflect.hasField(Reflect.field(parsedData, firstPageId), 'extract')) {
                         parsedData = Reflect.field(parsedData, firstPageId);
-                        _context.rawSendToChannel(author + ' => ' + Reflect.field(parsedData, 'extract'));
+                        _context.rawSendToChannel(author + ' => ' + Reflect.field(parsedData, 'extract') + '\n\n<https://' + host + '/wiki/' + parsedData.title + '>');
                     } else {
                         Logger.error('Failed to search on wikipedia (step 2)');
                         _context.sendToChannel('model.commandlist.wiki.process.not_found', cast [author]);
