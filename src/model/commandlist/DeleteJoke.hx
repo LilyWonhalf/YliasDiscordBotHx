@@ -22,7 +22,7 @@ class DeleteJoke implements ICommandDefinition {
     public function process(args: Array<String>): Void {
         var author = _context.getMessage().author;
 
-        if (args.length > 0 && Std.is(args[0], Int)) {
+        if (args.length > 0) {
             var joke: Joke = new Joke();
             var primaryValues = new Map<String, String>();
 
