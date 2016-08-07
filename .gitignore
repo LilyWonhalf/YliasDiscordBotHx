@@ -6,6 +6,7 @@ node_modules
 # Private files
 src/config/AuthDetails.hx
 discord.properties
+database.properties
 
 # Compiler output
 out

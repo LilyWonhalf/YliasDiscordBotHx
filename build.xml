@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project basedir="." name="myproject" default="deploy" >
+<project basedir="." name="Ylias" default="deploy">
+    <property file="database.properties"/>
     <property file="discord.properties"/>
     <property file="build.properties"/>
     <property name="ProdToken" value="${OAuthProdToken}"/>
@@ -12,6 +13,33 @@
         <antcall target="unpack"/>
         <antcall target="delete-package"/>
         <antcall target="unset-token"/>
+        <antcall target="dump-sql"/>
+    </target>
+
+    <target name="dump-sql">
+        <exec executable="${mysqlDumpFolder}/mysqldump" output="ylias.sql">
+            <arg value="-d" />
+            <arg value="--user=${dbUser}" />
+            <arg value="--password=${dbPassword}" />
+            <arg value="--host=${dbHost}" />
+            <arg value="--port=${dbPort}" />
+            <arg value="${dbName}" />
+        </exec>
+
+        <loadfile srcfile="ylias.sql" property="validDump">
+            <filterchain>
+                <filterreader classname="org.apache.tools.ant.filters.HeadFilter">
+                    <param name="lines" value="-1"/>
+                    <param name="skip" value="7"/>
+                </filterreader>
+                <filterreader classname="org.apache.tools.ant.filters.TailFilter">
+                    <param name="lines" value="-1"/>
+                    <param name="skip" value="2"/>
+                </filterreader>
+            </filterchain>
+        </loadfile>
+
+        <echo message="${validDump}" file="ylias.sql" />
     </target>
 
     <target name="set-token">
