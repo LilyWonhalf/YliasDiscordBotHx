@@ -26,6 +26,7 @@ class ClientEventHandler extends EventHandler<Client> {
         _eventEmitter.on(cast ClientEventType.MESSAGE, messageHandler);
         _eventEmitter.on(cast ClientEventType.MESSAGE_UPDATED, messageUpdatedHandler);
         _eventEmitter.on(cast ClientEventType.SERVER_NEW_MEMBER, serverNewMemberHandler);
+        _eventEmitter.on(cast ClientEventType.SERVER_MEMBER_REMOVED, serverMemberRemovedHandler);
         _eventEmitter.on(cast ClientEventType.DISCONNECTED, disconnectedHandler);
     }
 
@@ -104,6 +105,20 @@ class ClientEventHandler extends EventHandler<Client> {
                 }
             }
         });
+
+        Staff.getStaffToNotifyAboutNewMember(server.id, function (staffToNotify: Array<Staff>): Void {
+            if (staffToNotify != null && staffToNotify.length > 0) {
+                for (staff in staffToNotify) {
+                    context.sendTo(staff.idUser, 'event.clickeventhandler.servernewmemberhandler.notification_to_staff', cast [user.username, server.name]);
+                }
+            }
+        });
+    }
+
+    private function serverMemberRemovedHandler(server: Server, user: User): Void {
+        Logger.info('Member removed!');
+
+        var context: CommunicationContext = Core.instance.createCommunicationContext();
 
         Staff.getStaffToNotifyAboutNewMember(server.id, function (staffToNotify: Array<Staff>): Void {
             if (staffToNotify != null && staffToNotify.length > 0) {

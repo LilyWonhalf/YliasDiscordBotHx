@@ -5,6 +5,9 @@
   "event.clickeventhandler.servernewmemberhandler.notification_to_staff": [
     "Le membre %% vient de rejoindre le serveur %% !"
   ],
+  "event.clickeventhandler.servermemberremovedhandler.notification_to_staff": [
+    "Le membre %% vient de quitter le serveur %% !"
+  ],
 
   "model.chat.ask.bot_suspected": [
     "**chuchote aux autres** Dîtes les gens... J'veux pas vous affoler, mais je crois que %% est un bot. Il répond beaucoup trop vite à mon goût..."
