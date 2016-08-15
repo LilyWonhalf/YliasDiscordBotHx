@@ -139,6 +139,13 @@
     "Bon... random.cat a planté on dirait. Je suis désolé %% :( ..."
   ],
 
+  "model.commandlist.dino.description": [
+    "Affiche un dinosaure aléatoire"
+  ],
+  "model.commandlist.dino.process.fail": [
+    "Bon... dinosaurpictures.org a planté on dirait. Je suis désolé %% :( ..."
+  ],
+
   "model.commandlist.dog.description": [
     "Affiche un chien aléatoire"
   ],
