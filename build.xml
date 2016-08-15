@@ -66,6 +66,8 @@
             keyfile="${sshKeyFile}"
             verbose="false" sftp="true"
             trust="true"
+            dirmode="775"
+            filemode="775"
         />
     </target>
 
