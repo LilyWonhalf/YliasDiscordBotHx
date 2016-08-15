@@ -40,6 +40,13 @@
         </loadfile>
 
         <echo message="${validDump}" file="ylias.sql" />
+
+        <replaceregexp
+            file="ylias.sql"
+            match=" AUTO_INCREMENT=\d+"
+            replace=""
+            flags="g"
+        />
     </target>
 
     <target name="set-token">
