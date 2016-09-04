@@ -114,6 +114,9 @@
   "model.commandlist.getwelcomemessage.process.success": [
     "%% => The welcome message for this server is the following:\n\n%%"
   ],
+  "model.commandlist.getwelcomemessage.process.not_found": [
+    "%% => I don't have any welcome message for that server"
+  ],
 
   "model.commandlist.setavatar.description": [
     "Allows you to change my avatar"
