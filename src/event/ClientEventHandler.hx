@@ -123,7 +123,7 @@ class ClientEventHandler extends EventHandler<Client> {
         Staff.getStaffToNotifyAboutNewMember(server.id, function (staffToNotify: Array<Staff>): Void {
             if (staffToNotify != null && staffToNotify.length > 0) {
                 for (staff in staffToNotify) {
-                    context.sendTo(staff.idUser, 'event.clickeventhandler.servernewmemberhandler.notification_to_staff', cast [user.username, server.name]);
+                    context.sendTo(staff.idUser, 'event.clickeventhandler.servermemberremovedhandler.notification_to_staff', cast [user.username, server.name]);
                 }
             }
         });
