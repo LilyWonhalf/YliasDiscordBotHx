@@ -8,7 +8,7 @@ import utils.HttpUtils;
 import translations.LangCenter;
 
 class Wiki implements ICommandDefinition {
-    public var paramsUsage = '(search)';
+    public var paramsUsage = '(language prefix) (search)';
     public var description: String;
     public var hidden = false;
 
@@ -23,18 +23,12 @@ class Wiki implements ICommandDefinition {
 
     public function process(args: Array<String>): Void {
         var author = _context.getMessage().author;
-        var host = '.wikipedia.org';
-        var path = '/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&redirects=1&titles=';
 
-        switch (LangCenter.instance.getLang(DiscordUtils.getServerIdFromMessage(_context.getMessage()))) {
-            case Lang.fr_FR:
-                host = 'fr' + host;
+        if (args.length > 1) {
+            var language = args.shift();
+            var host = language + '.wikipedia.org';
+            var path = '/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&redirects=1&titles=';
 
-            default:
-                host = 'en' + host;
-        }
-
-        if (args.length > 0) {
             HttpUtils.query(true, host, path + StringTools.urlEncode(args.join(' ')), cast HTTPMethod.Get, function (data: String) {
                 var parsedData: Dynamic;
 
@@ -51,13 +45,19 @@ class Wiki implements ICommandDefinition {
 
                     if (firstPageId != '-1' && Reflect.hasField(parsedData, firstPageId) && Reflect.hasField(Reflect.field(parsedData, firstPageId), 'extract')) {
                         parsedData = Reflect.field(parsedData, firstPageId);
-                        _context.rawSendToChannel(author + ' => ' + Reflect.field(parsedData, 'extract') + '\n\n<https://' + host + '/wiki/' + parsedData.title + '>');
+                        var extract:String = Reflect.field(parsedData, 'extract');
+
+                        if (extract.length > 1000) {
+                            extract = extract.substr(0, 1000) + '...';
+                        }
+
+                        _context.rawSendToChannel(author + ' => ' + extract + '\n\n<https://' + host + '/wiki/' + parsedData.title + '>');
                     } else {
-                        Logger.error('Failed to search on wikipedia (step 2)');
+                        Logger.error('Failed to search on wikipedia (step 2), URL: https://' + host + path);
                         _context.sendToChannel('model.commandlist.wiki.process.not_found', cast [author]);
                     }
                 } else {
-                    Logger.error('Failed to search on wikipedia (step 1)');
+                    Logger.error('Failed to search on wikipedia (step 1), URL: https://' + host + path);
                     _context.sendToChannel('model.commandlist.wiki.process.fail', cast [author]);
                 }
             });
