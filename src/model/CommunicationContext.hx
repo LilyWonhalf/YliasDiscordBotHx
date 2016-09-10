@@ -91,6 +91,7 @@ class CommunicationContext {
         _client.sendMessage(destination, content, cast {tts: false}, function (err: Dynamic, msg: Message): Void {
             if (err != null && _retriesLeft > 0) {
                 Logger.error('Message not sent, retrying...');
+                Logger.exception(err.response.body.message);
 
                 _isBusy = true;
                 _retriesLeft--;
@@ -99,6 +100,7 @@ class CommunicationContext {
             } else {
                 if (err != null) {
                     Logger.error('Could not send message, giving up');
+                    Logger.exception(err.response.body.message);
                 } else if (_isBusy) {
                     Logger.info('Message successfully sent after retries');
                 }
