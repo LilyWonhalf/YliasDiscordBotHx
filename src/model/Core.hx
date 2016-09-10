@@ -53,7 +53,7 @@ class Core {
     }
 
     public function connect(): Void {
-        _client.loginWithToken(AuthDetails.DISCORD_TOKEN, AuthDetails.DISCORD_EMAIL, AuthDetails.DISCORD_PASSWORD, function (err: Dynamic, token: String): Void {
+        _client.loginWithToken('Bot ' + AuthDetails.DISCORD_TOKEN, AuthDetails.DISCORD_EMAIL, AuthDetails.DISCORD_PASSWORD, function (err: Dynamic, token: String): Void {
             if (err != null) {
                 Logger.exception(err);
             }
