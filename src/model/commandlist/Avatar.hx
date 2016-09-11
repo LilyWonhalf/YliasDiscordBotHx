@@ -38,7 +38,7 @@ class Avatar implements ICommandDefinition {
         if (user != null) {
             if (user.id == Core.userInstance.id) {
                 _context.rawSendToChannel(author + ' => ' + user.avatarURL, function(err: Dynamic, sentMessage: Message) {
-                    _context.sendToChannel('model.commandlist.avatar.process.client_avatar_author', cast ['https://commons.wikimedia.org/wiki/File:Anthro_vixen_colored.jpg']);
+                    _context.sendToChannel('model.commandlist.avatar.process.client_avatar_author', cast ['https://twitter.com/MiagoMeowsome']);
                 });
             } else {
                 _context.rawSendToChannel(author + ' => ' + user.avatarURL);
