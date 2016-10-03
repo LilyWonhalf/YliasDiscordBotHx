@@ -1,5 +1,6 @@
 package event;
 
+import haxe.Timer;
 import model.Db;
 import model.Core;
 import nodejs.NodeJS;
@@ -16,6 +17,10 @@ class ProcessEventHandler extends EventHandler<Process> {
     private function uncaughtExceptionHandler(e: Dynamic) {
         Logger.exception(e.stack);
         Core.instance.disconnect();
+
+        Timer.delay(function () {
+            Core.instance.connect();
+        }, 100);
     }
 
     private function signalInterruptionHandler() {
