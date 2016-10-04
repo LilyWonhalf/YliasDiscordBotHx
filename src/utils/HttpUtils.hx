@@ -6,8 +6,13 @@ import nodejs.http.HTTPS;
 import nodejs.http.HTTP;
 
 class HttpUtils {
-    public static function query(secured: Bool, host: String, path: String, method: HTTPMethod, callback: String->Void): Void {
+    public static function query(secured: Bool, host: String, path: String, method: HTTPMethod, callback: String->Void, ?data: String): Void {
         var port = 80;
+        var contentLength = 0;
+
+        if (data != null) {
+            contentLength = data.length;
+        }
 
         if (secured) {
             port = 443;
@@ -19,7 +24,9 @@ class HttpUtils {
             path: path,
             method: method,
             headers: {
-                'User-Agent': 'YliasDiscordBotHx/1.0 (by ElianWonhalf)'
+                'User-Agent': 'YliasDiscordBotHx/1.0 (by ElianWonhalf)',
+                'Content-Type': 'application/json',
+                'Content-Length': contentLength
             }
         };
 
@@ -49,6 +56,10 @@ class HttpUtils {
                     callback(output);
                 });
             });
+        }
+
+        if (data != null) {
+            req.write(data);
         }
 
         req.end();

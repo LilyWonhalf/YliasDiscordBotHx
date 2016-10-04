@@ -270,6 +270,16 @@
     "%% => Got it, deleted it!"
   ],
 
+  "model.commandlist.describe.description": [
+    "You can ask a bot like me to describe a picture!"
+  ],
+  "model.commandlist.describe.process.wait": [
+    "Alright %%, just let me a few seconds..."
+  ],
+  "model.commandlist.describe.process.error": [
+    "You forgot to give me a picture :| ..."
+  ],
+
   "model.commandlist.avatar.description": [
     "Shows a member avatar in the chat, wider"
   ],

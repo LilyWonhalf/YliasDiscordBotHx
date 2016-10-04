@@ -270,6 +270,16 @@
     "%% => Compris, c'est supprimé !"
   ],
 
+  "model.commandlist.describe.description": [
+    "Vous pouvez demander à un ordinateur comme moi de décrire une image !"
+  ],
+  "model.commandlist.describe.process.wait": [
+    "C'est parti %%, laisse-moi quelques secondes de réflexion..."
+  ],
+  "model.commandlist.describe.process.error": [
+    "T'as oublié de me donner une image :| ..."
+  ],
+
   "model.commandlist.avatar.description": [
     "Permet d'afficher l'avatar d'un membre en plus grand"
   ],
