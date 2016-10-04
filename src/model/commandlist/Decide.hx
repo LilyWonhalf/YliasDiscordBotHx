@@ -7,7 +7,7 @@ import utils.ArrayUtils;
 import translations.LangCenter;
 
 class Decide implements ICommandDefinition {
-    public var paramsUsage = '';
+    public var paramsUsage = '(thing) or (other thing)';
     public var description: String;
     public var hidden = false;
 
