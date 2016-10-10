@@ -15,6 +15,7 @@ class Db {
     private var _pool: Array<DelayedQuery>;
     private var _connectionRestoring: Bool;
     private var _connectionRetries: Int;
+    private var _logged: Bool;
 
     public static function get_instance(): Db {
         if (_instance == null){
@@ -128,10 +129,24 @@ class Db {
     }
 
     private function new(): Void {
+        Logger.info('Initiating database connection and keep-alive process...');
+
         initializeConnection();
-        _db.connect();
+        _logged = false;
+        _db.connect(keepConnectionAlive);
         _pool = new Array<DelayedQuery>();
         _connectionRestoring = false;
+    }
+
+    private function keepConnectionAlive(): Void {
+        _db.query('SELECT 1');
+
+        if (_logged == false) {
+            Logger.info('Database connection keep-alive initiated.');
+            _logged = true;
+        }
+
+        Timer.delay(keepConnectionAlive, 20000);
     }
 
     private function initializeConnection(): Void {
