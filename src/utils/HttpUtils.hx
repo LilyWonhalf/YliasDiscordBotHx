@@ -6,7 +6,7 @@ import nodejs.http.HTTPS;
 import nodejs.http.HTTP;
 
 class HttpUtils {
-    public static function query(secured: Bool, host: String, path: String, method: HTTPMethod, callback: String->Void, ?data: String): Void {
+    public static function query(secured: Bool, host: String, path: String, method: HTTPMethod, callback: String->Void, ?data: String, ?additionnalHeaders: Map<String, String>): Void {
         var port = 80;
         var contentLength = 0;
 
@@ -29,6 +29,12 @@ class HttpUtils {
                 'Content-Length': contentLength
             }
         };
+
+        if (additionnalHeaders != null) {
+            for (header in additionnalHeaders.keys()) {
+                Reflect.setField(options.headers, header, additionnalHeaders.get(header));
+            }
+        }
 
         var req: HTTPClientRequest;
 

@@ -163,11 +163,14 @@
     "Bon... Reddit a planté on dirait. Je suis désolé %% :( ..."
   ],
 
-  "model.commandlist.penguin.description": [
-    "Affiche un manchot aléatoire"
+  "model.commandlist.animal.description": [
+    "Affiche un animal aléatoire"
   ],
-  "model.commandlist.penguin.process.fail": [
-    "Bon... penguin.wtf a planté on dirait. Je suis désolé %% :( ..."
+  "model.commandlist.animal.process.not_found": [
+    "Bon... On dirait que ta recherche ne donne aucun résultat. Je suis désolé %% :( ..."
+  ],
+  "model.commandlist.animal.process.fail": [
+    "Bon... l'API de Getty a planté on dirait. Je suis désolé %% :( ..."
   ],
 
   "model.commandlist.crash.description": [

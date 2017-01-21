@@ -26,4 +26,8 @@ class AuthDetails_example {
     // e621 API
     public static inline var E621_LOGIN = '';
     public static inline var E621_PASSWORD_HASH = '';
+
+    // Getty API
+    public static inline var GETTY_KEY = '';
+    public static inline var GETTY_SECRET = '';
 }

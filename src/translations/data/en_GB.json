@@ -163,11 +163,14 @@
     "Welp... Seems like Reddit just crashed. I'm sorry %% :( ..."
   ],
 
-  "model.commandlist.penguin.description": [
-    "Displays a random penguin"
+  "model.commandlist.animal.description": [
+    "Displays a random animal"
   ],
-  "model.commandlist.penguin.process.fail": [
-    "Welp... Seems like penguin.wtf just crashed. I'm sorry %% :( ..."
+  "model.commandlist.animal.process.not_found": [
+    "Welp... Seems like there is no result for your search. I'm sorry %% :( ..."
+  ],
+  "model.commandlist.animal.process.fail": [
+    "Welp... Seems like getty API just crashed. I'm sorry %% :( ..."
   ],
 
   "model.commandlist.crash.description": [

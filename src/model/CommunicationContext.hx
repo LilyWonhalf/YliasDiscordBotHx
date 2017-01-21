@@ -75,6 +75,22 @@ class CommunicationContext {
         sendMessage(destination, text, callback);
     }
 
+    public function sendFileToChannel(url: String, name: String, ?callback: Dynamic->Message->Void): Void {
+        sendFile(_msg.channel, url, name, callback);
+    }
+
+    public function sendFileToAuthor(url: String, name: String, ?callback: Dynamic->Message->Void): Void {
+        sendFile(_msg.author, url, name, callback);
+    }
+
+    public function sendFileToOwner(url: String, name: String, ?callback: Dynamic->Message->Void): Void {
+        sendFile(AuthDetails.OWNER_ID, url, name, callback);
+    }
+
+    public function sendFileTo(destination: ChannelResolvable, url: String, name: String, ?callback: Dynamic->Message->Void): Void {
+        sendFile(destination, url, name, callback);
+    }
+
     private function sendMessage(destination: ChannelResolvable, content: String, ?callback: Dynamic->Message->Void, flushing: Bool = false): Void {
         if (!_isBusy || flushing) {
             trySendingMessage(destination, content, callback);
@@ -109,6 +125,10 @@ class CommunicationContext {
                 resetBusyState();
             }
         });
+    }
+
+    private function sendFile(destination: ChannelResolvable, url: String, name: String, ?callback: Dynamic->Message->Void): Void {
+        _client.sendFile(destination, url, name, callback);
     }
 
     private function resetBusyState() {
