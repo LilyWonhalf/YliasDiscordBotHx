@@ -11,7 +11,7 @@ class YliasBaseCommand extends BaseCommand {
         var serverId = DiscordUtils.getServerIdFromMessage(context.message);
         var commandName = pos.className.substr(pos.className.lastIndexOf('.') + 1).toLowerCase();
 
-        description = LangCenter.instance.translate(serverId, 'yliasdiscordbothx.model.commandlist.' + commandName + '.description');
+        description = LangCenter.instance.translate(serverId, Bot.PROJECT_NAME + '.model.commandlist.' + commandName + '.description');
         super(context);
     }
 
@@ -20,7 +20,7 @@ class YliasBaseCommand extends BaseCommand {
 
         return LangCenter.instance.translate(
             DiscordUtils.getServerIdFromMessage(context.message),
-            'yliasdiscordbothx.model.commandlist.' + commandName + '.' + str,
+            Bot.PROJECT_NAME + '.model.commandlist.' + commandName + '.' + str,
             vars,
             variant
         );

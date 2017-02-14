@@ -1,6 +1,5 @@
 package yliasdiscordbothx;
 
-import yliasdiscordbothx.model.Db;
 import yliasdiscordbothx.model.PermissionSystem;
 import yliasdiscordbothx.utils.DiscordUtils;
 import yliasdiscordbothx.system.FileSystem;
@@ -11,6 +10,8 @@ import yliasdiscordbothx.config.AuthDetails;
 import discordbothx.core.DiscordBot;
 
 class Bot {
+    public static inline var PROJECT_NAME = 'yliasdiscordbothx';
+
     public static var instance(get, null): Bot;
 
     public var authDetails: AuthDetails;
@@ -50,7 +51,7 @@ class Bot {
 
             bot.commands.set(
                 commandName.toLowerCase(),
-                cast Type.resolveClass('yliasdiscordbothx.model.commandlist.' + commandName)
+                cast Type.resolveClass(PROJECT_NAME + '.model.commandlist.' + commandName)
             );
         }
 

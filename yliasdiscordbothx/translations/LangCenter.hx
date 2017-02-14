@@ -55,7 +55,7 @@ class LangCenter {
             lang = langMap.get(serverId);
         }
 
-        if (translationId.indexOf('yliasdiscordbothx') < 0) {
+        if (translationId.indexOf(Bot.PROJECT_NAME) < 0) {
             translationId = pos.className.toLowerCase() + '.' + pos.methodName.toLowerCase() + '.' + translationId;
         }
 

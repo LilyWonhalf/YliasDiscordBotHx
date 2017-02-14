@@ -3,11 +3,11 @@ package yliasdiscordbothx.utils;
 class Humanify {
     public static function getMultimediaContentDeliverySentence(): String {
         var imageDeliverySentences: Array<String> = [
-            'yliasdiscordbothx.utils.humanify.getimagedeliverysentence.1',
-            'yliasdiscordbothx.utils.humanify.getimagedeliverysentence.2',
-            'yliasdiscordbothx.utils.humanify.getimagedeliverysentence.3',
-            'yliasdiscordbothx.utils.humanify.getimagedeliverysentence.4',
-            'yliasdiscordbothx.utils.humanify.getimagedeliverysentence.5'
+            Bot.PROJECT_NAME + '.utils.humanify.getimagedeliverysentence.1',
+            Bot.PROJECT_NAME + '.utils.humanify.getimagedeliverysentence.2',
+            Bot.PROJECT_NAME + '.utils.humanify.getimagedeliverysentence.3',
+            Bot.PROJECT_NAME + '.utils.humanify.getimagedeliverysentence.4',
+            Bot.PROJECT_NAME + '.utils.humanify.getimagedeliverysentence.5'
         ];
 
         return ArrayUtils.random(imageDeliverySentences);
@@ -15,10 +15,10 @@ class Humanify {
 
     public static function getChoiceDeliverySentence(): String {
         var choiceDeliverySentences: Array<String> = [
-            'yliasdiscordbothx.utils.humanify.getchoicedeliverysentence.1',
-            'yliasdiscordbothx.utils.humanify.getchoicedeliverysentence.2',
-            'yliasdiscordbothx.utils.humanify.getchoicedeliverysentence.3',
-            'yliasdiscordbothx.utils.humanify.getchoicedeliverysentence.4'
+            Bot.PROJECT_NAME + '.utils.humanify.getchoicedeliverysentence.1',
+            Bot.PROJECT_NAME + '.utils.humanify.getchoicedeliverysentence.2',
+            Bot.PROJECT_NAME + '.utils.humanify.getchoicedeliverysentence.3',
+            Bot.PROJECT_NAME + '.utils.humanify.getchoicedeliverysentence.4'
         ];
 
         return ArrayUtils.random(choiceDeliverySentences);
