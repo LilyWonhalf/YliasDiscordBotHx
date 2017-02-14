@@ -1,0 +1,626 @@
+{
+    "yliasdiscordbothx": {
+        "bot": {
+            "new": {
+                "helpdialogintroduction": [
+                    "Bot **Ylias** for **Discord** - need help? Here is a list of the commands I can answer to:"
+                ],
+                "helpdialogend": [
+                    "As you can see, some commands can take parameters. A parameter is indicated by a pair of parenthesis. When you type the command, you shall not type these parenthesis. If you see parameters in *italic*, that means they are optionnal. If you need more help, ask **Elian Wonhalf**. He's the dumbass that created me, he should know."
+                ]
+            }
+        },
+        "event": {
+            "clickeventhandler": {
+                "servernewmemberhandler": {
+                    "fail": [
+                        "The member %% just joined server %%, but I couldn't send him a private message because of a database error... Can you handle it?"
+                    ],
+                    "notification_to_staff": [
+                        "The member %% just joined server %%!"
+                    ]
+                },
+                "servermemberremovedhandler": {
+                    "notification_to_staff": [
+                        "The member %% just left server %%!"
+                    ]
+                }
+            }
+        },
+        "model": {
+            "chat": {
+                "ask": {
+                    "bot_suspected": [
+                        "**whispers to the others** Hey people... I don't mean to freak you out, but I think that %% is a bot. He answers way too quickly..."
+                    ],
+                    "not_ready": [
+                        "Wait wait %%, I didn't even have enough time to wake up properly, Elian just started me right now... Can I get some coffee?"
+                    ]
+                }
+            },
+            "repeatcommand": {
+                "description": [
+                    "Allows you to execute again the last executed command"
+                ],
+                "no_last_command": [
+                    "%%, No command was executed on this channel since I joined. Sorry :/ ."
+                ]
+            },
+            "commandlist": {
+                "addjoke": {
+                    "description": [
+                        "Allows you to add a joke in the database"
+                    ],
+                    "fail": [
+                        "Sorry %%, the joke did not save correctly."
+                    ],
+                    "success": [
+                        "Thank you %%, the joke has been successfully saved :) !"
+                    ]
+                },
+                "addtagtoblacklist": {
+                    "description": [
+                        "Allows you to forbid a tag while searching on e621 or e926"
+                    ],
+                    "wrong_format": [
+                        "%%, We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
+                    ],
+                    "fail": [
+                        "%%, Nope, didn't work : %%"
+                    ],
+                    "success": [
+                        "%%, Got it, saved it!"
+                    ]
+                },
+                "avatar": {
+                    "description": [
+                        "Shows a member avatar in the chat, wider"
+                    ],
+                    "not_found": [
+                        "Sorry %%, but I didn't find this member..."
+                    ],
+                    "client_avatar_author": [
+                        "My avatar has been created by Miago: %%"
+                    ]
+                },
+                "aww": {
+                    "description": [
+                        "Displays a random AWW"
+                    ],
+                    "fail": [
+                        "Welp... Seems like Reddit just crashed. I'm sorry %% :( ..."
+                    ],
+                    "link_to_the_topic": [
+                        "Link to the topic:"
+                    ]
+                },
+                "cat": {
+                    "description": [
+                        "Displays a random cat"
+                    ],
+                    "fail": [
+                        "Welp... Seems like random.cat just crashed. I'm sorry %% :( ..."
+                    ]
+                },
+                "crash": {
+                    "description": [
+                        "This command kills me. I mean... Literally"
+                    ],
+                    "speech": [
+                        "Oh, so it's like that? So you're tired of me? Alright. You really think you can get rid of me just like that? You really think it's that easy? Yo, I'm crazy! I can handle paradoxes without a flinch!\n\n\"This sentence is wrong.\""
+                    ]
+                },
+                "decide": {
+                    "description": [
+                        "You have two (or more) options, you have to make a choice, and you just can't make your mind? Let me help :D"
+                    ],
+                    "split": [
+                        "or"
+                    ],
+                    "wrong_format": [
+                        "%%, You ask me to pick one, but... You only have one to pick... It doesn't make any sense D: !"
+                    ]
+                },
+                "deletejoke": {
+                    "description": [
+                        "Allows you to delete a joke from the database"
+                    ],
+                    "wong_format": [
+                        "%%, Seems like you got mistaken while typing the command. I'm expecting a joke ID, a number c: ."
+                    ],
+                    "not_found": [
+                        "Sorry %%, I did not find any joke with that number."
+                    ],
+                    "failed": [
+                        "Sorry %%, the joke was not deleted successfully."
+                    ],
+                    "success": [
+                        "Alright %%, the joke has been successfully deleted :) !"
+                    ]
+                },
+                "deletetagfromblacklist": {
+                    "description": [
+                        "Allows you to un-forbid a tag while searching on e621 or e926"
+                    ],
+                    "wrong_format": [
+                        "%%, We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
+                    ],
+                    "not_found": [
+                        "%%, The tag you're asking me to remove from the blacklist doesn't exist. I guess it's good news?"
+                    ],
+                    "fail": [
+                        "%%, Nope, didn't work : %%"
+                    ],
+                    "success": [
+                        "%%, Got it, deleted it!"
+                    ]
+                },
+                "deletewelcomemessage": {
+                    "description": [
+                        "Allows you to delete a server's welcome message"
+                    ],
+                    "not_found": [
+                        "%%, The welcome message you're asking me to delete doesn't exist. I guess it's good news?"
+                    ],
+                    "fail": [
+                        "%%, Nope, didn't work : %%"
+                    ],
+                    "success": [
+                        "%%, Got it, deleted it!"
+                    ]
+                },
+                "derpibooru": {
+                    "description": [
+                        "Allows you to search for brony (poney) pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
+                    ]
+                },
+                "describe": {
+                    "description": [
+                        "You can ask a bot like me to describe a picture!"
+                    ],
+                    "wait": [
+                        "Alright %%, just let me a few seconds..."
+                    ],
+                    "error": [
+                        "You forgot to give me a picture :| ..."
+                    ]
+                },
+                "dog": {
+                    "description": [
+                        "Displays a random dog"
+                    ],
+                    "fail": [
+                        "Welp... Seems like random.dog just crashed. I'm sorry %% :( ..."
+                    ]
+                },
+                "e621": {
+                    "description": [
+                        "Allows you to search for furry (or not, I heard there's everything down there) pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
+                    ]
+                },
+                "e926": {
+                    "description": [
+                        "Allows you to search for furry (or not, I heard there's everything down there) pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
+                    ]
+                },
+                "eval": {
+                    "description": [
+                        "Allows you to execute javascript commands and display the return value."
+                    ],
+                    "exception": [
+                        "Well done, %%, you code almost made me crash!"
+                    ]
+                },
+                "gelbooru": {
+                    "description": [
+                        "Allows you to search for manga pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
+                    ]
+                },
+                "getblacklistedtags": {
+                    "description": [
+                        "Displays all the blacklisted tags on the current server, or on the server that was passed in parameter"
+                    ],
+                    "fail": [
+                        "%%, Nope, didn't work, sorry"
+                    ],
+                    "success": [
+                        "%%, Here are all the blacklisted tags on this server: \n%%"
+                    ]
+                },
+                "getty": {
+                    "description": [
+                        "Displays a random animal"
+                    ],
+                    "not_found": [
+                        "Welp... Seems like there is no result for your search. I'm sorry %% :( ..."
+                    ],
+                    "fail": [
+                        "Welp... Seems like getty API just crashed. I'm sorry %% :( ..."
+                    ]
+                },
+                "getwelcomemessage": {
+                    "description": [
+                        "Allows you to see the welcome message that will be sent to the members who join this server"
+                    ],
+                    "fail": [
+                        "%%, Nope, didn't work : %%"
+                    ],
+                    "success": [
+                        "%%, The welcome message for this server is the following:\n\n%%"
+                    ],
+                    "not_found": [
+                        "%%, I don't have any welcome message for that server"
+                    ]
+                },
+                "hug": {
+                    "description": [
+                        "Everyone needs a little love one day or another. Hey, who said bots can't feel love?"
+                    ],
+                    "self_hug": {
+                        "1": [
+                            "**Turns into an octopus and hugs himself with his tentacles <3**"
+                        ],
+                        "2": [
+                            "**Grabs his own torso to hug himself tight <3**"
+                        ],
+                        "3": [
+                            "**Grabs a pillow, draws his avatar on it and hugs it <3**"
+                        ]
+                    },
+                    "hug": {
+                        "1": [
+                            "**Sneakity sneakily crawls in high herbs, stays still, wags, and JUMPS on %% to hug him tight!**"
+                        ],
+                        "2": [
+                            "**Makes a furry hug to %%**"
+                        ],
+                        "3": [
+                            "Come here so I can hug you, %% ! **hugs tight**"
+                        ],
+                        "4": [
+                            "**Falls from a tree and hugs %%**"
+                        ],
+                        "5": [
+                            "**Sneakity sneakily crawls in a hole and jumps out of the earth to hold %% in his arms**"
+                        ],
+                        "6": [
+                            "**Swings from rope to rope and jumps in %%'s arms**"
+                        ],
+                        "7": [
+                            "**Throws a teddy bear to %%'s head while shouting \"HUG\"**"
+                        ],
+                        "8": [
+                            "**Turns into an octopus and holds %% with his tentacles**"
+                        ],
+                        "9": [
+                            "**Turns into a snake and holds %% tight**"
+                        ]
+                    }
+                },
+                "joke": {
+                    "description": [
+                        "I can tell jokes. True! You can even search for one or more words if you're looking for a particular one"
+                    ],
+                    "not_found": [
+                        "Sorry %%, I did not find any joke :/ ..."
+                    ],
+                    "answer": [
+                        "%%, Joke number %%: \n%%"
+                    ]
+                },
+                "meme": {
+                    "description": [
+                        "Allows you to generate a meme of type (type) with the text (top text) at the top of it and the text (bottom text) at the bottom of it if it has been filled"
+                    ],
+                    "parse_error": [
+                        "Sorry %%, but you did not write the command correctly, I don't understand what you want."
+                    ],
+                    "not_found": [
+                        "Sorry %%, but this meme type doesn't exist... You should try !memelist to get the list of the meme types that exist !"
+                    ],
+                    "fail": [
+                        "Sorry %%, seems like Imgflip has crashed..."
+                    ]
+                },
+                "memelist": {
+                    "description": [
+                        "I can send you in private the list of the available memes"
+                    ],
+                    "finished": [
+                        "Just sent you the available meme list in private, %%!"
+                    ]
+                },
+                "ping": {
+                    "description": [
+                        "Who's up for ping pong? Oh, sorry. Table tennis u_u"
+                    ],
+                    "answer": [
+                        "%%, Pong!"
+                    ]
+                },
+                "registerpermission": {
+                    "description": [
+                        "Allows you to allow or deny a command access to someone"
+                    ],
+                    "wrong_format": [
+                        "%%, We got a problem. I think you made a mistake while typing the command, I didn't understand a thing."
+                    ],
+                    "wrong_user": [
+                        "%%, We got a problem. I don't know which member you want to register a permission from. I need the member ID, right? Well, you can highlight him with an @, I will translate it."
+                    ],
+                    "granted_parse_error": [
+                        "%%, You wanna grant or deny, there? It's not really crystal clear ._. ..."
+                    ],
+                    "success": [
+                        "%%, The permission has been successfully registered :) !"
+                    ],
+                    "fail": [
+                        "%%, There has been an error during registering, sorry :/ ."
+                    ]
+                },
+                "registerstaff": {
+                    "description": [
+                        "Allows you to register a member to the staff and subscribe him to the new member notifications"
+                    ],
+                    "private_channel_error": [
+                        "%%, I need you to execute this command on a server so I know which one you're talking about."
+                    ],
+                    "no_mention": [
+                        "%%, You haven't mentionned anyone in your message, how am I supposed to know who to register?"
+                    ],
+                    "fail": [
+                        "%%, There has been an error during save, sorry :/ ..."
+                    ],
+                    "success": [
+                        "%%, The member has been successfully registered in the staff and subscribed to the notifications :) !"
+                    ]
+                },
+                "safebooru": {
+                    "description": [
+                        "Allows you to search for manga pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
+                    ]
+                },
+                "scream": {
+                    "description": [
+                        "I can imitate lots of animals"
+                    ]
+                },
+                "setavatar": {
+                    "description": [
+                        "Allows you to change my avatar"
+                    ],
+                    "network_error": [
+                        "%%, The request failed, are you sure the address is correct?"
+                    ],
+                    "fail": [
+                        "%%, The avatar change didn't work, are you sure your URL goes to an image?"
+                    ],
+                    "answer": [
+                        "%%, My avatar has been successfully changed :D !"
+                    ]
+                },
+                "setlang": {
+                    "description": [
+                        "Allows you to change my lang"
+                    ],
+                    "wrong_format": [
+                        "You forgot to tell me in which lang I should speak..."
+                    ],
+                    "wrong_lang": [
+                        "I am sorry, but I don't know this lang :/ ..."
+                    ],
+                    "answer": [
+                        "Okay, my lang has been successfully changed :) !"
+                    ]
+                },
+                "setwelcomemessage": {
+                    "description": [
+                        "Allows you to set the welcome message that will be sent to the members who join this server"
+                    ],
+                    "wrong_format": [
+                        "%%, We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
+                    ],
+                    "fail": [
+                        "%%, Nope, didn't work : %%"
+                    ],
+                    "success": [
+                        "%%, Got it, saved it!"
+                    ]
+                },
+                "unregisterpermission": {
+                    "description": [
+                        "Allows you to delete a previously registered permission"
+                    ],
+                    "wrong_format": [
+                        "%%, We got a problem. I think you made a mistake while typing the command, I didn't understand a thing."
+                    ],
+                    "wrong_user": [
+                        "%%, We got a problem. I don't know which member you want to unregister a permission from. I need the member ID, right? Well, you can highlight him with an @, I will translate it."
+                    ],
+                    "not_found": [
+                        "%%, The permission you're asking me to delete doesn't exist. I guess it's good news?"
+                    ],
+                    "success": [
+                        "%%, The permission has been successfully unregistered :) !"
+                    ],
+                    "fail": [
+                        "%%, There has been an error during unregistering, sorry :/ ."
+                    ]
+                },
+                "unregisterstaff": {
+                    "description": [
+                        "Allows you to delete a member from the staff"
+                    ],
+                    "private_channel_error": [
+                        "%%, I need you to execute this command on a server so I know which one you're talking about."
+                    ],
+                    "no_mention": [
+                        "%%, You haven't mentionned anyone in your message, how am I supposed to know who to delete?"
+                    ],
+                    "not_found": [
+                        "%%, The member you want to delete from the staff is already not part of the staff. I guess that's good news?"
+                    ],
+                    "fail": [
+                        "%%, There has been an error during save, sorry :/ ..."
+                    ],
+                    "success": [
+                        "%%, The member has been successfully deleted from the staff :) !"
+                    ]
+                },
+                "wiki": {
+                    "description": [
+                        "I can look up an article on Wikipedia and write the beginning here if you want"
+                    ],
+                    "parse_error": [
+                        "%%, You wanna make a search on Wikipedia without... Search terms?"
+                    ],
+                    "fail": [
+                        "Seems like Wikipedia crashed. Didn't think that day would come! Sorry %%!"
+                    ],
+                    "not_found": [
+                        "23 19, WE GOT A 23 19!! Oh, wait, it's a 404, sorry. Well, the page you asked for doesn't exist on Wikipédia. Sorry, %% !"
+                    ]
+                },
+                "youtube": {
+                    "description": [
+                        "Allows you to make a search on YouTube"
+                    ],
+                    "wait": [
+                        "Wait a moment, %%, I'm asking YouTube if he's got something..."
+                    ],
+                    "fail": [
+                        "Welp... Seems like YouTube has crashed. How strange... I'm sorry %% :( ..."
+                    ],
+                    "error": [
+                        "Welp... YouTube told me there has been an error. I think we reached the search quota for today! I'm sorry %% :( ..."
+                    ],
+                    "not_found": [
+                        "Welp... YouTube didn't find anything for you. I'm sorry %% :( ..."
+                    ]
+                }
+            },
+            "mangapicture": {
+                "searchpicture": {
+                    "sql_error": [
+                        "Welp... Seems like my database is not in the mood... I am sorry %% :( ..."
+                    ],
+                    "forbidden_search_message_to_owner": [
+                        "The user %% tried to search a manga picture with the following forbidden tag(s): %%. %%"
+                    ],
+                    "forbidden_search_public_message": [
+                        "%%, You just made a search that involved at least one blacklisted tag. That's nasty. Here are the incriminated tags: %%"
+                    ],
+                    "wait": [
+                        "Just a moment, %%, gotta ask %% if he can find something for you..."
+                    ]
+                },
+                "proxypicturefoundhandler": {
+                    "no_valid_picture_found": [
+                        "Sorry %%, but I did not find any picture that would've been authorized on this server... You can retry if you want, who know, I could find one this time! But don't spam, please. If I still don't find after a few retries, you can stop right there, I won't find at all."
+                    ]
+                }
+            },
+            "entity": {
+                "permission": {
+                    "register": {
+                        "error_data_format": [
+                            "Incorrect data format"
+                        ],
+                        "error_sql_server_retrieval": [
+                            "SQL server returned an error while retrieving data"
+                        ],
+                        "error_sql_server_saving": [
+                            "SQL server returned an error while saving data"
+                        ],
+                        "error_404": [
+                            "This permission doesn't exist"
+                        ]
+                    },
+                    "unregister": {
+                        "error_data_format": [
+                            "Incorrect data format"
+                        ],
+                        "error_sql_server_retrieval": [
+                            "SQL server returned an error while retrieving data"
+                        ],
+                        "error_sql_server_deleting": [
+                            "SQL server returned an error while deleting data"
+                        ]
+                    }
+                }
+            },
+            "command": {
+                "requestexecutecommand": {
+                    "message_to_owner": [
+                        "%% tried to execute command %% with arguments \"%%\" but doesn't have the right to. %%"
+                    ],
+                    "message_to_member": [
+                        "Sorry, %%, you don't have the right to execute this command."
+                    ]
+                },
+                "handleunknowncommand": {
+                    "answer": [
+                        "%%? I don't know this command, sorry, %%... You can get the command list by typing !help :) ."
+                    ]
+                }
+            }
+        },
+        "net": {
+            "mangapictureproxy": {
+                "initializequerycompletehandler": {
+                    "host_crashed": [
+                        "Well... Seems like %% has crashed. I'm sorry %% :( ..."
+                    ],
+                    "no_result": [
+                        "Well... %% told me that he hasn't got anything about your search. I'm sorry %% :( ..."
+                    ]
+                }
+            }
+        },
+        "utils": {
+            "humanify": {
+                "getimagedeliverysentence": {
+                    "1": [
+                        "Here!"
+                    ],
+                    "2": [
+                        "Here's one!"
+                    ],
+                    "3": [
+                        "Do you like this one?"
+                    ],
+                    "4": [
+                        "Found this one!"
+                    ],
+                    "5": [
+                        "Someone told me a lot about this one. Won't tell you who, though c: ."
+                    ]
+                },
+                "getchoicedeliverysentence": {
+                    "1": [
+                        "I choose %%!"
+                    ],
+                    "2": [
+                        "%%, without a doubt."
+                    ],
+                    "3": [
+                        "You kidding, right? Pick %%, obviously!"
+                    ],
+                    "4": [
+                        "To make this choice is a big responsibility. But I'm ready. I pick %%."
+                    ]
+                }
+            },
+            "discordutils": {
+                "getlocationstringfrommessage": {
+                    "location_private": [
+                        "It was on a private conversation (date : %%)."
+                    ],
+                    "location_public": [
+                        "It was on server %% and on channel #%% (date : %%)."
+                    ]
+                }
+            }
+        }
+    }
+}

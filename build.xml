@@ -51,7 +51,7 @@
 
     <target name="set-token">
         <replace
-            file="out/release/bot.js"
+            file="out/bot.js"
             token="${DebugToken}"
             value="${ProdToken}"
         />
@@ -59,7 +59,7 @@
 
     <target name="package">
         <tar destfile="${archiveFilename}" compression="gzip">
-            <tarfileset dir="${basedir}/out/release" filemode="775" dirmode="775">
+            <tarfileset dir="${basedir}/out" filemode="775" dirmode="775">
                 <include name="bot.js"/>
                 <include name="package.json"/>
             </tarfileset>
@@ -107,7 +107,7 @@
 
     <target name="unset-token">
         <replace
-                file="out/release/bot.js"
+                file="out/bot.js"
                 token="${ProdToken}"
                 value="${DebugToken}"
                 />

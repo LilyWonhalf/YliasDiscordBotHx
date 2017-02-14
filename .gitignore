@@ -4,7 +4,7 @@
 node_modules
 
 # Private files
-src/config/AuthDetails.hx
+yliasdiscordbothx/config/AuthDetails.hx
 discord.properties
 database.properties
 
