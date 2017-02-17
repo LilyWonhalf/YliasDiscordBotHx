@@ -2,10 +2,10 @@
     "yliasdiscordbothx": {
         "bot": {
             "new": {
-                "helpdialogendintroduction": [
+                "helpdialogintroduction": [
                     "Bot **Ylias** pour **Discord** - besoin d'aide ? Voici une liste des commandes auxquelles je peux répondre :"
                 ],
-                "helpdialogendend": [
+                "helpdialogend": [
                     "Comme vous pouvez le voir, certaines commandes peuvent prendre des paramètres. Un paramètre est indiqué par un groupe de parenthèses. Lorsque vous tapperez la commande, il ne faut pas reporter ces parenthèses. Si vous voyez des paramètres en *italique*, ça signifie qu'ils sont optionnels. Si vous avez besoin de plus d'aide, demandez à **Elian Wonhalf**. C'est lui l'idiot qui m'a codé, il devrait savoir."
                 ]
             }
