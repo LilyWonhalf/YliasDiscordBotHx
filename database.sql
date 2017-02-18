@@ -117,7 +117,10 @@ CREATE TABLE `staff` (
   `id_user` varchar(255) NOT NULL,
   `id_server` varchar(255) NOT NULL,
   `notify_new_member` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_user`,`id_server`)
+  PRIMARY KEY (`id_user`,`id_server`),
+  KEY `staff_id_server_server_id` (`id_server`),
+  CONSTRAINT `staff_id_server_server_id` FOREIGN KEY (`id_server`) REFERENCES `server` (`id`),
+  CONSTRAINT `staff_id_user_user_id` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

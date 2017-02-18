@@ -8,10 +8,42 @@
                 "helpdialogend": [
                     "As you can see, some commands can take parameters. A parameter is indicated by a pair of parenthesis. When you type the command, you shall not type these parenthesis. If you see parameters in *italic*, that means they are optionnal. If you need more help, ask **Elian Wonhalf**. He's the dumbass that created me, he should know."
                 ]
+            },
+            "bindsignals": {
+                "cleverbotio_bot_suspected": [
+                    "**whispers to the others** Hey people... I don't mean to freak you out, but I think that %% is a bot. He answers way too quickly..."
+                ],
+                "cleverbotio_not_ready": [
+                    "Wait wait %%, I didn't even have enough time to wake up properly, Elian just started me right now... Can I get some coffee please?"
+                ],
+                "no_last_command": [
+                    "%%, no command was executed on this channel since I joined. Sorry :/ ."
+                ],
+                "unauthorized_command_message_to_owner": [
+                    "%% tried to execute command %% with arguments \"%%\" but doesn't have the right to. %%"
+                ],
+                "unauthorized_command_message_to_member": [
+                    "Sorry, %%, you don't have the right to execute this command."
+                ],
+                "unknown_command": [
+                    "%%? I don't know this command, sorry, %%... You can get the command list by typing %%help :) ."
+                ],
+                "check_permission_error": [
+                    "Sorry  %%, there has been a problem while retrieving your permissions."
+                ],
+                "get_denied_command_list_error": [
+                    "Sorry  %%, there has been a problem while retrieving the list."
+                ],
+                "help_dialog_sent_confirmation": [
+                    "I just sent you a list of the commands I can answer to in DM, %%."
+                ],
+                "help_dialog_send_error": [
+                    "Sorry %%, there has been an error while sending the help dialog."
+                ]
             }
         },
         "event": {
-            "clickeventhandler": {
+            "clienteventhandler": {
                 "servernewmemberhandler": {
                     "fail": [
                         "The member %% just joined server %%, but I couldn't send him a private message because of a database error... Can you handle it?"
@@ -28,24 +60,6 @@
             }
         },
         "model": {
-            "chat": {
-                "ask": {
-                    "bot_suspected": [
-                        "**whispers to the others** Hey people... I don't mean to freak you out, but I think that %% is a bot. He answers way too quickly..."
-                    ],
-                    "not_ready": [
-                        "Wait wait %%, I didn't even have enough time to wake up properly, Elian just started me right now... Can I get some coffee?"
-                    ]
-                }
-            },
-            "repeatcommand": {
-                "description": [
-                    "Allows you to execute again the last executed command"
-                ],
-                "no_last_command": [
-                    "%%, No command was executed on this channel since I joined. Sorry :/ ."
-                ]
-            },
             "commandlist": {
                 "addjoke": {
                     "description": [
@@ -547,21 +561,6 @@
                             "SQL server returned an error while deleting data"
                         ]
                     }
-                }
-            },
-            "command": {
-                "requestexecutecommand": {
-                    "message_to_owner": [
-                        "%% tried to execute command %% with arguments \"%%\" but doesn't have the right to. %%"
-                    ],
-                    "message_to_member": [
-                        "Sorry, %%, you don't have the right to execute this command."
-                    ]
-                },
-                "handleunknowncommand": {
-                    "answer": [
-                        "%%? I don't know this command, sorry, %%... You can get the command list by typing !help :) ."
-                    ]
                 }
             }
         },

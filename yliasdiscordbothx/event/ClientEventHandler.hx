@@ -1,5 +1,7 @@
 package yliasdiscordbothx.event;
 
+import discordhx.guild.Guild;
+import discordhx.guild.GuildMember;
 import yliasdiscordbothx.model.Db;
 import discordbothx.core.DiscordBot;
 import yliasdiscordbothx.model.entity.Staff;
@@ -35,16 +37,18 @@ class ClientEventHandler extends EventHandler<Client> {
         UserEntity.registerUsers();
     }
 
-    private function serverNewMemberHandler(server: Server, user: User): Void {
+    private function serverNewMemberHandler(member: GuildMember): Void {
         Logger.info('New member joined!');
         registerEntities();
 
         var context: CommunicationContext = new CommunicationContext();
+        var guild: Guild = member.guild;
+        var user: User = member.user;
 
-        WelcomeMessage.getForServer(server.id, function(err: Dynamic, message: String) {
+        WelcomeMessage.getForServer(guild.id, function(err: Dynamic, message: String) {
             if (err != null) {
                 Logger.exception(err);
-                context.sendToOwner(LangCenter.instance.translate(server.id, 'fail', cast [user.username, server.name]));
+                context.sendToOwner(LangCenter.instance.translate(guild.id, 'fail', cast [user.username, guild.name]));
             } else {
                 if (message != null) {
                     context.sendTo(user, message);
@@ -52,29 +56,31 @@ class ClientEventHandler extends EventHandler<Client> {
             }
         });
 
-        Staff.getStaffToNotifyAboutNewMember(server.id, function (staffToNotify: Array<Staff>): Void {
+        Staff.getStaffToNotifyAboutNewMember(guild.id, function (staffToNotify: Array<Staff>): Void {
             if (staffToNotify != null && staffToNotify.length > 0) {
                 for (staff in staffToNotify) {
                     context.sendTo(
                         DiscordBot.instance.client.users.get(staff.idUser),
-                        LangCenter.instance.translate(server.id, 'notification_to_staff', cast [user.username, server.name])
+                        LangCenter.instance.translate(guild.id, 'notification_to_staff', cast [user.username, guild.name])
                     );
                 }
             }
         });
     }
 
-    private function serverMemberRemovedHandler(server: Server, user: User): Void {
+    private function serverMemberRemovedHandler(member: GuildMember): Void {
         Logger.info('Member removed!');
 
         var context: CommunicationContext = new CommunicationContext();
+        var guild: Guild = member.guild;
+        var user: User = member.user;
 
-        Staff.getStaffToNotifyAboutNewMember(server.id, function (staffToNotify: Array<Staff>): Void {
+        Staff.getStaffToNotifyAboutNewMember(guild.id, function (staffToNotify: Array<Staff>): Void {
             if (staffToNotify != null && staffToNotify.length > 0) {
                 for (staff in staffToNotify) {
                     context.sendTo(
                         DiscordBot.instance.client.users.get(staff.idUser),
-                        LangCenter.instance.translate(server.id, 'notification_to_staff', cast [user.username, server.name])
+                        LangCenter.instance.translate(guild.id, 'notification_to_staff', cast [user.username, guild.name])
                     );
                 }
             }

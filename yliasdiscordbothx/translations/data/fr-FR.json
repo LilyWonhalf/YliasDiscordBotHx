@@ -8,10 +8,42 @@
                 "helpdialogend": [
                     "Comme vous pouvez le voir, certaines commandes peuvent prendre des paramètres. Un paramètre est indiqué par un groupe de parenthèses. Lorsque vous tapperez la commande, il ne faut pas reporter ces parenthèses. Si vous voyez des paramètres en *italique*, ça signifie qu'ils sont optionnels. Si vous avez besoin de plus d'aide, demandez à **Elian Wonhalf**. C'est lui l'idiot qui m'a codé, il devrait savoir."
                 ]
+            },
+            "bindsignals": {
+                "cleverbotio_bot_suspected": [
+                    "**chuchote aux autres** Dîtes les gens... J'veux pas vous affoler, mais je crois que %% est un bot. Il répond beaucoup trop vite à mon goût..."
+                ],
+                "cleverbotio_not_ready": [
+                    "Attends attends %%, j'ai même pas eu le temps de me réveiller correctement, Elian vient tout juste de me démarrer là... Je peux avoir un café s'il te plaît ?"
+                ],
+                "no_last_command": [
+                    "%%, aucune commande n'a été exécutée sur ce canal depuis que je suis connecté. Désolé :/ ."
+                ],
+                "unauthorized_command_message_to_owner": [
+                    "%% a essayé d'exécuter la commande %% avec les arguments \"%%\" alors qu'il n'a pas les droits. %%"
+                ],
+                "unauthorized_command_message_to_member": [
+                    "Désolé, %%, tu n'as pas l'autorisation d'exécuter cette commande."
+                ],
+                "unknown_command": [
+                    "%% ? Je ne connais pas cette commande, désolé, %%... Tu peux voir la liste des commandes en tapant %%help :) ."
+                ],
+                "check_permission_error": [
+                    "Désolé %%, il y a eu un problème durant la récupération de tes permissions."
+                ],
+                "get_denied_command_list_error": [
+                    "Désolé %%, il y a eu un problème durant la récupération de la liste."
+                ],
+                "help_dialog_sent_confirmation": [
+                    "Je viens juste de t'envoyer par MP la liste des commandes auxquelles je peux répondre, %%."
+                ],
+                "help_dialog_send_error": [
+                    "Désolé %%, une erreur est survenue durant l'envoi du message d'aide."
+                ]
             }
         },
         "event": {
-            "clickeventhandler": {
+            "clienteventhandler": {
                 "servernewmemberhandler": {
                     "fail": [
                         "Le membre %% vient de rejoindre le serveur %%, mais je n'ai pas pu lui envoyer de message privé à cause d'une erreur de BDD... J'te laisse t'en charger ?"
@@ -19,9 +51,7 @@
                     "notification_to_staff": [
                         "Le membre %% vient de rejoindre le serveur %% !"
                     ]
-                }
-            },
-            "clickeventhandler": {
+                },
                 "servermemberremovedhandler": {
                     "notification_to_staff": [
                         "Le membre %% vient de quitter le serveur %% !"
@@ -30,24 +60,6 @@
             }
         },
         "model": {
-            "chat": {
-                "ask": {
-                    "bot_suspected": [
-                        "**chuchote aux autres** Dîtes les gens... J'veux pas vous affoler, mais je crois que %% est un bot. Il répond beaucoup trop vite à mon goût..."
-                    ],
-                    "not_ready": [
-                        "Attends attends %%, j'ai même pas eu le temps de me réveiller correctement, Elian vient tout juste de me démarrer là... Je peux avoir un café ?"
-                    ]
-                }
-            },
-            "repeatcommand": {
-                "description": [
-                    "Permet d'exécuter à nouveau la dernière commande exécutée"
-                ],
-                "no_last_command": [
-                    "%%, Aucune commande n'a été exécutée sur ce canal depuis que je suis connecté. Désolé :/ ."
-                ]
-            },
             "commandlist": {
                 "addjoke": {
                     "description": [
@@ -549,21 +561,6 @@
                             "La permission en question n'existe pas"
                         ]
                     }
-                }
-            },
-            "command": {
-                "requestexecutecommand": {
-                    "message_to_owner": [
-                        "%% a essayé d'exécuter la commande %% avec les arguments \"%%\" alors qu'il n'a pas les droits. %%"
-                    ],
-                    "message_to_member": [
-                        "Désolé, %%, tu n'as pas l'autorisation d'exécuter cette commande."
-                    ]
-                },
-                "handleunknowncommand": {
-                    "answer": [
-                        "%% ? Je ne connais pas cette commande, désolé, %%... Tu peux voir la liste des commandes en tapant !help :) ."
-                    ]
                 }
             }
         },
