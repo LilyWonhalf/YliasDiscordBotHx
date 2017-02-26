@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.entity;
 
+import discordhx.channel.VoiceChannel;
 import discordhx.channel.GroupDMChannel;
 import discordhx.channel.TextChannel;
 import discordhx.channel.DMChannel;
@@ -58,6 +59,10 @@ class Channel extends Entity {
                                 var textChannel: TextChannel = cast channel;
 
                                 newChannel.name = textChannel.name;
+                            } else {
+                                var voiceChannel: VoiceChannel = cast channel;
+
+                                newChannel.name = voiceChannel.name;
                             }
                         }
 

@@ -29,10 +29,10 @@
                     "%%? I don't know this command, sorry, %%... You can get the command list by typing %%help :) ."
                 ],
                 "check_permission_error": [
-                    "Sorry  %%, there has been a problem while retrieving your permissions."
+                    "Sorry %%, there has been a problem while retrieving your permissions."
                 ],
                 "get_denied_command_list_error": [
-                    "Sorry  %%, there has been a problem while retrieving the list."
+                    "Sorry %%, there has been a problem while retrieving the list."
                 ],
                 "help_dialog_sent_confirmation": [
                     "I just sent you a list of the commands I can answer to in DM, %%."

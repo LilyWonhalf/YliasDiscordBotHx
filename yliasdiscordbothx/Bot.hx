@@ -1,5 +1,6 @@
 package yliasdiscordbothx;
 
+import yliasdiscordbothx.config.Config;
 import discordbothx.event.NotificationBus;
 import yliasdiscordbothx.model.PermissionSystem;
 import yliasdiscordbothx.utils.DiscordUtils;
@@ -12,7 +13,6 @@ import discordbothx.core.DiscordBot;
 
 class Bot {
     public static inline var PROJECT_NAME = 'yliasdiscordbothx';
-    public static inline var COMMAND_IDENTIFIER = '!';
 
     public static var instance(get, null): Bot;
 
@@ -45,7 +45,7 @@ class Bot {
             var serverId: String = DiscordUtils.getServerIdFromMessage(context.message);
             return LangCenter.instance.translate(serverId, 'helpdialogend');
         };
-        bot.commandIdentifier = COMMAND_IDENTIFIER;
+        bot.commandIdentifier = Config.COMMAND_IDENTIFIER;
 
         var commandList: Array<String> = FileSystem.getFileListInFolder('yliasdiscordbothx/model/commandlist/');
 
@@ -115,7 +115,9 @@ class Bot {
             var serverId: String = DiscordUtils.getServerIdFromMessage(context.message);
             var author: String = context.message.author.toString();
 
-            context.sendToChannel(LangCenter.instance.translate(serverId, 'unknown_command', [command, author, COMMAND_IDENTIFIER]));
+            if (Config.ANSWER_TO_UNKNOWN_COMMAND) {
+                context.sendToChannel(LangCenter.instance.translate(serverId, 'unknown_command', [command, author, Config.COMMAND_IDENTIFIER]));
+            }
         });
 
         NotificationBus.instance.helpDialogSent.add(function (context: CommunicationContext): Void {

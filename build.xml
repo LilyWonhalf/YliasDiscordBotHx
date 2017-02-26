@@ -3,7 +3,6 @@
     <property file="database.properties"/>
     <property file="discord.properties"/>
     <property file="build.properties"/>
-    <property name="ProdToken" value="${OAuthProdToken}"/>
 
     <target name="deploy">
         <antcall target="set-token"/>
