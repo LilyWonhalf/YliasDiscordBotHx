@@ -441,6 +441,14 @@
                         "%%, Compris, c'est dans la boîte !"
                     ]
                 },
+                "slots": {
+                    "description": [
+                        "Tu veux jouer aux machines à sous ? Bon, sauf que là y'a pas de sous."
+                    ],
+                    "try_again": [
+                        "Essaie encore"
+                    ]
+                },
                 "unregisterpermission": {
                     "description": [
                         "Permet de supprimer une permission qui aurait au préalable été enregistrée"

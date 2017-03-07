@@ -441,6 +441,14 @@
                         "%%, Got it, saved it!"
                     ]
                 },
+                "slots": {
+                    "description": [
+                        "Wanna play slot machines? Well, there is no money implied but it's still fun."
+                    ],
+                    "try_again": [
+                        "Try again"
+                    ]
+                },
                 "unregisterpermission": {
                     "description": [
                         "Allows you to delete a previously registered permission"
