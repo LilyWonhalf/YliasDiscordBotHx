@@ -447,6 +447,9 @@
                     ],
                     "try_again": [
                         "Essaie encore"
+                    ],
+                    "too_much_tries": [
+                        "Tu as trop joué pour aujourd'hui, %%, reviens demain :D !"
                     ]
                 },
                 "unregisterpermission": {

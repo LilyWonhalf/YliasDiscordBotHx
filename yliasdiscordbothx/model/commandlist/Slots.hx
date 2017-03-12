@@ -1,10 +1,19 @@
 package yliasdiscordbothx.model.commandlist;
 
+import DateTools;
+import Date;
+import discordhx.user.User;
+import discordhx.Collection;
 import discordhx.message.Message;
 import yliasdiscordbothx.utils.ArrayUtils;
 import discordbothx.core.CommunicationContext;
 
 class Slots extends YliasBaseCommand {
+    private static inline var MAX_ATTEMPS: Int = 5;
+
+    private static var attempts: Collection<User, Int>;
+    private static var lastAttemptTime: Date;
+
     public function new(context: CommunicationContext) {
         super(context);
     }
@@ -80,19 +89,59 @@ class Slots extends YliasBaseCommand {
             ':squid:'
         ];
 
+        var author: User = context.message.author;
         var first: String = ArrayUtils.random(emojis);
         var second: String = ArrayUtils.random(emojis);
         var third: String = ArrayUtils.random(emojis);
         var answer: String = '';
 
-        if (first == second && second == third) {
-            answer += ':sparkles: **JACKPOT** :sparkles:';
-        } else {
-            answer += ':x: **' + l('try_again').toUpperCase() + '** :x:';
+        if (attempts == null) {
+            attempts = new Collection<User, Int>();
         }
 
-        context.sendToChannel(first + second + third).then(function (message: Message): Void {
-            context.sendToChannel(answer);
-        });
+        if (lastAttemptTime == null) {
+            lastAttemptTime = Date.now();
+        }
+
+        if (!attempts.has(author)) {
+            attempts.set(author, 0);
+        }
+
+        if (isDateBeforeToday(lastAttemptTime)) {
+            for (entry in attempts.keyArray()) {
+                attempts.set(entry, 0);
+            }
+        }
+
+        if (attempts.get(author) < MAX_ATTEMPS) {
+            attempts.set(author, attempts.get(author) + 1);
+
+            if (first == second && second == third) {
+                answer += ':sparkles: **JACKPOT** :sparkles:';
+            } else {
+                answer += ':x: **' + l('try_again').toUpperCase() + '** :x:';
+            }
+
+            context.sendToChannel(first + second + third).then(function (message: Message): Void {
+                context.sendToChannel(answer);
+            });
+        } else {
+            context.sendToChannel(l('too_much_tries', cast [author]));
+        }
+    }
+
+    private function isDateBeforeToday(date: Date): Bool {
+        var beforeToday: Bool = false;
+        var now: Date = Date.now();
+
+        if (date.getFullYear() < now.getFullYear()) {
+            beforeToday = true;
+        } else if (date.getMonth() < now.getMonth()) {
+            beforeToday = true;
+        } else if (date.getDate() < now.getDate()) {
+            beforeToday = true;
+        }
+
+        return beforeToday;
     }
 }

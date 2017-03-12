@@ -447,6 +447,9 @@
                     ],
                     "try_again": [
                         "Try again"
+                    ],
+                    "too_much_tries": [
+                        "You tried too hard today, %%, come back tomorrow :D !"
                     ]
                 },
                 "unregisterpermission": {
