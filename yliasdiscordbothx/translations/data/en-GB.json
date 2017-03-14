@@ -243,7 +243,7 @@
                 },
                 "getty": {
                     "description": [
-                        "Displays a random animal"
+                        "Displays a random picture"
                     ],
                     "not_found": [
                         "Welp... Seems like there is no result for your search. I'm sorry %% :( ..."

@@ -243,7 +243,7 @@
                 },
                 "getty": {
                     "description": [
-                        "Affiche un animal aléatoire"
+                        "Affiche une image aléatoire"
                     ],
                     "not_found": [
                         "Bon... On dirait que ta recherche ne donne aucun résultat. Je suis désolé %% :( ..."
