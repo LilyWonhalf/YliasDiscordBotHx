@@ -1,9 +1,8 @@
 package yliasdiscordbothx.model.commandlist;
 
-import DateTools;
+import discordhx.Collection;
 import Date;
 import discordhx.user.User;
-import discordhx.Collection;
 import discordhx.message.Message;
 import yliasdiscordbothx.utils.ArrayUtils;
 import discordbothx.core.CommunicationContext;
@@ -12,7 +11,7 @@ class Slots extends YliasBaseCommand {
     private static inline var MAX_ATTEMPS: Int = 5;
 
     private static var attempts: Collection<User, Int>;
-    private static var lastAttemptTime: Date;
+    private static var lastAttemptTime: Collection<User, Date>;
 
     public function new(context: CommunicationContext) {
         super(context);
@@ -100,14 +99,18 @@ class Slots extends YliasBaseCommand {
         }
 
         if (lastAttemptTime == null) {
-            lastAttemptTime = Date.now();
+            lastAttemptTime = new Collection<User, Date>();
         }
 
         if (!attempts.has(author)) {
             attempts.set(author, 0);
         }
 
-        if (isDateBeforeToday(lastAttemptTime)) {
+        if (!lastAttemptTime.has(author)) {
+            lastAttemptTime.set(author, Date.now());
+        }
+
+        if (isDateBeforeToday(lastAttemptTime.get(author))) {
             for (entry in attempts.keyArray()) {
                 attempts.set(entry, 0);
             }
@@ -115,6 +118,7 @@ class Slots extends YliasBaseCommand {
 
         if (attempts.get(author) < MAX_ATTEMPS) {
             attempts.set(author, attempts.get(author) + 1);
+            lastAttemptTime.set(author, Date.now());
 
             if (first == second && second == third) {
                 answer += ':sparkles: **JACKPOT** :sparkles:';
