@@ -221,6 +221,17 @@
                         ]
                     }
                 },
+                "imgur": {
+                    "description": [
+                        "Affiche une image aléatoire"
+                    ],
+                    "not_found": [
+                        "Bon... On dirait que ta recherche ne donne aucun résultat. Je suis désolé %% :( ..."
+                    ],
+                    "fail": [
+                        "Bon... l'API de Imgur a planté on dirait. Je suis désolé %% :( ..."
+                    ]
+                },
                 "meme": {
                     "description": [
                         "Permet de générer un meme de type (type) avec le texte (top text) en haut et le texte (bottom text) en bas s'il a été renseigné"

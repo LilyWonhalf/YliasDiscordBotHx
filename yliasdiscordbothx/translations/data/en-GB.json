@@ -159,7 +159,7 @@
                         "Welp... Seems like there is no result for your search. I'm sorry %% :( ..."
                     ],
                     "fail": [
-                        "Welp... Seems like getty API just crashed. I'm sorry %% :( ..."
+                        "Welp... Seems like Getty API just crashed. I'm sorry %% :( ..."
                     ]
                 },
                 "getwelcomemessage": {
@@ -220,6 +220,17 @@
                             "**Turns into a snake and holds %% tight**"
                         ]
                     }
+                },
+                "imgur": {
+                    "description": [
+                        "Displays a random picture"
+                    ],
+                    "not_found": [
+                        "Welp... Seems like there is no result for your search. I'm sorry %% :( ..."
+                    ],
+                    "fail": [
+                        "Welp... Seems like Imgur API just crashed. I'm sorry %% :( ..."
+                    ]
                 },
                 "meme": {
                     "description": [

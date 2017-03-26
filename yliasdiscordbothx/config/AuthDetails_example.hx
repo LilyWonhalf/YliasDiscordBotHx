@@ -33,4 +33,10 @@ class AuthDetails_example {
     // Getty API
     public static inline var GETTY_KEY = '';
     public static inline var GETTY_SECRET = '';
+
+    // Imgur
+    public var IMGUR_CLIENT_ID = '';
+    public var IMGUR_CLIENT_SECRET = '';
+
+    public function new() {}
 }
