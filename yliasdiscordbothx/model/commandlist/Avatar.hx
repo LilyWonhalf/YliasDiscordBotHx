@@ -41,7 +41,7 @@ class Avatar extends YliasBaseCommand {
                 } else {
                     var textChannel: TextChannel = cast channel;
 
-                    for (member in textChannel.members.array()) {
+                    for (member in textChannel.guild.members.array()) {
                         userList.set(member.user.id, member.user);
                     }
                 }
