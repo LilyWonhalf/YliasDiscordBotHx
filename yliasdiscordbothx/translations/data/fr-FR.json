@@ -61,31 +61,6 @@
         },
         "model": {
             "commandlist": {
-                "addjoke": {
-                    "description": [
-                        "Permet de rajouter une blague dans la base de données"
-                    ],
-                    "fail": [
-                        "Désolé %%, la blague ne s'est pas enregistrée correctement."
-                    ],
-                    "success": [
-                        "Merci %%, la blague a bien été enregistrée :) !"
-                    ]
-                },
-                "addtagtoblacklist": {
-                    "description": [
-                        "Permet d'interdire un tag lors des recherches e621 et e926"
-                    ],
-                    "wrong_format": [
-                        "%%, On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
-                    ],
-                    "fail": [
-                        "%%, Nope, ça n'a pas fonctionné : %%"
-                    ],
-                    "success": [
-                        "%%, Compris, c'est dans la boîte !"
-                    ]
-                },
                 "avatar": {
                     "description": [
                         "Permet d'afficher l'avatar d'un membre en plus grand"
@@ -135,40 +110,6 @@
                         "%%, Tu me demandes de décider entre... Une seule chose ? Ça n'a aucun sens D: !"
                     ]
                 },
-                "deletejoke": {
-                    "description": [
-                        "Permet de supprimer une blague dans la base de données"
-                    ],
-                    "wong_format": [
-                        "%%, Il semblerait que tu te sois planté dans la syntaxe de la commande. J'attends un ID de blague, un numéro, pas autre chose c: ."
-                    ],
-                    "not_found": [
-                        "Désolé %%, je n'ai pas trouvé de blague correspondant à ce numéro."
-                    ],
-                    "failed": [
-                        "Désolé %%, la blague ne s'est pas supprimée correctement."
-                    ],
-                    "success": [
-                        "C'est bon %%, la blague a bien été supprimée :) !"
-                    ]
-                },
-                "deletetagfromblacklist": {
-                    "description": [
-                        "Permet de supprimer l'interdiction d'un tag lors des recherches e621 et e926"
-                    ],
-                    "wrong_format": [
-                        "%%, On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
-                    ],
-                    "not_found": [
-                        "%%, Le tag que tu me demandes de retirer de la liste noire n'existe déjà pas. J'imagine que c'est une bonne nouvelle, non ?"
-                    ],
-                    "fail": [
-                        "%%, Nope, ça n'a pas fonctionné : %%"
-                    ],
-                    "success": [
-                        "%%, Compris, c'est supprimé !"
-                    ]
-                },
                 "deletewelcomemessage": {
                     "description": [
                         "Permet de supprimer le message de bienvenue d'un serveur"
@@ -181,11 +122,6 @@
                     ],
                     "success": [
                         "%%, Compris, c'est supprimé !"
-                    ]
-                },
-                "derpibooru": {
-                    "description": [
-                        "Permet de rechercher des images brony (des poneys) potentiellement nsfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
                     ]
                 },
                 "describe": {
@@ -207,38 +143,12 @@
                         "Bon... random.dog a planté on dirait. Je suis désolé %% :( ..."
                     ]
                 },
-                "e621": {
-                    "description": [
-                        "Permet de rechercher des images furry (ou non, 'paraît qu'il y a de tout là-bas) potentiellement nsfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
-                    ]
-                },
-                "e926": {
-                    "description": [
-                        "Permet de rechercher des images furry (ou non, 'paraît qu'il y a de tout là-bas) sfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
-                    ]
-                },
                 "eval": {
                     "description": [
                         "Permet d'exécuter des commandes javascript et d'afficher le retour"
                     ],
                     "exception": [
                         "Bravo, %%, ton code a faillit me faire planter !"
-                    ]
-                },
-                "gelbooru": {
-                    "description": [
-                        "Permet de rechercher des images style manga potentiellement nsfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
-                    ]
-                },
-                "getblacklistedtags": {
-                    "description": [
-                        "Permet d'afficher la liste des tags blacklistés sur le serveur courant, ou sur le serveur passé en paramètre"
-                    ],
-                    "fail": [
-                        "%%, Nope, ça n'a pas fonctionné, désolé"
-                    ],
-                    "success": [
-                        "%%, Voici tous les tags blacklistés pour le serveur : \n%%"
                     ]
                 },
                 "getty": {
@@ -311,17 +221,6 @@
                         ]
                     }
                 },
-                "joke": {
-                    "description": [
-                        "Je peux raconter des blagues. Oui oui ! Vous pouvez même rechercher un ou plusieurs mots si vous voulez une blague en particulier"
-                    ],
-                    "not_found": [
-                        "Désolé %%, je n'ai pas trouvé de blague :/ ..."
-                    ],
-                    "answer": [
-                        "%%, Blague N°%% : \n%%"
-                    ]
-                },
                 "meme": {
                     "description": [
                         "Permet de générer un meme de type (type) avec le texte (top text) en haut et le texte (bottom text) en bas s'il a été renseigné"
@@ -387,11 +286,6 @@
                     ],
                     "success": [
                         "%%, Le membre a bien été enregistré dans le staff et été inscrit aux notifications :) !"
-                    ]
-                },
-                "safebooru": {
-                    "description": [
-                        "Permet de rechercher des images style manga sfw. Vous pouvez préciser des \"tags\" ou des mots clés à rechercher séparés par des espaces"
                     ]
                 },
                 "scream": {
@@ -524,27 +418,6 @@
                     ]
                 }
             },
-            "mangapicture": {
-                "searchpicture": {
-                    "sql_error": [
-                        "Bon... Ma base de données m'a envoyé ballader... Je suis désolé %% :( ..."
-                    ],
-                    "forbidden_search_message_to_owner": [
-                        "L'utilisateur %% a tenté de faire une recherche d'image manga comportant le(s) tag(s) interdit(s) suivant(s) : %%. %%"
-                    ],
-                    "forbidden_search_public_message": [
-                        "%%, Tu viens de faire une recherche comportant au moins un tag blacklisté. C'est pas très propre. Voici le(s) tag(s) incriminé(s) : %%"
-                    ],
-                    "wait": [
-                        "Un petit instant, %%, faut que je demande à %% s'il a ça en stock..."
-                    ]
-                },
-                "proxypicturefoundhandler": {
-                    "no_valid_picture_found": [
-                        "Désolé %%, mais je n'ai trouvé aucune image qui aurait été autorisée sur ce serveur... Tu peux réessayer, si tu veux, si ça se trouve, je trouverai ce coup-ci ! Mais ne spamme pas pour autant, si après quelques essais je trouve toujours pas, laisse tomber, ça marchera pas."
-                    ]
-                }
-            },
             "entity": {
                 "permission": {
                     "register": {
@@ -572,18 +445,6 @@
                             "La permission en question n'existe pas"
                         ]
                     }
-                }
-            }
-        },
-        "net": {
-            "mangapictureproxy": {
-                "initializequerycompletehandler": {
-                    "host_crashed": [
-                        "Bon... %% a planté, apparemment. Je suis désolé %% :( ..."
-                    ],
-                    "no_result": [
-                        "Bon... %% m'a dit qu'il n'avait rien. Je suis désolé %% :( ..."
-                    ]
                 }
             }
         },

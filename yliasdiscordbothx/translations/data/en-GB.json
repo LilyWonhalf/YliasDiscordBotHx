@@ -61,31 +61,6 @@
         },
         "model": {
             "commandlist": {
-                "addjoke": {
-                    "description": [
-                        "Allows you to add a joke in the database"
-                    ],
-                    "fail": [
-                        "Sorry %%, the joke did not save correctly."
-                    ],
-                    "success": [
-                        "Thank you %%, the joke has been successfully saved :) !"
-                    ]
-                },
-                "addtagtoblacklist": {
-                    "description": [
-                        "Allows you to forbid a tag while searching on e621 or e926"
-                    ],
-                    "wrong_format": [
-                        "%%, We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
-                    ],
-                    "fail": [
-                        "%%, Nope, didn't work : %%"
-                    ],
-                    "success": [
-                        "%%, Got it, saved it!"
-                    ]
-                },
                 "avatar": {
                     "description": [
                         "Shows a member avatar in the chat, wider"
@@ -135,40 +110,6 @@
                         "%%, You ask me to pick one, but... You only have one to pick... It doesn't make any sense D: !"
                     ]
                 },
-                "deletejoke": {
-                    "description": [
-                        "Allows you to delete a joke from the database"
-                    ],
-                    "wong_format": [
-                        "%%, Seems like you got mistaken while typing the command. I'm expecting a joke ID, a number c: ."
-                    ],
-                    "not_found": [
-                        "Sorry %%, I did not find any joke with that number."
-                    ],
-                    "failed": [
-                        "Sorry %%, the joke was not deleted successfully."
-                    ],
-                    "success": [
-                        "Alright %%, the joke has been successfully deleted :) !"
-                    ]
-                },
-                "deletetagfromblacklist": {
-                    "description": [
-                        "Allows you to un-forbid a tag while searching on e621 or e926"
-                    ],
-                    "wrong_format": [
-                        "%%, We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
-                    ],
-                    "not_found": [
-                        "%%, The tag you're asking me to remove from the blacklist doesn't exist. I guess it's good news?"
-                    ],
-                    "fail": [
-                        "%%, Nope, didn't work : %%"
-                    ],
-                    "success": [
-                        "%%, Got it, deleted it!"
-                    ]
-                },
                 "deletewelcomemessage": {
                     "description": [
                         "Allows you to delete a server's welcome message"
@@ -181,11 +122,6 @@
                     ],
                     "success": [
                         "%%, Got it, deleted it!"
-                    ]
-                },
-                "derpibooru": {
-                    "description": [
-                        "Allows you to search for brony (poney) pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
                     ]
                 },
                 "describe": {
@@ -207,38 +143,12 @@
                         "Welp... Seems like random.dog just crashed. I'm sorry %% :( ..."
                     ]
                 },
-                "e621": {
-                    "description": [
-                        "Allows you to search for furry (or not, I heard there's everything down there) pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
-                    ]
-                },
-                "e926": {
-                    "description": [
-                        "Allows you to search for furry (or not, I heard there's everything down there) pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
-                    ]
-                },
                 "eval": {
                     "description": [
                         "Allows you to execute javascript commands and display the return value."
                     ],
                     "exception": [
                         "Well done, %%, you code almost made me crash!"
-                    ]
-                },
-                "gelbooru": {
-                    "description": [
-                        "Allows you to search for manga pictures that will most likely be nsfw. You can specify \"tags\" or keywords separated with spaces."
-                    ]
-                },
-                "getblacklistedtags": {
-                    "description": [
-                        "Displays all the blacklisted tags on the current server, or on the server that was passed in parameter"
-                    ],
-                    "fail": [
-                        "%%, Nope, didn't work, sorry"
-                    ],
-                    "success": [
-                        "%%, Here are all the blacklisted tags on this server: \n%%"
                     ]
                 },
                 "getty": {
@@ -311,17 +221,6 @@
                         ]
                     }
                 },
-                "joke": {
-                    "description": [
-                        "I can tell jokes. True! You can even search for one or more words if you're looking for a particular one"
-                    ],
-                    "not_found": [
-                        "Sorry %%, I did not find any joke :/ ..."
-                    ],
-                    "answer": [
-                        "%%, Joke number %%: \n%%"
-                    ]
-                },
                 "meme": {
                     "description": [
                         "Allows you to generate a meme of type (type) with the text (top text) at the top of it and the text (bottom text) at the bottom of it if it has been filled"
@@ -387,11 +286,6 @@
                     ],
                     "success": [
                         "%%, The member has been successfully registered in the staff and subscribed to the notifications :) !"
-                    ]
-                },
-                "safebooru": {
-                    "description": [
-                        "Allows you to search for manga pictures that will be sfw. You can specify \"tags\" or keywords separated with spaces."
                     ]
                 },
                 "scream": {
@@ -524,27 +418,6 @@
                     ]
                 }
             },
-            "mangapicture": {
-                "searchpicture": {
-                    "sql_error": [
-                        "Welp... Seems like my database is not in the mood... I am sorry %% :( ..."
-                    ],
-                    "forbidden_search_message_to_owner": [
-                        "The user %% tried to search a manga picture with the following forbidden tag(s): %%. %%"
-                    ],
-                    "forbidden_search_public_message": [
-                        "%%, You just made a search that involved at least one blacklisted tag. That's nasty. Here are the incriminated tags: %%"
-                    ],
-                    "wait": [
-                        "Just a moment, %%, gotta ask %% if he can find something for you..."
-                    ]
-                },
-                "proxypicturefoundhandler": {
-                    "no_valid_picture_found": [
-                        "Sorry %%, but I did not find any picture that would've been authorized on this server... You can retry if you want, who know, I could find one this time! But don't spam, please. If I still don't find after a few retries, you can stop right there, I won't find at all."
-                    ]
-                }
-            },
             "entity": {
                 "permission": {
                     "register": {
@@ -572,18 +445,6 @@
                             "SQL server returned an error while deleting data"
                         ]
                     }
-                }
-            }
-        },
-        "net": {
-            "mangapictureproxy": {
-                "initializequerycompletehandler": {
-                    "host_crashed": [
-                        "Well... Seems like %% has crashed. I'm sorry %% :( ..."
-                    ],
-                    "no_result": [
-                        "Well... %% told me that he hasn't got anything about your search. I'm sorry %% :( ..."
-                    ]
                 }
             }
         },
