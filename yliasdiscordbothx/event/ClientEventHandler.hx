@@ -1,5 +1,7 @@
 package yliasdiscordbothx.event;
 
+import discordhx.invite.Invite;
+import yliasdiscordbothx.config.Config;
 import discordhx.guild.Guild;
 import discordhx.guild.GuildMember;
 import yliasdiscordbothx.model.Db;
@@ -35,6 +37,21 @@ class ClientEventHandler extends EventHandler<Client> {
         Server.registerServers();
         Channel.registerChannels();
         UserEntity.registerUsers();
+    }
+
+    private function guildCreateHandler(guild: Guild): Void {
+        var context: CommunicationContext = new CommunicationContext();
+        var owner: User = guild.owner.user;
+
+        context.sendToOwner('J\'ai été invité sur un nouveau serveur nommé **' + guild.name + '**. Le créateur, c\'est **' + owner.username + '#' + owner.discriminator + '**.');
+
+        if (!guild.members.has(Bot.instance.authDetails.BOT_OWNER_ID)) {
+            guild.defaultChannel.createInvite(cast {temporary: false, maxUses: 1}).then(function (invite: Invite) {
+                context.sendToOwner('Voici une invitation : ' + invite.url);
+            }).catchError(function (error: Dynamic) {
+                context.sendToOwner('Je n\'ai pas pu créer d\'invitation...\n\n```' + error + '```');
+            });
+        }
     }
 
     private function serverNewMemberHandler(member: GuildMember): Void {
