@@ -3,7 +3,7 @@
         "bot": {
             "new": {
                 "helpdialogintroduction": [
-                    "Bot **Ylias** for **Discord** - need help? Here is a list of the commands I can answer to:"
+                    "Hello! I'm **Ylias**, a shapeshifter that is here to help! Here is a list of the commands I can answer to:"
                 ],
                 "helpdialogend": [
                     "As you can see, some commands can take parameters. A parameter is indicated by a pair of parenthesis. When you type the command, you shall not type these parenthesis. If you see parameters in *italic*, that means they are optionnal. If you need more help, ask **Elian Wonhalf**. He's the dumbass that created me, he should know."
