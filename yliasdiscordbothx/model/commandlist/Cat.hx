@@ -4,7 +4,7 @@ import discordbothx.core.CommunicationContext;
 import nodejs.http.HTTP.HTTPMethod;
 import discordbothx.log.Logger;
 import haxe.Json;
-import yliasdiscordbothx.utils.HttpUtils;
+import yliasdiscordbothx.utils.HttpQuery;
 
 class Cat extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
@@ -13,8 +13,11 @@ class Cat extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
+        var query: HttpQuery = new HttpQuery('random.cat', '/meow');
 
-        HttpUtils.query(false, 'random.cat', '/meow', cast HTTPMethod.Get, function (data: String) {
+        query.secured = false;
+
+        query.send().then(function (data: String) {
             var response: Dynamic = null;
 
             try {

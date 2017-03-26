@@ -8,7 +8,7 @@ import yliasdiscordbothx.utils.Humanify;
 import discordbothx.log.Logger;
 import haxe.Json;
 import nodejs.http.HTTP.HTTPMethod;
-import yliasdiscordbothx.utils.HttpUtils;
+import yliasdiscordbothx.utils.HttpQuery;
 import discordhx.message.Message;
 
 class YouTube extends YliasBaseCommand {
@@ -24,13 +24,16 @@ class YouTube extends YliasBaseCommand {
         var videoUrl = 'https://www.youtube.com/watch?v=';
         var host = 'www.googleapis.com';
         var path = '/youtube/v3/search?part=snippet&maxResults=50';
+        var query: HttpQuery = new HttpQuery(host);
 
         path += '&q=' + StringTools.urlEncode(args.join(' '));
         path += '&key=' + Bot.instance.authDetails.GOOGLE_API_KEY;
 
+        query.path = path;
+
         context.sendToChannel(l('wait', cast [author]));
 
-        HttpUtils.query(true, host, path, cast HTTPMethod.Get, function (data: String) {
+        query.send().then(function (data: String) {
             var parsedData: Dynamic;
 
             try {

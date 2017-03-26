@@ -2,7 +2,7 @@ package yliasdiscordbothx.model.commandlist;
 
 import discordbothx.core.CommunicationContext;
 import nodejs.http.HTTP.HTTPMethod;
-import yliasdiscordbothx.utils.HttpUtils;
+import yliasdiscordbothx.utils.HttpQuery;
 import haxe.Json;
 
 class Describe extends YliasBaseCommand {
@@ -19,32 +19,34 @@ class Describe extends YliasBaseCommand {
         if (args.length > 0) {
             var domain = 'www.captionbot.ai';
             var path = '/api';
+            var query: HttpQuery = new HttpQuery(domain, path + '/init');
 
             context.sendToChannel(l('wait', cast [author]));
 
-            HttpUtils.query(true, domain, path + '/init', cast HTTPMethod.Get, function (data: String) {
+            query.send().then(function (data: String) {
                 var session: String = Json.parse(data);
 
-                HttpUtils.query(
-                    true,
-                    domain,
-                    path + '/message',
-                    cast HTTPMethod.Post,
-                    function (data: String) {
-                        HttpUtils.query(true, domain, path + '/message?waterMark=&conversationId=' + session, cast HTTPMethod.Get, function (data: String) {
-                            var response = Json.parse(Json.parse(data));
-
-                            context.sendToChannel(author + ', ' + response.BotMessages[1]);
-                        });
-                    },
-                    Json.stringify(
-                        {
-                            conversationId: session,
-                            waterMark: '',
-                            userMessage: args.join(' ')
-                        }
-                    )
+                query.path = path + '/message';
+                query.method = cast HTTPMethod.Post;
+                query.data = Json.stringify(
+                    {
+                        conversationId: session,
+                        waterMark: '',
+                        userMessage: args.join(' ')
+                    }
                 );
+
+                query.send().then(function (data: String) {
+                    query.path = path + '/message?waterMark=&conversationId=' + session;
+                    query.method = cast HTTPMethod.Get;
+                    query.data = null;
+
+                    query.send().then(function (data: String) {
+                        var response = Json.parse(Json.parse(data));
+
+                        context.sendToChannel(author + ', ' + response.BotMessages[1]);
+                    });
+                });
             });
         } else {
             context.sendToChannel(l('error'));

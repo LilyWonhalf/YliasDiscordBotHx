@@ -8,7 +8,7 @@ import yliasdiscordbothx.utils.ArrayUtils;
 import haxe.Json;
 import nodejs.http.HTTP.HTTPMethod;
 import discordbothx.log.Logger;
-import yliasdiscordbothx.utils.HttpUtils;
+import yliasdiscordbothx.utils.HttpQuery;
 
 class Getty extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
@@ -24,6 +24,7 @@ class Getty extends YliasBaseCommand {
         var path = '/v3/search/images';
         var headers = new Map<String, String>();
         var search: String = StringTools.trim(args.join(' '));
+        var query: HttpQuery = new HttpQuery(domain);
 
         if (search == 'awoo') {
             search = 'wolf howl';
@@ -43,9 +44,12 @@ class Getty extends YliasBaseCommand {
 
         headers.set('Api-Key', Bot.instance.authDetails.GETTY_KEY);
 
+        query.path = path;
+        query.headers = headers;
+
         DiscordUtils.setTyping(true, context.message.channel);
 
-        HttpUtils.query(true, domain, path, cast HTTPMethod.Get, function (data: String) {
+        query.send().then(function (data: String) {
             var response: Dynamic = null;
 
             try {
@@ -60,7 +64,9 @@ class Getty extends YliasBaseCommand {
                     var nbPerPage: Int = response.images.length;
                     var nbPages: Int = cast Math.min(Math.ceil(nbResults / nbPerPage), 6); // Limit at 6 pages so we don't end up with unrelevant content
 
-                    HttpUtils.query(true, domain, path + '&page=' + Math.ceil(Math.random() * nbPages + 0.1), cast HTTPMethod.Get, function (data: String) {
+                    query.path = path + '&page=' + Math.ceil(Math.random() * nbPages + 0.1);
+
+                    query.send().then(function (data: String) {
                         var response: Dynamic = null;
 
                         try {
@@ -94,7 +100,7 @@ class Getty extends YliasBaseCommand {
                             DiscordUtils.setTyping(false, context.message.channel);
                             context.sendToChannel(l('fail', cast [author]));
                         }
-                    }, null, headers);
+                    });
                 } else {
                     DiscordUtils.setTyping(false, context.message.channel);
                     context.sendToChannel(l('not_found', cast [author]));
@@ -106,6 +112,6 @@ class Getty extends YliasBaseCommand {
                 DiscordUtils.setTyping(false, context.message.channel);
                 context.sendToChannel(l('fail', cast [author]));
             }
-        }, null, headers);
+        });
     }
 }

@@ -6,7 +6,7 @@ import yliasdiscordbothx.utils.ArrayUtils;
 import haxe.Json;
 import nodejs.http.HTTP.HTTPMethod;
 import discordbothx.log.Logger;
-import yliasdiscordbothx.utils.HttpUtils;
+import yliasdiscordbothx.utils.HttpQuery;
 
 class Aww extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
@@ -17,6 +17,7 @@ class Aww extends YliasBaseCommand {
         var author = context.message.author;
         var bestArray: Array<String> = new Array<String>();
         var path = '/r/aww/new.json?count=100';
+        var query: HttpQuery = new HttpQuery('www.reddit.com');
 
         bestArray.push('best');
         bestArray.push('top');
@@ -27,7 +28,9 @@ class Aww extends YliasBaseCommand {
             path = '/r/aww/.json?count=100';
         }
 
-        HttpUtils.query(true, 'www.reddit.com', path, cast HTTPMethod.Get, function (data: String) {
+        query.path = path;
+
+        query.send().then(function (data: String) {
             var response: Dynamic = null;
 
             try {

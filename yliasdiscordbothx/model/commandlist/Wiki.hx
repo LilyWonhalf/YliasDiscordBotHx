@@ -7,7 +7,7 @@ import discordbothx.core.CommunicationContext;
 import discordbothx.log.Logger;
 import haxe.Json;
 import nodejs.http.HTTP.HTTPMethod;
-import yliasdiscordbothx.utils.HttpUtils;
+import yliasdiscordbothx.utils.HttpQuery;
 
 class Wiki extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
@@ -24,8 +24,9 @@ class Wiki extends YliasBaseCommand {
             var language = args.shift();
             var host = language + '.wikipedia.org';
             var path = '/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&redirects=1&titles=';
+            var query: HttpQuery = new HttpQuery(host, path + StringTools.urlEncode(args.join(' ')));
 
-            HttpUtils.query(true, host, path + StringTools.urlEncode(args.join(' ')), cast HTTPMethod.Get, function (data: String) {
+            query.send().then(function (data: String) {
                 var parsedData: Dynamic;
 
                 try {
