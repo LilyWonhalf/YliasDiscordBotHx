@@ -30,6 +30,10 @@ class Getty extends YliasBaseCommand {
             search = 'wolf howl';
         }
 
+        if (search == 'snek') {
+            search = 'snake';
+        }
+
         if (search == null || search.length < 1) {
             search = 'animal';
         }
