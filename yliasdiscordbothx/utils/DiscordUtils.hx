@@ -1,11 +1,46 @@
 package yliasdiscordbothx.utils;
 
+import discordhx.channel.DMChannel;
+import discordhx.channel.GroupDMChannel;
+import discordhx.channel.ChannelType;
+import discordhx.channel.Channel;
 import discordhx.channel.TextChannel;
 import yliasdiscordbothx.translations.LangCenter;
 import yliasdiscordbothx.config.Config;
 import discordhx.message.Message;
 
 class DiscordUtils {
+    public static function setTyping(typing: Bool, channel: Channel): Void {
+        switch (channel.type) {
+            case ChannelType.TEXT:
+                var channel: TextChannel = cast channel;
+
+                if (typing) {
+                    channel.startTyping();
+                } else {
+                    channel.stopTyping(true);
+                }
+
+            case ChannelType.GROUP:
+                var groupChannel: GroupDMChannel = cast channel;
+
+                if (typing) {
+                    groupChannel.startTyping();
+                } else {
+                    groupChannel.stopTyping(true);
+                }
+
+            default:
+                var dmChannel: DMChannel = cast channel;
+
+                if (typing) {
+                    dmChannel.startTyping();
+                } else {
+                    dmChannel.stopTyping(true);
+                }
+        }
+    }
+
     public static function isHightlight(str: String): Bool {
         return ~/<@!?\d+>/ig.match(str);
     }

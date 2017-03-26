@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.DiscordUtils;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.Bot;
 import discordhx.message.Message;
@@ -42,6 +43,8 @@ class Getty extends YliasBaseCommand {
 
         headers.set('Api-Key', Bot.instance.authDetails.GETTY_KEY);
 
+        DiscordUtils.setTyping(true, context.message.channel);
+
         HttpUtils.query(true, domain, path, cast HTTPMethod.Get, function (data: String) {
             var response: Dynamic = null;
 
@@ -77,6 +80,7 @@ class Getty extends YliasBaseCommand {
                                 hash |= 0;
                             }
 
+                            DiscordUtils.setTyping(false, context.message.channel);
                             context.sendFileToChannel(displaySizes[0].uri, hash + '.png', author.toString()).catchError(function (error: Dynamic) {
                                 Logger.error('Failed to load Getty image (step 3)');
                                 Logger.debug(response);
@@ -87,16 +91,19 @@ class Getty extends YliasBaseCommand {
                             Logger.error('Failed to load Getty image (step 2)');
                             Logger.debug(response);
 
+                            DiscordUtils.setTyping(false, context.message.channel);
                             context.sendToChannel(l('fail', cast [author]));
                         }
                     }, null, headers);
                 } else {
+                    DiscordUtils.setTyping(false, context.message.channel);
                     context.sendToChannel(l('not_found', cast [author]));
                 }
             } else {
                 Logger.error('Failed to load Getty image (step 1)');
                 Logger.debug(response);
 
+                DiscordUtils.setTyping(false, context.message.channel);
                 context.sendToChannel(l('fail', cast [author]));
             }
         }, null, headers);
