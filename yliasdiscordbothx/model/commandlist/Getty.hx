@@ -34,6 +34,14 @@ class Getty extends YliasBaseCommand {
             search = 'snake';
         }
 
+        if (search == 'snep') {
+            search = 'snow leopard';
+        }
+
+        if (['birb', 'burb', 'burd'].indexOf(search) > -1) {
+            search = 'bird';
+        }
+
         if (search == null || search.length < 1) {
             search = 'animal';
         }
