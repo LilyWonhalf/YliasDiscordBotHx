@@ -57,7 +57,7 @@ class Avatar extends YliasBaseCommand {
         if (foundUser != null) {
             if (foundUser.id == DiscordBot.instance.client.user.id) {
                 context.sendFileToChannel(foundUser.displayAvatarURL, foundUser.id + '.jpg', author.toString()).then(function (sentMessage: Message) {
-                    context.sendToChannel(l('client_avatar_author', cast ['https://twitter.com/MiagoMeowsome']));
+                    context.sendToChannel(l('client_avatar_author', cast ['https://twitter.com/MiagoArts']));
                 });
             } else {
                 context.sendFileToChannel(foundUser.displayAvatarURL, foundUser.id + '.jpg', author.toString());
