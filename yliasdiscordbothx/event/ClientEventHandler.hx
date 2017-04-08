@@ -1,5 +1,6 @@
 package yliasdiscordbothx.event;
 
+import discordhx.RichEmbed;
 import discordhx.invite.Invite;
 import yliasdiscordbothx.config.Config;
 import discordhx.guild.Guild;
@@ -75,10 +76,24 @@ class ClientEventHandler extends EventHandler<Client> {
 
         Staff.getStaffToNotifyAboutNewMember(guild.id, function (staffToNotify: Array<Staff>): Void {
             if (staffToNotify != null && staffToNotify.length > 0) {
+                var username: String = user.username + '#' + user.discriminator + ' (ID: ' + user.id + ')';
+                var embed: RichEmbed = new RichEmbed();
+
+                embed.setAuthor(guild.name, guild.iconURL);
+                embed.setThumbnail(member.user.displayAvatarURL);
+                embed.setDescription(
+                    LangCenter.instance.translate(
+                        guild.id,
+                        'notification_to_staff',
+                        cast [username, guild.name]
+                    )
+                );
+                embed.setColor(Std.parseInt('0x4CAF50'));
+
                 for (staff in staffToNotify) {
-                    context.sendTo(
+                    context.sendEmbedTo(
                         DiscordBot.instance.client.users.get(staff.idUser),
-                        LangCenter.instance.translate(guild.id, 'notification_to_staff', cast [user.username, guild.name])
+                        embed
                     );
                 }
             }
@@ -94,10 +109,24 @@ class ClientEventHandler extends EventHandler<Client> {
 
         Staff.getStaffToNotifyAboutNewMember(guild.id, function (staffToNotify: Array<Staff>): Void {
             if (staffToNotify != null && staffToNotify.length > 0) {
+                var username: String = user.username + '#' + user.discriminator + ' (ID: ' + user.id + ')';
+                var embed: RichEmbed = new RichEmbed();
+
+                embed.setAuthor(guild.name, guild.iconURL);
+                embed.setThumbnail(member.user.displayAvatarURL);
+                embed.setDescription(
+                    LangCenter.instance.translate(
+                        guild.id,
+                        'notification_to_staff',
+                        cast [username, guild.name]
+                    )
+                );
+                embed.setColor(Std.parseInt('0xF44336'));
+
                 for (staff in staffToNotify) {
-                    context.sendTo(
+                    context.sendEmbedTo(
                         DiscordBot.instance.client.users.get(staff.idUser),
-                        LangCenter.instance.translate(guild.id, 'notification_to_staff', cast [user.username, guild.name])
+                        embed
                     );
                 }
             }
