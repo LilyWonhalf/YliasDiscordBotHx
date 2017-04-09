@@ -1,6 +1,6 @@
 {
   "name": "yliasdiscordbothx",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "A bot for Discord",
   "main": "./yliasdiscordbothx/Bot.hx",
   "author": "Elian Wonhalf <elianwonhalf@gmail.com>",

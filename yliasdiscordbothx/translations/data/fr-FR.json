@@ -254,6 +254,20 @@
                         "Je t'ai envoyé en privé la liste des memes disponibles %% !"
                     ]
                 },
+                "obf": {
+                    "description": [
+                        "Vous savez ce que ça donne, une phrase traduite successivement dans plusieurs langues ?"
+                    ],
+                    "wrong_language": [
+                        "Désolé %%, je ne connais pas cette langue"
+                    ],
+                    "fail": [
+                        "Désolé %%, on dirait que Google Traduction a planté :/ ..."
+                    ],
+                    "answer": [
+                        "Voici ton texte après plusieurs traductions, %% :"
+                    ]
+                },
                 "ping": {
                     "description": [
                         "Qui pour un ping pong ? Oh, pardon. Un tennis de table u_u"

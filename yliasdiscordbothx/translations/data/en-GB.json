@@ -254,6 +254,20 @@
                         "Just sent you the available meme list in private, %%!"
                     ]
                 },
+                "obf": {
+                    "description": [
+                        "Have you ever seen a sentence being translated many times?"
+                    ],
+                    "wrong_language": [
+                        "Sorry %%, I don't know this langauge"
+                    ],
+                    "fail": [
+                        "Sorry %%, seems like Google Translate crashed :/ ..."
+                    ],
+                    "answer": [
+                        "Here is your text after some translations, %%:"
+                    ]
+                },
                 "ping": {
                     "description": [
                         "Who's up for ping pong? Oh, sorry. Table tennis u_u"
