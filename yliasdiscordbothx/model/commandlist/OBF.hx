@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import Math;
 import yliasdiscordbothx.utils.DiscordUtils;
 import yliasdiscordbothx.utils.ArrayUtils;
 import discordbothx.core.CommunicationContext;
@@ -9,6 +10,7 @@ import yliasdiscordbothx.utils.HttpQuery;
 
 class Obf extends YliasBaseCommand {
     private static inline var ITERATIONS = 8;
+    private static inline var MAX_ITERATIONS = 25;
 
     private var basePath: String;
     private var iterationsLeft: Int;
@@ -18,13 +20,20 @@ class Obf extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
         super(context);
 
-        paramsUsage = '(2-letters language) (text)';
+        paramsUsage = '(2-letters language) *(amount of translations)* (text)';
         nbRequiredParams = 2;
     }
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
         var lang: String = args.shift();
+
+        iterationsLeft = ITERATIONS;
+
+        if (args.length > 1 && !Math.isNaN(cast args[0])) {
+            iterationsLeft = cast Math.min(Std.parseInt(args.shift()), MAX_ITERATIONS);
+        }
+
         var text: String = args.join(' ');
 
         languages = [
@@ -72,7 +81,6 @@ class Obf extends YliasBaseCommand {
 
         if (languages.indexOf(lang) > -1) {
             sourceLanguage = lang;
-            iterationsLeft = ITERATIONS;
             basePath = '/translate_a/single';
             basePath += '?ie=UTF-8';
             basePath += '&oe=UTF-8';
