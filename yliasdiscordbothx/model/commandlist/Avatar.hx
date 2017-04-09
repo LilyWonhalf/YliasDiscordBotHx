@@ -55,13 +55,17 @@ class Avatar extends YliasBaseCommand {
         }
 
         if (foundUser != null) {
+            var text: String = author.toString();
+
             if (foundUser.id == DiscordBot.instance.client.user.id) {
-                context.sendFileToChannel(foundUser.displayAvatarURL, foundUser.id + '.jpg', author.toString()).then(function (sentMessage: Message) {
-                    context.sendToChannel(l('client_avatar_author', cast ['https://twitter.com/MiagoArts']));
-                });
-            } else {
-                context.sendFileToChannel(foundUser.displayAvatarURL, foundUser.id + '.jpg', author.toString());
+                text += ', ' + l('client_avatar_author', cast ['https://twitter.com/MiagoArts']);
             }
+
+            context.sendFileToChannel(
+                foundUser.displayAvatarURL,
+                foundUser.id + '.jpg',
+                text
+            );
         } else {
             context.sendToChannel(l('not_found', cast [author]));
         }
