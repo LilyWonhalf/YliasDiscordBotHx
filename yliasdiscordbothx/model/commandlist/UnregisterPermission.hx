@@ -4,7 +4,7 @@ import discordhx.channel.Channel;
 import discordbothx.core.CommunicationContext;
 import discordbothx.log.Logger;
 import yliasdiscordbothx.model.entity.Permission;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 
 class UnregisterPermission extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
@@ -21,7 +21,7 @@ class UnregisterPermission extends YliasBaseCommand {
             var idUser: String = StringTools.trim(args[0]);
             var command: String = StringTools.trim(args[1]);
             var idChannel: String = null;
-            var idServer: String = DiscordUtils.getServerIdFromMessage(context.message);
+            var idServer: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
 
             if (args.length > 2 && StringTools.trim(args[2]).length > 0) {
                 idChannel = StringTools.trim(args[2]);
@@ -31,8 +31,8 @@ class UnregisterPermission extends YliasBaseCommand {
                 idChannel = channel.id;
             }
 
-            if (DiscordUtils.isHightlight(idUser)) {
-                idUser = DiscordUtils.getIdFromHighlight(idUser);
+            if (YliasDiscordUtils.isHightlight(idUser)) {
+                idUser = YliasDiscordUtils.getIdFromHighlight(idUser);
             }
 
             if (idUser != null) {
@@ -49,20 +49,40 @@ class UnregisterPermission extends YliasBaseCommand {
                         permission.remove(function (err: Dynamic) {
                             if (err != null) {
                                 Logger.exception(err);
-                                context.sendToChannel(l('fail', cast [author]));
+                                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                    'Unregister permission',
+                                    l('fail', cast [author]),
+                                    Emotion.SAD
+                                ));
                             } else {
-                                context.sendToChannel(l('success', cast [author]));
+                                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                    'Unregister permission',
+                                    l('success', cast [author]),
+                                    Emotion.NEUTRAL
+                                ));
                             }
                         });
                     } else {
-                        context.sendToChannel(l('not_found', cast [author]));
+                        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                            'Unregister permission',
+                            l('not_found', cast [author]),
+                            Emotion.NEUTRAL
+                        ));
                     }
                 });
             } else {
-                context.sendToChannel(l('wrong_user', cast [author]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Unregister permission',
+                    l('wrong_user', cast [author]),
+                    Emotion.NEUTRAL
+                ));
             }
         } else {
-            context.sendToChannel(l('wrong_format', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Unregister permission',
+                l('wrong_format', cast [author]),
+                Emotion.UNAMUSED
+            ));
         }
     }
 }

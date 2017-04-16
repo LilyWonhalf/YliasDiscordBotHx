@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.Bot;
 import yliasdiscordbothx.external.imgflipper.Imgflipper;
@@ -45,15 +46,27 @@ class Meme extends YliasBaseCommand {
                         } else {
                             Logger.exception(err);
                             Logger.debug(meme);
-                            context.sendToChannel(l('fail', cast [author]));
+                            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                'Meme',
+                                l('fail', cast [author]),
+                                Emotion.SAD
+                            ));
                         }
                     });
                 } else {
-                    context.sendToChannel(l('not_found', cast [author]));
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Meme',
+                        l('not_found', cast [author]),
+                        Emotion.SAD
+                    ));
                 }
             });
         } else {
-            context.sendToChannel(l('parse_error', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Meme',
+                l('parse_error', cast [author]),
+                Emotion.UNAMUSED
+            ));
         }
     }
 

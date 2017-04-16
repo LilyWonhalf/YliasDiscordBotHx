@@ -2,12 +2,9 @@ package yliasdiscordbothx.model.commandlist;
 
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.Bot;
-import yliasdiscordbothx.translations.LangCenter;
-import yliasdiscordbothx.utils.DiscordUtils;
-import yliasdiscordbothx.utils.Humanify;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.log.Logger;
 import haxe.Json;
-import nodejs.http.HTTP.HTTPMethod;
 import yliasdiscordbothx.utils.HttpQuery;
 import discordhx.message.Message;
 
@@ -31,7 +28,7 @@ class YouTube extends YliasBaseCommand {
 
         query.path = path;
 
-        context.sendToChannel(l('wait', cast [author]));
+        YliasDiscordUtils.setTyping(true, context.message.channel);
 
         query.send().then(function (data: String) {
             var parsedData: Dynamic;
@@ -57,25 +54,48 @@ class YouTube extends YliasBaseCommand {
                         }
 
                         if (link != null) {
-                            var idServer = DiscordUtils.getServerIdFromMessage(context.message);
-                            var message = LangCenter.instance.translate(idServer, Humanify.getMultimediaContentDeliverySentence()) + '\n' + link;
-                            context.sendToChannel(message);
+                            YliasDiscordUtils.setTyping(false, context.message.channel);
+                            context.sendToChannel(link);
                         } else {
                             Logger.error('Failed to load a youtube video (step 4)');
-                            context.sendToChannel(l('not_found', cast [author]));
+
+                            YliasDiscordUtils.setTyping(false, context.message.channel);
+                            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                'YouTube',
+                                l('not_found', cast [author]),
+                                Emotion.SAD
+                            ));
                         }
                     } else {
                         Logger.error('Failed to load a youtube video (step 3)');
-                        context.sendToChannel(l('not_found', cast [author]));
+
+                        YliasDiscordUtils.setTyping(false, context.message.channel);
+                        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                            'YouTube',
+                            l('not_found', cast [author]),
+                            Emotion.SAD
+                        ));
                     }
                 } else {
                     Logger.error('Failed to load a youtube video (step 2)');
                     Logger.exception(Reflect.field(parsedData, 'error'));
-                    context.sendToChannel(l('error', cast [author]));
+
+                    YliasDiscordUtils.setTyping(false, context.message.channel);
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'YouTube',
+                        l('error', cast [author]),
+                        Emotion.SAD
+                    ));
                 }
             } else {
                 Logger.error('Failed to load a youtube video (step 1)');
-                context.sendToChannel(l('fail', cast [author]));
+
+                YliasDiscordUtils.setTyping(false, context.message.channel);
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'YouTube',
+                    l('failed', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }

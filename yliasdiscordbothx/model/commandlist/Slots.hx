@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.Collection;
 import Date;
 import discordhx.user.User;
@@ -93,6 +94,7 @@ class Slots extends YliasBaseCommand {
         var second: String = ArrayUtils.random(emojis);
         var third: String = ArrayUtils.random(emojis);
         var answer: String = '';
+        var emotion: Emotion = Emotion.WINK;
 
         if (attempts == null) {
             attempts = new Collection<User, Int>();
@@ -122,15 +124,22 @@ class Slots extends YliasBaseCommand {
 
             if (first == second && second == third) {
                 answer += ':sparkles: **JACKPOT** :sparkles:';
+                emotion = Emotion.SURPRISE;
             } else {
                 answer += ':x: **' + l('try_again').toUpperCase() + '** :x:';
             }
 
-            context.sendToChannel(first + second + third).then(function (message: Message): Void {
-                context.sendToChannel(answer);
-            });
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Slots',
+                first + second + third + '\n' + answer,
+                emotion
+            ));
         } else {
-            context.sendToChannel(l('too_much_tries', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Slots',
+                l('too_many_tries', cast [author]),
+                Emotion.WINK
+            ));
         }
     }
 

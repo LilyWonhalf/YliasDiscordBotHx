@@ -1,6 +1,6 @@
 package yliasdiscordbothx.model;
 
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.channel.Channel;
 import yliasdiscordbothx.model.entity.Permission;
 import discordbothx.core.CommunicationContext;
@@ -13,7 +13,7 @@ class PermissionSystem implements IPermissionSystem {
     public function check(context: CommunicationContext, command: String): Promise<Bool> {
         return new Promise<Bool>(function (resolve: Bool->Void, reject: Dynamic->Void): Void {
             var channel: Channel = cast context.message.channel;
-            var serverId: String = DiscordUtils.getServerIdFromMessage(context.message);
+            var serverId: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
 
             Permission.check(context.message.author.id, channel.id, serverId, command, function (error: Dynamic, granted: Bool): Void {
                 if (error == null) {
@@ -28,7 +28,7 @@ class PermissionSystem implements IPermissionSystem {
     public function getDeniedCommandList(context: CommunicationContext): Promise<Array<String>> {
         return new Promise<Array<String>>(function (resolve: Array<String>->Void, reject: Dynamic->Void): Void {
             var channel: Channel = cast context.message.channel;
-            var serverId: String = DiscordUtils.getServerIdFromMessage(context.message);
+            var serverId: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
 
             Permission.getDeniedCommandList(context.message.author.id, channel.id, serverId, function (error: Dynamic, deniedCommandList: Array<String>): Void {
                 if (error == null) {

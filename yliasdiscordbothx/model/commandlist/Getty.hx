@@ -1,6 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.Bot;
 import discordhx.message.Message;
@@ -59,7 +59,7 @@ class Getty extends YliasBaseCommand {
         query.path = path;
         query.headers = headers;
 
-        DiscordUtils.setTyping(true, context.message.channel);
+        YliasDiscordUtils.setTyping(true, context.message.channel);
 
         query.send().then(function (data: String) {
             var response: Dynamic = null;
@@ -98,7 +98,7 @@ class Getty extends YliasBaseCommand {
                                 hash |= 0;
                             }
 
-                            DiscordUtils.setTyping(false, context.message.channel);
+                            YliasDiscordUtils.setTyping(false, context.message.channel);
                             context.sendFileToChannel(displaySizes[0].uri, hash + '.png', author.toString()).catchError(function (error: Dynamic) {
                                 Logger.error('Failed to load Getty image (step 3)');
                                 Logger.debug(response);
@@ -109,20 +109,32 @@ class Getty extends YliasBaseCommand {
                             Logger.error('Failed to load Getty image (step 2)');
                             Logger.debug(response);
 
-                            DiscordUtils.setTyping(false, context.message.channel);
-                            context.sendToChannel(l('fail', cast [author]));
+                            YliasDiscordUtils.setTyping(false, context.message.channel);
+                            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                'Getty',
+                                l('fail', cast [author]),
+                                Emotion.SAD
+                            ));
                         }
                     });
                 } else {
-                    DiscordUtils.setTyping(false, context.message.channel);
-                    context.sendToChannel(l('not_found', cast [author]));
+                    YliasDiscordUtils.setTyping(false, context.message.channel);
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Getty',
+                        l('not_found', cast [author]),
+                        Emotion.SAD
+                    ));
                 }
             } else {
                 Logger.error('Failed to load Getty image (step 1)');
                 Logger.debug(response);
 
-                DiscordUtils.setTyping(false, context.message.channel);
-                context.sendToChannel(l('fail', cast [author]));
+                YliasDiscordUtils.setTyping(false, context.message.channel);
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Getty',
+                    l('fail', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }

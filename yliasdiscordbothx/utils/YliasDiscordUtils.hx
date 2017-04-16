@@ -1,5 +1,8 @@
 package yliasdiscordbothx.utils;
 
+import discordbothx.service.DiscordUtils;
+import discordhx.RichEmbed;
+import yliasdiscordbothx.model.Emotion;
 import discordhx.channel.DMChannel;
 import discordhx.channel.GroupDMChannel;
 import discordhx.channel.ChannelType;
@@ -9,7 +12,7 @@ import yliasdiscordbothx.translations.LangCenter;
 import yliasdiscordbothx.config.Config;
 import discordhx.message.Message;
 
-class DiscordUtils {
+class YliasDiscordUtils {
     public static function setTyping(typing: Bool, channel: Channel): Void {
         switch (channel.type) {
             case ChannelType.TEXT:
@@ -75,5 +78,19 @@ class DiscordUtils {
         }
 
         return location;
+    }
+
+    public static function getEmbeddedMessage(title: String, message: String, ?emotion: Emotion): RichEmbed {
+        var embed: RichEmbed = new RichEmbed();
+
+        embed.setTitle(title);
+        embed.setDescription(message);
+        embed.setColor(DiscordUtils.getMaterialUIColor());
+
+        if (emotion != null) {
+            embed.setThumbnail(Config.EMOTIONS_PATH + emotion);
+        }
+
+        return embed;
     }
 }

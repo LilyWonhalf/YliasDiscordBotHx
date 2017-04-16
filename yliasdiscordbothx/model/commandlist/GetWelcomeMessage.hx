@@ -3,7 +3,7 @@ package yliasdiscordbothx.model.commandlist;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.model.entity.WelcomeMessage;
 import discordbothx.log.Logger;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 
 class GetWelcomeMessage extends YliasBaseCommand {
     public function new(context: CommunicationContext) {
@@ -14,7 +14,7 @@ class GetWelcomeMessage extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var serverId: String = DiscordUtils.getServerIdFromMessage(context.message);
+        var serverId: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
 
         if (args.length > 0 && StringTools.trim(args[0]).length > 0) {
             serverId = StringTools.trim(args[0]);
@@ -23,12 +23,24 @@ class GetWelcomeMessage extends YliasBaseCommand {
         WelcomeMessage.getForServer(serverId, function(err: Dynamic, message: String) {
             if (err != null) {
                 Logger.exception(err);
-                context.sendToChannel(l('fail', cast [author, err]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Get welcome message',
+                    l('fail', cast [author, err]),
+                    Emotion.SAD
+                ));
             } else {
                 if (message != null) {
-                    context.sendToChannel(l('success', cast [cast author, message]));
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Get welcome message',
+                        l('success', cast [cast author, message]),
+                        Emotion.NEUTRAL
+                    ));
                 } else {
-                    context.sendToChannel(l('not_found', cast [author]));
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Get welcome message',
+                        l('not_found', cast [author]),
+                        Emotion.NEUTRAL
+                    ));
                 }
             }
         });

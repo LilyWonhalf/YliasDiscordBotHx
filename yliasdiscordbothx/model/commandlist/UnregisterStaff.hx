@@ -5,7 +5,7 @@ import discordhx.channel.Channel;
 import discordbothx.core.CommunicationContext;
 import discordbothx.log.Logger;
 import yliasdiscordbothx.model.entity.Staff;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.user.User;
 import discordhx.message.Message;
 
@@ -23,34 +23,46 @@ class UnregisterStaff extends YliasBaseCommand {
         var channel: Channel = cast context.message.channel;
 
         if (channel.type != ChannelType.DM) {
-            if (context.message.mentions.users.size > 0) {
-                var staff = new Staff();
-                var staffMember = context.message.mentions.users.first();
-                var serverId = DiscordUtils.getServerIdFromMessage(context.message);
-                var uniqueValues = new Map<String, String>();
+            var staff = new Staff();
+            var staffMember = context.message.mentions.users.first();
+            var serverId = YliasDiscordUtils.getServerIdFromMessage(context.message);
+            var uniqueValues = new Map<String, String>();
 
-                uniqueValues.set('idUser', staffMember.id);
-                uniqueValues.set('idServer', serverId);
+            uniqueValues.set('idUser', staffMember.id);
+            uniqueValues.set('idServer', serverId);
 
-                staff.retrieve(uniqueValues, function (found: Bool): Void {
-                    if (!found) {
-                        context.sendToChannel(l('not_found', cast [author]));
-                    } else {
-                        staff.remove(function (err: Dynamic): Void {
-                            if (err == null) {
-                                context.sendToChannel(l('success', cast [author]));
-                            } else {
-                                Logger.exception(err);
-                                context.sendToChannel(l('fail', cast [author]));
-                            }
-                        });
-                    }
-                });
-            } else {
-                context.sendToChannel(l('no_mention', cast [author]));
-            }
+            staff.retrieve(uniqueValues, function (found: Bool): Void {
+                if (!found) {
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Unregister staff',
+                        l('not_found', cast [author]),
+                        Emotion.NEUTRAL
+                    ));
+                } else {
+                    staff.remove(function (err: Dynamic): Void {
+                        if (err == null) {
+                            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                'Unregister staff',
+                                l('success', cast [author]),
+                                Emotion.NEUTRAL
+                            ));
+                        } else {
+                            Logger.exception(err);
+                            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                'Unregister staff',
+                                l('fail', cast [author]),
+                                Emotion.SAD
+                            ));
+                        }
+                    });
+                }
+            });
         } else {
-            context.sendToChannel(l('private_channel_error', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Unregister staff',
+                l('private_channel_error', cast [author]),
+                Emotion.UNAMUSED
+            ));
         }
     }
 

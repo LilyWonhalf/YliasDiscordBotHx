@@ -1,6 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.Bot;
 import discordhx.message.Message;
@@ -36,7 +36,7 @@ class Imgur extends YliasBaseCommand {
         query.path = path;
         query.headers = headers;
 
-        DiscordUtils.setTyping(true, context.message.channel);
+        YliasDiscordUtils.setTyping(true, context.message.channel);
 
         query.send().then(function (data: String) {
             var response: Dynamic = null;
@@ -71,26 +71,38 @@ class Imgur extends YliasBaseCommand {
                         if (response != null && Reflect.hasField(response, 'data')) {
                             var link: String = response.data.link;
 
-                            DiscordUtils.setTyping(false, context.message.channel);
+                            YliasDiscordUtils.setTyping(false, context.message.channel);
                             context.sendFileToChannel(link, link.substring(link.lastIndexOf('/') + 1));
                         } else {
                             Logger.error('Failed to load Imgur image (step 2)');
                             Logger.debug(response);
 
-                            DiscordUtils.setTyping(false, context.message.channel);
-                            context.sendToChannel(l('fail', cast [author]));
+                            YliasDiscordUtils.setTyping(false, context.message.channel);
+                            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                'Imgur',
+                                l('fail', cast [author]),
+                                Emotion.SAD
+                            ));
                         }
                     });
                 } else {
-                    DiscordUtils.setTyping(false, context.message.channel);
-                    context.sendToChannel(l('not_found', cast [author]));
+                    YliasDiscordUtils.setTyping(false, context.message.channel);
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Imgur',
+                        l('not_found', cast [author]),
+                        Emotion.SAD
+                    ));
                 }
             } else {
                 Logger.error('Failed to load Imgur image (step 1)');
                 Logger.debug(response);
 
-                DiscordUtils.setTyping(false, context.message.channel);
-                context.sendToChannel(l('fail', cast [author]));
+                YliasDiscordUtils.setTyping(false, context.message.channel);
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Imgur',
+                    l('fail', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }

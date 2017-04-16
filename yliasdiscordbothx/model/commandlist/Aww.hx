@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import StringTools;
 import yliasdiscordbothx.utils.ArrayUtils;
@@ -51,12 +52,14 @@ class Aww extends YliasBaseCommand {
                 });
 
                 var picture = ArrayUtils.random(children);
-                var linkSentence = l('link_to_the_topic');
 
-                context.sendToChannel(author + ', ' + ~/&amp;/g.replace(picture.data.url, '&') + '\n\n' + linkSentence + ' <https://www.reddit.com' + picture.data.permalink + '>');
+                context.sendToChannel(author + ', ' + ~/&amp;/g.replace(picture.data.url, '&'));
             } else {
-                Logger.error('Failed to load a cat picture');
-                context.sendToChannel(l('fail', cast [author]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Aww!',
+                    l('fail', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }

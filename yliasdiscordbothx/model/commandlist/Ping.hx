@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 
 class Ping extends YliasBaseCommand {
@@ -8,6 +9,10 @@ class Ping extends YliasBaseCommand {
     }
 
     override public function process(args: Array<String>): Void {
-        context.sendToChannel(':ping_pong: ' + l('answer', cast [context.message.author]));
+        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+            'Ping',
+            l('answer', cast [context.message.author]) + ':ping_pong: ',
+            Emotion.NEUTRAL
+        ));
     }
 }

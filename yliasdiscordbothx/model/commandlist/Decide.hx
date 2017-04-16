@@ -1,8 +1,8 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.translations.LangCenter;
-import yliasdiscordbothx.utils.DiscordUtils;
 import yliasdiscordbothx.utils.Humanify;
 import yliasdiscordbothx.utils.ArrayUtils;
 
@@ -16,18 +16,18 @@ class Decide extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var idServer = DiscordUtils.getServerIdFromMessage(context.message);
+        var idServer = YliasDiscordUtils.getServerIdFromMessage(context.message);
 
         args = args.join(' ').split(' ' + l('split') + ' ');
 
-        if (args.length > 1) {
-            var picked = ArrayUtils.random(args);
-            var sentence = LangCenter.instance.translate(idServer, Humanify.getChoiceDeliverySentence(), [picked]);
+        var picked = ArrayUtils.random(args);
+        var sentence = LangCenter.instance.translate(idServer, Humanify.getChoiceDeliverySentence(), [picked]);
 
-            context.sendToChannel(author + ', ' + sentence);
-        } else {
-            context.sendToChannel(l('wrong_format', cast [author]));
-        }
+        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+            'Decide',
+            sentence,
+            Emotion.NEUTRAL
+        ), cast author);
     }
 
     override public function checkFormat(args: Array<String>): Bool {

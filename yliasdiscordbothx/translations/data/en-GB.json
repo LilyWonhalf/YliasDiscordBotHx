@@ -78,9 +78,6 @@
                     ],
                     "fail": [
                         "Welp... Seems like Reddit just crashed. I'm sorry %% :( ..."
-                    ],
-                    "link_to_the_topic": [
-                        "Link to the topic:"
                     ]
                 },
                 "cat": {
@@ -105,9 +102,6 @@
                     ],
                     "split": [
                         "or"
-                    ],
-                    "wrong_format": [
-                        "%%, You ask me to pick one, but... You only have one to pick... It doesn't make any sense D: !"
                     ]
                 },
                 "deletewelcomemessage": {
@@ -127,12 +121,6 @@
                 "describe": {
                     "description": [
                         "You can ask a bot like me to describe a picture!"
-                    ],
-                    "wait": [
-                        "Alright %%, just let me a few seconds..."
-                    ],
-                    "error": [
-                        "You forgot to give me a picture :| ..."
                     ]
                 },
                 "dog": {
@@ -146,9 +134,6 @@
                 "eval": {
                     "description": [
                         "Allows you to execute javascript commands and display the return value."
-                    ],
-                    "exception": [
-                        "Well done, %%, you code almost made me crash!"
                     ]
                 },
                 "getty": {
@@ -287,13 +272,13 @@
                         "%%, We got a problem. I don't know which member you want to register a permission from. I need the member ID, right? Well, you can highlight him with an @, I will translate it."
                     ],
                     "granted_parse_error": [
-                        "%%, You wanna grant or deny, there? It's not really crystal clear ._. ..."
+                        "%%, You wanna grant or deny, there? It's not really crystal clear..."
                     ],
                     "success": [
                         "%%, The permission has been successfully registered :) !"
                     ],
                     "fail": [
-                        "%%, There has been an error during registering, sorry :/ ."
+                        "%%, There has been an error during registering, sorry :( ."
                     ]
                 },
                 "registerstaff": {
@@ -303,14 +288,11 @@
                     "private_channel_error": [
                         "%%, I need you to execute this command on a server so I know which one you're talking about."
                     ],
-                    "no_mention": [
-                        "%%, You haven't mentionned anyone in your message, how am I supposed to know who to register?"
-                    ],
                     "fail": [
-                        "%%, There has been an error during save, sorry :/ ..."
+                        "%%, there has been an error during save, sorry :( ..."
                     ],
                     "success": [
-                        "%%, The member has been successfully registered in the staff and subscribed to the notifications :) !"
+                        "%%, the member has been successfully registered in the staff and subscribed to the notifications :) !"
                     ]
                 },
                 "scream": {
@@ -336,11 +318,8 @@
                     "description": [
                         "Allows you to change my lang"
                     ],
-                    "wrong_format": [
-                        "You forgot to tell me in which lang I should speak..."
-                    ],
                     "wrong_lang": [
-                        "I am sorry, but I don't know this lang :/ ..."
+                        "I am sorry, but I don't know this lang..."
                     ],
                     "answer": [
                         "Okay, my lang has been successfully changed :) !"
@@ -349,9 +328,6 @@
                 "setwelcomemessage": {
                     "description": [
                         "Allows you to set the welcome message that will be sent to the members who join this server"
-                    ],
-                    "wrong_format": [
-                        "%%, We got a problem. I think you got mistaken while typing the command... I did not understand a thing."
                     ],
                     "fail": [
                         "%%, Nope, didn't work : %%"
@@ -367,7 +343,7 @@
                     "try_again": [
                         "Try again"
                     ],
-                    "too_much_tries": [
+                    "too_many_tries": [
                         "You tried too hard today, %%, come back tomorrow :D !"
                     ]
                 },
@@ -398,9 +374,6 @@
                     "private_channel_error": [
                         "%%, I need you to execute this command on a server so I know which one you're talking about."
                     ],
-                    "no_mention": [
-                        "%%, You haven't mentionned anyone in your message, how am I supposed to know who to delete?"
-                    ],
                     "not_found": [
                         "%%, The member you want to delete from the staff is already not part of the staff. I guess that's good news?"
                     ],
@@ -415,9 +388,6 @@
                     "description": [
                         "I can look up an article on Wikipedia and write the beginning here if you want"
                     ],
-                    "parse_error": [
-                        "%%, You wanna make a search on Wikipedia without... Search terms?"
-                    ],
                     "fail": [
                         "Seems like Wikipedia crashed. Didn't think that day would come! Sorry %%!"
                     ],
@@ -428,9 +398,6 @@
                 "youtube": {
                     "description": [
                         "Allows you to make a search on YouTube"
-                    ],
-                    "wait": [
-                        "Wait a moment, %%, I'm asking YouTube if he's got something..."
                     ],
                     "fail": [
                         "Welp... Seems like YouTube has crashed. How strange... I'm sorry %% :( ..."

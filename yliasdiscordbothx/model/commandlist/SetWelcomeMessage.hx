@@ -2,7 +2,7 @@ package yliasdiscordbothx.model.commandlist;
 
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.model.entity.WelcomeMessage;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import StringTools;
 
 class SetWelcomeMessage extends YliasBaseCommand {
@@ -18,7 +18,7 @@ class SetWelcomeMessage extends YliasBaseCommand {
 
         if (args.length > 0) {
             var message: String = StringTools.trim(args.join(' '));
-            var idServer: String = DiscordUtils.getServerIdFromMessage(context.message);
+            var idServer: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
             var welcomeMessage: WelcomeMessage = new WelcomeMessage();
             var uniqueValues: Map<String, String> = new Map<String, String>();
 
@@ -33,14 +33,20 @@ class SetWelcomeMessage extends YliasBaseCommand {
 
                 welcomeMessage.save(function (err: Dynamic) {
                     if (err != null) {
-                        context.sendToChannel(l('fail', cast [author, err]));
+                        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                            'Set welcome message',
+                            l('fail', cast [author, err]),
+                            Emotion.SAD
+                        ));
                     } else {
-                        context.sendToChannel(l('success', cast [author]));
+                        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                            'Set welcome message',
+                            l('success', cast [author]),
+                            Emotion.NEUTRAL
+                        ));
                     }
                 });
             });
-        } else {
-            context.sendToChannel(l('wrong_format', cast [author]));
         }
     }
 }

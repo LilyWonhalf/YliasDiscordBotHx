@@ -1,7 +1,7 @@
 package yliasdiscordbothx.model.commandlist;
 
+import discordbothx.service.DiscordUtils;
 import discordbothx.core.CommunicationContext;
-import discordbothx.service.DiscordUtils as RootDiscordUtils;
 import discordhx.message.Message;
 import yliasdiscordbothx.model.entity.Meme;
 
@@ -21,7 +21,7 @@ class MemeList extends YliasBaseCommand {
                 result += '**\\`' + meme.name + '\\`** - ' + meme.description + ' \n';
             }
 
-            splittedResult = RootDiscordUtils.splitLongMessage(result);
+            splittedResult = DiscordUtils.splitLongMessage(result);
             index = 0;
 
             sendMessage(null);

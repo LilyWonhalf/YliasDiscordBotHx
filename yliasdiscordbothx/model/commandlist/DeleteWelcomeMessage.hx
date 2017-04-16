@@ -1,7 +1,7 @@
 package yliasdiscordbothx.model.commandlist;
 
 import discordbothx.core.CommunicationContext;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import yliasdiscordbothx.model.entity.WelcomeMessage;
 
 class DeleteWelcomeMessage extends YliasBaseCommand {
@@ -13,7 +13,7 @@ class DeleteWelcomeMessage extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var idServer: String = DiscordUtils.getServerIdFromMessage(context.message);
+        var idServer: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
         var welcomeMessageToDelete: WelcomeMessage = new WelcomeMessage();
         var primaryValues = new Map<String, String>();
 
@@ -27,13 +27,25 @@ class DeleteWelcomeMessage extends YliasBaseCommand {
             if (found) {
                 welcomeMessageToDelete.remove(function (err: Dynamic) {
                     if (err != null) {
-                        context.sendToChannel(l('fail', cast [author, err]));
+                        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                            'Delete welcome message',
+                            l('fail', cast [author, err]),
+                            Emotion.SAD
+                        ));
                     } else {
-                        context.sendToChannel(l('success', cast [author]));
+                        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                            'Delete welcome message',
+                            l('success', cast [author]),
+                            Emotion.WINK
+                        ));
                     }
                 });
             } else {
-                context.sendToChannel(l('not_found', cast [author]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Delete welcome message',
+                    l('not_found', cast [author]),
+                    Emotion.WINK
+                ));
             }
         });
     }

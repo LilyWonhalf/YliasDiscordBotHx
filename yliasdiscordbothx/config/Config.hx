@@ -7,4 +7,5 @@ class Config {
     public static inline var MESSAGE_MAX_LENGTH = 2000;
     public static inline var KEY_ALL = '0';
     public static inline var PROXY_MAX_RETRIES = 5;
+    public static inline var EMOTIONS_PATH = 'http://bew.ink/public/images/ylias/emotions/';
 }

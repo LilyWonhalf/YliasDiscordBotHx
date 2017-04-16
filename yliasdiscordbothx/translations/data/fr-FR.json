@@ -78,9 +78,6 @@
                     ],
                     "fail": [
                         "Bon... Reddit a planté on dirait. Je suis désolé %% :( ..."
-                    ],
-                    "link_to_the_topic": [
-                        "Lien vers le topic :"
                     ]
                 },
                 "cat": {
@@ -105,9 +102,6 @@
                     ],
                     "split": [
                         "ou"
-                    ],
-                    "wrong_format": [
-                        "%%, Tu me demandes de décider entre... Une seule chose ? Ça n'a aucun sens D: !"
                     ]
                 },
                 "deletewelcomemessage": {
@@ -127,12 +121,6 @@
                 "describe": {
                     "description": [
                         "Vous pouvez demander à un ordinateur comme moi de décrire une image !"
-                    ],
-                    "wait": [
-                        "C'est parti %%, laisse-moi quelques secondes de réflexion..."
-                    ],
-                    "error": [
-                        "T'as oublié de me donner une image :| ..."
                     ]
                 },
                 "dog": {
@@ -146,9 +134,6 @@
                 "eval": {
                     "description": [
                         "Permet d'exécuter des commandes javascript et d'afficher le retour"
-                    ],
-                    "exception": [
-                        "Bravo, %%, ton code a faillit me faire planter !"
                     ]
                 },
                 "getty": {
@@ -287,13 +272,13 @@
                         "%%, On a un souci. Je ne sais pas pour qui tu veux définir la permission, là. Il me faut l'id du membre, hein ? Au pire, identifie-le avec @, je me débrouillerai avec ça."
                     ],
                     "granted_parse_error": [
-                        "%%, Tu veux donner ou retirer l'autorisation, là ? C'est pas vraiment clair ._. ..."
+                        "%%, Tu veux donner ou retirer l'autorisation, là ? C'est pas vraiment clair..."
                     ],
                     "success": [
                         "%%, La permission a bien été créée :) !"
                     ],
                     "fail": [
-                        "%%, Il y a eu une erreur durant la création, désolé :/ ."
+                        "%%, Il y a eu une erreur durant la création, désolé :( ."
                     ]
                 },
                 "registerstaff": {
@@ -301,16 +286,13 @@
                         "Permet d'enregistrer un membre du staff et de l'inscrire aux notifications de nouveau membre sur le serveur"
                     ],
                     "private_channel_error": [
-                        "%%, J'ai besoin que tu exécutes cette commande sur un serveur pour que je puisse savoir duquel tu parles."
-                    ],
-                    "no_mention": [
-                        "%%, Tu n'as mentionné personne dans ton message, comment je suis censé savoir qui inscrire ?"
+                        "%%, j'ai besoin que tu exécutes cette commande sur un serveur pour que je puisse savoir duquel tu parles."
                     ],
                     "fail": [
-                        "%%, Il y a eu une erreur durant la sauvegarde, désolé :/ ..."
+                        "%%, il y a eu une erreur durant la sauvegarde, désolé :( ..."
                     ],
                     "success": [
-                        "%%, Le membre a bien été enregistré dans le staff et été inscrit aux notifications :) !"
+                        "%%, le membre a bien été enregistré dans le staff et été inscrit aux notifications :) !"
                     ]
                 },
                 "scream": {
@@ -336,11 +318,8 @@
                     "description": [
                         "Vous permet de changer la langue dans laquelle je parle"
                     ],
-                    "wrong_format": [
-                        "Tu as oublié de me préciser la langue dans laquelle tu veux que je parle..."
-                    ],
                     "wrong_lang": [
-                        "Je suis désolé, mais je ne connais pas cette langue :/ ..."
+                        "Je suis désolé, mais je ne connais pas cette langue..."
                     ],
                     "answer": [
                         "C'est bon, ma langue a bien été changée :) !"
@@ -349,9 +328,6 @@
                 "setwelcomemessage": {
                     "description": [
                         "Permet de définir le message de bienvenue qui sera envoyé par message privé aux personnes qui rejoindront ce salon"
-                    ],
-                    "wrong_format": [
-                        "%%, On a un souci. Je crois que tu as mal tapé la commande, du coup j'ai rien compris."
                     ],
                     "fail": [
                         "%%, Nope, ça n'a pas fonctionné : %%"
@@ -367,7 +343,7 @@
                     "try_again": [
                         "Essaie encore"
                     ],
-                    "too_much_tries": [
+                    "too_many_tries": [
                         "Tu as trop joué pour aujourd'hui, %%, reviens demain :D !"
                     ]
                 },
@@ -398,9 +374,6 @@
                     "private_channel_error": [
                         "%%, J'ai besoin que tu exécutes cette commande sur un serveur pour que je puisse savoir duquel tu parles."
                     ],
-                    "no_mention": [
-                        "%%, Tu n'as mentionné personne dans ton message, comment je suis censé savoir qui supprimer ?"
-                    ],
                     "not_found": [
                         "%%, Le membre que tu veux supprimer du staff ne s'y trouve déjà pas, j'imagine que c'est une bonne nouvelle ?"
                     ],
@@ -415,9 +388,6 @@
                     "description": [
                         "Je peux rechercher un article sur Wikipédia et vous afficher le début ici si vous voulez"
                     ],
-                    "parse_error": [
-                        "%%, Tu veux faire une recherche sur Wikipédia sans... Termes à rechercher ?"
-                    ],
                     "fail": [
                         "Il semblerait que Wikipédia ait planté. Je ne pensais pas que ça arriverait un jour ! Désolé %% !"
                     ],
@@ -428,9 +398,6 @@
                 "youtube": {
                     "description": [
                         "Permet de rechercher une vidéo sur YouTube"
-                    ],
-                    "wait": [
-                        "Un instant, %%, je demande à YouTube s'il a quelque chose..."
                     ],
                     "fail": [
                         "Bon... YouTube a l'air d'avoir planté, étrange... Je suis désolé %% :( ..."

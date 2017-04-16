@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.channel.GroupDMChannel;
 import discordhx.channel.DMChannel;
 import discordbothx.core.DiscordBot;
@@ -67,7 +68,11 @@ class Avatar extends YliasBaseCommand {
                 text
             );
         } else {
-            context.sendToChannel(l('not_found', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Avatar',
+                l('not_found', cast [author]),
+                Emotion.SAD
+            ));
         }
     }
 }

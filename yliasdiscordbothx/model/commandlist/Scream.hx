@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import js.RegExp;
 
@@ -16,6 +17,7 @@ class Scream extends YliasBaseCommand {
         var emoji: String = ':waxing_gibbous_moon:';
         var renderedScream: String = null;
         var multipliedLetter: String = null;
+        var emotion: Emotion = Emotion.NEUTRAL;
 
         _screamList = new Array<ScreamDetail>();
 
@@ -115,6 +117,8 @@ class Scream extends YliasBaseCommand {
         }
 
         if (renderedScream == null) {
+            emotion = Emotion.SURPRISE;
+
             if (~/[aeiouy]/g.match(scream)) {
                 var vowel: String = null;
                 var vowelPosition: Int = null;
@@ -170,7 +174,11 @@ class Scream extends YliasBaseCommand {
         }
 
         renderedScream = StringTools.replace(renderedScream, '%%', multipliedLetter);
-        context.sendToChannel(context.message.author + ', ' + emoji + ' ' + renderedScream);
+        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+            'Scream',
+            emoji + ' ' + renderedScream,
+            emotion
+        ), cast context.message.author);
     }
 }
 

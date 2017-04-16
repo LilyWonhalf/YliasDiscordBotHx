@@ -1,7 +1,7 @@
 package yliasdiscordbothx.model.commandlist;
 
 import Math;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import yliasdiscordbothx.utils.ArrayUtils;
 import discordbothx.core.CommunicationContext;
 import discordbothx.log.Logger;
@@ -26,7 +26,7 @@ class Obf extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var lang: String = args.shift();
+        var lang: String = args.shift().toLowerCase();
 
         iterationsLeft = ITERATIONS;
 
@@ -90,10 +90,14 @@ class Obf extends YliasBaseCommand {
 
             languages.remove(sourceLanguage);
 
-            DiscordUtils.setTyping(true, context.message.channel);
+            YliasDiscordUtils.setTyping(true, context.message.channel);
             translateFrom(text, sourceLanguage);
         } else {
-            context.sendToChannel(l('wrong_language', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Text obfuscator',
+                l('wrong_language', cast [author]),
+                Emotion.SAD
+            ));
         }
     }
 
@@ -137,12 +141,20 @@ class Obf extends YliasBaseCommand {
                     iterationsLeft--;
                     translateFrom(text, targetLanguage);
                 } else {
-                    DiscordUtils.setTyping(false, context.message.channel);
-                    context.sendToChannel(l('answer', cast [author]) + '\n\n' + text);
+                    YliasDiscordUtils.setTyping(false, context.message.channel);
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Text obfuscator',
+                        l('answer', cast [author]) + '\n\n' + text,
+                        Emotion.NEUTRAL
+                    ));
                 }
             } else {
-                DiscordUtils.setTyping(false, context.message.channel);
-                context.sendToChannel(l('fail', cast [author]));
+                YliasDiscordUtils.setTyping(false, context.message.channel);
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Text obfuscator',
+                    l('fail', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }

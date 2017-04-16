@@ -5,7 +5,7 @@ import discordbothx.core.CommunicationContext;
 import discordbothx.log.Logger;
 import yliasdiscordbothx.utils.Humanify;
 import yliasdiscordbothx.model.entity.Permission;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.message.Message;
 
 class RegisterPermission extends YliasBaseCommand {
@@ -24,7 +24,7 @@ class RegisterPermission extends YliasBaseCommand {
             var command: String = StringTools.trim(args[1]);
             var granted: String = StringTools.trim(args[2]);
             var idChannel: String = null;
-            var idServer: String = DiscordUtils.getServerIdFromMessage(context.message);
+            var idServer: String = YliasDiscordUtils.getServerIdFromMessage(context.message);
 
             if (args.length > 3 && StringTools.trim(args[3]).length > 0) {
                 idChannel = StringTools.trim(args[3]);
@@ -33,8 +33,8 @@ class RegisterPermission extends YliasBaseCommand {
                 idChannel = channel.id;
             }
 
-            if (DiscordUtils.isHightlight(idUser)) {
-                idUser = DiscordUtils.getIdFromHighlight(idUser);
+            if (YliasDiscordUtils.isHightlight(idUser)) {
+                idUser = YliasDiscordUtils.getIdFromHighlight(idUser);
             }
 
             if (idUser != null) {
@@ -62,22 +62,42 @@ class RegisterPermission extends YliasBaseCommand {
                         permission.save(function (err: Dynamic) {
                             if (err != null) {
                                 Logger.exception(err);
-                                context.sendToChannel(l('fail', cast [author]));
+                                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                    'Register permission',
+                                    l('fail', cast [author]),
+                                    Emotion.SAD
+                                ));
                             } else {
-                                context.sendToChannel(l('success', cast [author]));
+                                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                                    'Register permission',
+                                    l('success', cast [author]),
+                                    Emotion.NEUTRAL
+                                ));
                             }
                         });
                     });
                 } else {
                     Logger.debug(granted);
-                    context.sendToChannel(l('granted_parse_error', cast [author]));
+                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                        'Register permission',
+                        l('granted_parse_error', cast [author]),
+                        Emotion.UNAMUSED
+                    ));
                 }
             } else {
                 Logger.debug(idUser);
-                context.sendToChannel(l('wrong_user', cast [author]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Register permission',
+                    l('wrong_user', cast [author]),
+                    Emotion.NEUTRAL
+                ));
             }
         } else {
-            context.sendToChannel(l('wrong_format', cast [author]));
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Register permission',
+                l('wrong_format', cast [author]),
+                Emotion.UNAMUSED
+            ));
         }
     }
 }

@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import nodejs.http.HTTP.HTTPMethod;
 import discordbothx.log.Logger;
@@ -20,8 +21,11 @@ class Dog extends YliasBaseCommand {
             if (data != null && data.split('\n').length < 2) {
                 context.sendFileToChannel('http://random.dog/' + data, data, author.toString());
             } else {
-                Logger.error('Failed to load a dog picture');
-                context.sendToChannel(l('fail', cast [author]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Dog',
+                    l('fail', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }

@@ -2,7 +2,7 @@ package yliasdiscordbothx.model.commandlist;
 
 import discordbothx.core.DiscordBot;
 import discordbothx.core.CommunicationContext;
-import yliasdiscordbothx.utils.DiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import yliasdiscordbothx.utils.ArrayUtils;
 
 class Hug extends YliasBaseCommand {
@@ -14,7 +14,7 @@ class Hug extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var target: String = context.message.author.toString();
-        var idServer = DiscordUtils.getServerIdFromMessage(context.message);
+        var idServer = YliasDiscordUtils.getServerIdFromMessage(context.message);
         var hugs: Array<String>;
         var hug: String;
 
@@ -43,6 +43,10 @@ class Hug extends YliasBaseCommand {
         }
 
         hug = ArrayUtils.random(hugs);
-        context.sendToChannel(hug);
+        context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+            'Hug',
+            hug,
+            Emotion.WINK
+        ));
     }
 }

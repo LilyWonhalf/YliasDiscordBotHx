@@ -1,7 +1,7 @@
 package yliasdiscordbothx.model.commandlist;
 
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
-import nodejs.http.HTTP.HTTPMethod;
 import discordbothx.log.Logger;
 import haxe.Json;
 import yliasdiscordbothx.utils.HttpQuery;
@@ -29,8 +29,11 @@ class Cat extends YliasBaseCommand {
             if (response != null && Reflect.hasField(response, 'file')) {
                 context.sendFileToChannel(response.file, 'cat.jpg', author.toString());
             } else {
-                Logger.error('Failed to load a cat picture');
-                context.sendToChannel(l('fail', cast [author]));
+                context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                    'Meow!',
+                    l('fail', cast [author]),
+                    Emotion.SAD
+                ));
             }
         });
     }
