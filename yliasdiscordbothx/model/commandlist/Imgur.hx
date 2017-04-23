@@ -1,5 +1,6 @@
 package yliasdiscordbothx.model.commandlist;
 
+import discordhx.RichEmbed;
 import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
 import yliasdiscordbothx.Bot;
@@ -71,8 +72,12 @@ class Imgur extends YliasBaseCommand {
                         if (response != null && Reflect.hasField(response, 'data')) {
                             var link: String = response.data.link;
 
+                            if (Reflect.hasField(response.data, 'gifv')) {
+                                link = response.data.gifv;
+                            }
+
                             YliasDiscordUtils.setTyping(false, context.message.channel);
-                            context.sendFileToChannel(link, link.substring(link.lastIndexOf('/') + 1));
+                            context.sendToChannel(author + ', ' + link);
                         } else {
                             Logger.error('Failed to load Imgur image (step 2)');
                             Logger.debug(response);
