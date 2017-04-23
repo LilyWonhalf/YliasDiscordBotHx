@@ -11,7 +11,7 @@ class Crash extends YliasBaseCommand {
     override public function process(args: Array<String>): Void {
         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
             'Crash',
-            l('speech'),
+            YliasDiscordUtils.getCleanString(context, l('speech')),
             Emotion.UNAMUSED
         ));
         untyped __js__('setTimeout(() => crash++, 1000)');

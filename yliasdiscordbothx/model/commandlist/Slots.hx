@@ -131,13 +131,13 @@ class Slots extends YliasBaseCommand {
 
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Slots',
-                first + second + third + '\n' + answer,
+                YliasDiscordUtils.getCleanString(context, first + second + third + '\n' + answer),
                 emotion
             ));
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Slots',
-                l('too_many_tries', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('too_many_tries', cast [author])),
                 Emotion.WINK
             ));
         }

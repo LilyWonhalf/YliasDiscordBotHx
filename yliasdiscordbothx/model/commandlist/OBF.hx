@@ -95,7 +95,7 @@ class Obf extends YliasBaseCommand {
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Text obfuscator',
-                l('wrong_language', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('wrong_language', cast [author])),
                 Emotion.SAD
             ));
         }
@@ -144,7 +144,7 @@ class Obf extends YliasBaseCommand {
                     YliasDiscordUtils.setTyping(false, context.message.channel);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Text obfuscator',
-                        l('answer', cast [author]) + '\n\n' + text,
+                        YliasDiscordUtils.getCleanString(context, l('answer', cast [author]) + '\n\n' + text),
                         Emotion.NEUTRAL
                     ));
                 }
@@ -152,7 +152,7 @@ class Obf extends YliasBaseCommand {
                 YliasDiscordUtils.setTyping(false, context.message.channel);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Text obfuscator',
-                    l('fail', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                     Emotion.SAD
                 ));
             }

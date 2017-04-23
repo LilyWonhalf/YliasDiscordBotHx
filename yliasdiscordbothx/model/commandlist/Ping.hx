@@ -11,7 +11,7 @@ class Ping extends YliasBaseCommand {
     override public function process(args: Array<String>): Void {
         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
             'Ping',
-            l('answer', cast [context.message.author]) + ':ping_pong: ',
+            YliasDiscordUtils.getCleanString(context, l('answer', cast [context.message.author]) + ':ping_pong: '),
             Emotion.NEUTRAL
         ));
     }

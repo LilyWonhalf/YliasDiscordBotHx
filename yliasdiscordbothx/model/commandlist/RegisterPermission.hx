@@ -64,13 +64,13 @@ class RegisterPermission extends YliasBaseCommand {
                                 Logger.exception(err);
                                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                     'Register permission',
-                                    l('fail', cast [author]),
+                                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                                     Emotion.SAD
                                 ));
                             } else {
                                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                     'Register permission',
-                                    l('success', cast [author]),
+                                    YliasDiscordUtils.getCleanString(context, l('success', cast [author])),
                                     Emotion.NEUTRAL
                                 ));
                             }
@@ -80,7 +80,7 @@ class RegisterPermission extends YliasBaseCommand {
                     Logger.debug(granted);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Register permission',
-                        l('granted_parse_error', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('granted_parse_error', cast [author])),
                         Emotion.UNAMUSED
                     ));
                 }
@@ -88,14 +88,14 @@ class RegisterPermission extends YliasBaseCommand {
                 Logger.debug(idUser);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Register permission',
-                    l('wrong_user', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('wrong_user', cast [author])),
                     Emotion.NEUTRAL
                 ));
             }
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Register permission',
-                l('wrong_format', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('wrong_format', cast [author])),
                 Emotion.UNAMUSED
             ));
         }

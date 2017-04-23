@@ -59,7 +59,7 @@ class Wiki extends YliasBaseCommand {
                     Logger.error('Failed to search on wikipedia (step 2), URL: https://' + host + path);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Wikipedia',
-                        l('not_found', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                         Emotion.SURPRISE
                     ));
                 }
@@ -67,7 +67,7 @@ class Wiki extends YliasBaseCommand {
                 Logger.error('Failed to search on wikipedia (step 1), URL: https://' + host + path);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Wikipedia',
-                    l('fail', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                     Emotion.SAD
                 ));
             }

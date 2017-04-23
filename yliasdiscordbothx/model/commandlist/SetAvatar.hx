@@ -18,14 +18,14 @@ class SetAvatar extends YliasBaseCommand {
             if (error == null) {
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Set avatar',
-                    l('answer', cast [context.message.author]),
+                    YliasDiscordUtils.getCleanString(context, l('answer', cast [context.message.author])),
                     Emotion.NEUTRAL
                 ));
             } else {
                 Logger.exception(error);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Set avatar',
-                    l('fail', cast [context.message.author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [context.message.author])),
                     Emotion.SAD
                 ));
             }

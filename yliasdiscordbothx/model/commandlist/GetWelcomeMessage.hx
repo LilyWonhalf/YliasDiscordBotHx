@@ -25,20 +25,20 @@ class GetWelcomeMessage extends YliasBaseCommand {
                 Logger.exception(err);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Get welcome message',
-                    l('fail', cast [author, err]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author, err])),
                     Emotion.SAD
                 ));
             } else {
                 if (message != null) {
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Get welcome message',
-                        l('success', cast [cast author, message]),
+                        YliasDiscordUtils.getCleanString(context, l('success', cast [cast author, message])),
                         Emotion.NEUTRAL
                     ));
                 } else {
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Get welcome message',
-                        l('not_found', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                         Emotion.NEUTRAL
                     ));
                 }

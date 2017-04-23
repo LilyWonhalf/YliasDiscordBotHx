@@ -62,7 +62,7 @@ class YouTube extends YliasBaseCommand {
                             YliasDiscordUtils.setTyping(false, context.message.channel);
                             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                 'YouTube',
-                                l('not_found', cast [author]),
+                                YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                                 Emotion.SAD
                             ));
                         }
@@ -72,7 +72,7 @@ class YouTube extends YliasBaseCommand {
                         YliasDiscordUtils.setTyping(false, context.message.channel);
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'YouTube',
-                            l('not_found', cast [author]),
+                            YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                             Emotion.SAD
                         ));
                     }
@@ -83,7 +83,7 @@ class YouTube extends YliasBaseCommand {
                     YliasDiscordUtils.setTyping(false, context.message.channel);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'YouTube',
-                        l('error', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('error', cast [author])),
                         Emotion.SAD
                     ));
                 }
@@ -93,7 +93,7 @@ class YouTube extends YliasBaseCommand {
                 YliasDiscordUtils.setTyping(false, context.message.channel);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'YouTube',
-                    l('failed', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('failed', cast [author])),
                     Emotion.SAD
                 ));
             }

@@ -29,13 +29,13 @@ class SetLang extends YliasBaseCommand {
                 LangCenter.instance.setLang(serverId, cast lang);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Set lang',
-                    l('answer', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('answer', cast [author])),
                     Emotion.NEUTRAL
                 ));
             } else {
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Set lang',
-                    l('wrong_lang', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('wrong_lang', cast [author])),
                     Emotion.SAD
                 ));
             }

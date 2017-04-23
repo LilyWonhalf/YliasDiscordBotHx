@@ -45,7 +45,7 @@ class Hug extends YliasBaseCommand {
         hug = ArrayUtils.random(hugs);
         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
             'Hug',
-            hug,
+            YliasDiscordUtils.getCleanString(context, hug),
             Emotion.WINK
         ));
     }

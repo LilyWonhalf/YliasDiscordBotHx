@@ -23,7 +23,7 @@ class Dog extends YliasBaseCommand {
             } else {
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Dog',
-                    l('fail', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                     Emotion.SAD
                 ));
             }

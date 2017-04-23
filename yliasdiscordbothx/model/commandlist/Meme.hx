@@ -48,7 +48,7 @@ class Meme extends YliasBaseCommand {
                             Logger.debug(meme);
                             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                 'Meme',
-                                l('fail', cast [author]),
+                                YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                                 Emotion.SAD
                             ));
                         }
@@ -56,7 +56,7 @@ class Meme extends YliasBaseCommand {
                 } else {
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Meme',
-                        l('not_found', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                         Emotion.SAD
                     ));
                 }
@@ -64,7 +64,7 @@ class Meme extends YliasBaseCommand {
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Meme',
-                l('parse_error', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('parse_error', cast [author])),
                 Emotion.UNAMUSED
             ));
         }

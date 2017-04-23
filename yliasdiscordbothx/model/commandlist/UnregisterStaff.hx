@@ -35,7 +35,7 @@ class UnregisterStaff extends YliasBaseCommand {
                 if (!found) {
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Unregister staff',
-                        l('not_found', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                         Emotion.NEUTRAL
                     ));
                 } else {
@@ -43,14 +43,14 @@ class UnregisterStaff extends YliasBaseCommand {
                         if (err == null) {
                             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                 'Unregister staff',
-                                l('success', cast [author]),
+                                YliasDiscordUtils.getCleanString(context, l('success', cast [author])),
                                 Emotion.NEUTRAL
                             ));
                         } else {
                             Logger.exception(err);
                             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                 'Unregister staff',
-                                l('fail', cast [author]),
+                                YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                                 Emotion.SAD
                             ));
                         }
@@ -60,7 +60,7 @@ class UnregisterStaff extends YliasBaseCommand {
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Unregister staff',
-                l('private_channel_error', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('private_channel_error', cast [author])),
                 Emotion.UNAMUSED
             ));
         }

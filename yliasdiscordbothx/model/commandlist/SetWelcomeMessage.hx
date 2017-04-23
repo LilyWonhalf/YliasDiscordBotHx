@@ -35,13 +35,13 @@ class SetWelcomeMessage extends YliasBaseCommand {
                     if (err != null) {
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Set welcome message',
-                            l('fail', cast [author, err]),
+                            YliasDiscordUtils.getCleanString(context, l('fail', cast [author, err])),
                             Emotion.SAD
                         ));
                     } else {
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Set welcome message',
-                            l('success', cast [author]),
+                            YliasDiscordUtils.getCleanString(context, l('success', cast [author])),
                             Emotion.NEUTRAL
                         ));
                     }

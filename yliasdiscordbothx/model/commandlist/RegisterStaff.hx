@@ -42,14 +42,14 @@ class RegisterStaff extends YliasBaseCommand {
                     if (err == null) {
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Register staff',
-                            l('success', cast [author]),
+                            YliasDiscordUtils.getCleanString(context, l('success', cast [author])),
                             Emotion.NEUTRAL
                         ));
                     } else {
                         Logger.exception(err);
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Register staff',
-                            l('fail', cast [author]),
+                            YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                             Emotion.SAD
                         ));
                     }
@@ -58,7 +58,7 @@ class RegisterStaff extends YliasBaseCommand {
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Register staff',
-                l('private_channel_error', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('private_channel_error', cast [author])),
                 Emotion.UNAMUSED
             ));
         }

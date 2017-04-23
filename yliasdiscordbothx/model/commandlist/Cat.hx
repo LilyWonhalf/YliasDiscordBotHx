@@ -31,7 +31,7 @@ class Cat extends YliasBaseCommand {
             } else {
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Meow!',
-                    l('fail', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                     Emotion.SAD
                 ));
             }

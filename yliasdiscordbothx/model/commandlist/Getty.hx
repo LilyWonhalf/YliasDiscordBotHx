@@ -112,7 +112,7 @@ class Getty extends YliasBaseCommand {
                             YliasDiscordUtils.setTyping(false, context.message.channel);
                             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                 'Getty',
-                                l('fail', cast [author]),
+                                YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                                 Emotion.SAD
                             ));
                         }
@@ -121,7 +121,7 @@ class Getty extends YliasBaseCommand {
                     YliasDiscordUtils.setTyping(false, context.message.channel);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Getty',
-                        l('not_found', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                         Emotion.SAD
                     ));
                 }
@@ -132,7 +132,7 @@ class Getty extends YliasBaseCommand {
                 YliasDiscordUtils.setTyping(false, context.message.channel);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Getty',
-                    l('fail', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                     Emotion.SAD
                 ));
             }

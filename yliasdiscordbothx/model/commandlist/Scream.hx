@@ -176,7 +176,7 @@ class Scream extends YliasBaseCommand {
         renderedScream = StringTools.replace(renderedScream, '%%', multipliedLetter);
         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
             'Scream',
-            emoji + ' ' + renderedScream,
+            YliasDiscordUtils.getCleanString(context, emoji + ' ' + renderedScream),
             emotion
         ), cast context.message.author);
     }

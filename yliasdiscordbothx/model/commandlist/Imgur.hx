@@ -80,7 +80,7 @@ class Imgur extends YliasBaseCommand {
                             YliasDiscordUtils.setTyping(false, context.message.channel);
                             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                 'Imgur',
-                                l('fail', cast [author]),
+                                YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                                 Emotion.SAD
                             ));
                         }
@@ -89,7 +89,7 @@ class Imgur extends YliasBaseCommand {
                     YliasDiscordUtils.setTyping(false, context.message.channel);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Imgur',
-                        l('not_found', cast [author]),
+                        YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                         Emotion.SAD
                     ));
                 }
@@ -100,7 +100,7 @@ class Imgur extends YliasBaseCommand {
                 YliasDiscordUtils.setTyping(false, context.message.channel);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Imgur',
-                    l('fail', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                     Emotion.SAD
                 ));
             }

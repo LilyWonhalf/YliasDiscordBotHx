@@ -51,13 +51,13 @@ class UnregisterPermission extends YliasBaseCommand {
                                 Logger.exception(err);
                                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                     'Unregister permission',
-                                    l('fail', cast [author]),
+                                    YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
                                     Emotion.SAD
                                 ));
                             } else {
                                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                                     'Unregister permission',
-                                    l('success', cast [author]),
+                                    YliasDiscordUtils.getCleanString(context, l('success', cast [author])),
                                     Emotion.NEUTRAL
                                 ));
                             }
@@ -65,7 +65,7 @@ class UnregisterPermission extends YliasBaseCommand {
                     } else {
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Unregister permission',
-                            l('not_found', cast [author]),
+                            YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                             Emotion.NEUTRAL
                         ));
                     }
@@ -73,14 +73,14 @@ class UnregisterPermission extends YliasBaseCommand {
             } else {
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Unregister permission',
-                    l('wrong_user', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('wrong_user', cast [author])),
                     Emotion.NEUTRAL
                 ));
             }
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Unregister permission',
-                l('wrong_format', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('wrong_format', cast [author])),
                 Emotion.UNAMUSED
             ));
         }

@@ -25,7 +25,7 @@ class Decide extends YliasBaseCommand {
 
         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
             'Decide',
-            sentence,
+            YliasDiscordUtils.getCleanString(context, sentence),
             Emotion.NEUTRAL
         ), cast author);
     }

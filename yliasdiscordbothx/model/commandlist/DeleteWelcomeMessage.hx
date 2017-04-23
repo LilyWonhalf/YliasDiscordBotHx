@@ -29,13 +29,13 @@ class DeleteWelcomeMessage extends YliasBaseCommand {
                     if (err != null) {
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Delete welcome message',
-                            l('fail', cast [author, err]),
+                            YliasDiscordUtils.getCleanString(context, l('fail', cast [author, err])),
                             Emotion.SAD
                         ));
                     } else {
                         context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                             'Delete welcome message',
-                            l('success', cast [author]),
+                            YliasDiscordUtils.getCleanString(context, l('success', cast [author])),
                             Emotion.WINK
                         ));
                     }
@@ -43,7 +43,7 @@ class DeleteWelcomeMessage extends YliasBaseCommand {
             } else {
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Delete welcome message',
-                    l('not_found', cast [author]),
+                    YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                     Emotion.WINK
                 ));
             }

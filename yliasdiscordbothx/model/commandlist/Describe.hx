@@ -46,7 +46,7 @@ class Describe extends YliasBaseCommand {
                     YliasDiscordUtils.setTyping(false, context.message.channel);
                     context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                         'Describe',
-                        response.BotMessages[1],
+                        YliasDiscordUtils.getCleanString(context, response.BotMessages[1]),
                         Emotion.NEUTRAL
                     ), cast author);
                 });

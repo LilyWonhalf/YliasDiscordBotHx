@@ -1,6 +1,7 @@
 package yliasdiscordbothx.model.commandlist;
 
 import yliasdiscordbothx.utils.YliasDiscordUtils;
+import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.channel.GroupDMChannel;
 import discordhx.channel.DMChannel;
 import discordbothx.core.DiscordBot;
@@ -70,7 +71,7 @@ class Avatar extends YliasBaseCommand {
         } else {
             context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                 'Avatar',
-                l('not_found', cast [author]),
+                YliasDiscordUtils.getCleanString(context, l('not_found', cast [author])),
                 Emotion.SAD
             ));
         }
