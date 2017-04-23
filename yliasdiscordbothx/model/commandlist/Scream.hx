@@ -106,7 +106,7 @@ class Scream extends YliasBaseCommand {
         }
 
         for (screamDetail in _screamList) {
-            var regexp = new EReg('^' + screamDetail.scream, '');
+            var regexp = new EReg('^' + screamDetail.scream + '$', '');
 
             if (regexp.match(scream)) {
                 renderedScream = screamDetail.renderedScream;
@@ -141,9 +141,13 @@ class Scream extends YliasBaseCommand {
                     var screamReadyForSearch: String = scream;
                     var lastCharacterIsE = scream.charAt(scream.length - 1) == 'e';
                     var penultimateCharacterIsConsonant = consonantRegexp.match(scream.charAt(scream.length - 2));
+                    var shouldRemoveLastCharacter = lastCharacterIsE && penultimateCharacterIsConsonant;
+                    var screamWithoutE: String = scream.substr(0, scream.length - 1);
 
-                    if (lastCharacterIsE && penultimateCharacterIsConsonant) {
-                        screamReadyForSearch = scream.substr(0, scream.length - 1);
+                    shouldRemoveLastCharacter = shouldRemoveLastCharacter && simpleVowelsRegexp.test(screamWithoutE);
+
+                    if (shouldRemoveLastCharacter) {
+                        screamReadyForSearch = screamWithoutE;
                     }
 
                     do {
