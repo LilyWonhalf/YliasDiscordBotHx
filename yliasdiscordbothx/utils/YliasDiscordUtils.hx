@@ -54,7 +54,7 @@ class YliasDiscordUtils {
         }
     }
 
-    public static function isHightlight(str: String): Bool {
+    public static function isUserHightlight(str: String): Bool {
         return ~/<@!?\d+>/ig.match(str);
     }
 

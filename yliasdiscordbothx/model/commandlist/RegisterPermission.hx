@@ -33,7 +33,7 @@ class RegisterPermission extends YliasBaseCommand {
                 idChannel = channel.id;
             }
 
-            if (YliasDiscordUtils.isHightlight(idUser)) {
+            if (YliasDiscordUtils.isUserHightlight(idUser)) {
                 idUser = YliasDiscordUtils.getIdFromHighlight(idUser);
             }
 
