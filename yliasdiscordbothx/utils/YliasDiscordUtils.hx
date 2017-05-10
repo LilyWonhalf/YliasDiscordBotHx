@@ -58,6 +58,14 @@ class YliasDiscordUtils {
         return ~/<@!?\d+>/ig.match(str);
     }
 
+    public static function isChannelHightlight(str: String): Bool {
+        return ~/<#\d+>/ig.match(str);
+    }
+
+    public static function isRoleHightlight(str: String): Bool {
+        return ~/<@&\d+>/ig.match(str);
+    }
+
     public static function getIdFromHighlight(str: String): String {
         return ~/[^\d]+/ig.replace(str, '');
     }
