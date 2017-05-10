@@ -38,5 +38,9 @@ class AuthDetails_example {
     public var IMGUR_CLIENT_ID = '';
     public var IMGUR_CLIENT_SECRET = '';
 
+    // Oxford English Dictionnary
+    public var OED_APP_ID = '';
+    public var OED_APP_KEY = '';
+
     public function new() {}
 }

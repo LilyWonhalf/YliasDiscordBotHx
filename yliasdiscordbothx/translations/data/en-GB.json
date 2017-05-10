@@ -253,6 +253,20 @@
                         "Here is your text after some translations, %%:"
                     ]
                 },
+                "oed": {
+                    "description": [
+                        "Allows you to retrieve a definition in the Oxford English Dictinnary"
+                    ],
+                    "404": [
+                        "Sorry %%, I didn't find the word you're looking for!"
+                    ],
+                    "fatal": [
+                        "Sorry %%, looks like Oxford English Dictionary service is down :( ..."
+                    ],
+                    "fail": [
+                        "You didn't give me the word you want the definition for, %% :| ..."
+                    ]
+                },
                 "ping": {
                     "description": [
                         "Who's up for ping pong? Oh, sorry. Table tennis u_u"

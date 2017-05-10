@@ -253,6 +253,20 @@
                         "Voici ton texte après plusieurs traductions, %% :"
                     ]
                 },
+                "oed": {
+                    "description": [
+                        "Permet de récupérer une définition dans le Oxford English Dictionnary"
+                    ],
+                    "404": [
+                        "Désolé %%, je n'ai pas trouvé le mot que tu recherches !"
+                    ],
+                    "fatal": [
+                        "Désolé %%, on dirait que le service de Oxford English Dictionnary est planté :( ..."
+                    ],
+                    "fail": [
+                        "Tu ne m'as pas donné le mot dont tu veux la définition, %% :| ..."
+                    ]
+                },
                 "ping": {
                     "description": [
                         "Qui pour un ping pong ? Oh, pardon. Un tennis de table u_u"
