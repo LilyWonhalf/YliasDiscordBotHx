@@ -45,7 +45,13 @@ class Humanify {
             'yay',
             '1',
             'true',
-            'vrai'
+            'vrai',
+            'si',
+            'seh',
+            'sep',
+            'sip',
+            's',
+            'y'
         ];
         var stringsThatMeanFalse: Array<String> = [
             'no',
@@ -70,7 +76,10 @@ class Humanify {
             'nay',
             '0',
             'false',
-            'faux'
+            'faux',
+            'nah',
+            'meh',
+            'n'
         ];
 
         if (stringsThatMeanTrue.indexOf(str) > -1) {
