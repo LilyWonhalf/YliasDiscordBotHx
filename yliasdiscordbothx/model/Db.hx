@@ -24,7 +24,7 @@ class Db {
 
     public function get(query: String, values: Array<Dynamic>, callback: Dynamic->Dynamic->Void) {
         if (isConnectionRunning()) {
-            db.query(query + ' LIMIT 1', cast values, cast function (err: Dynamic, results: Array<Dynamic>, fields: Array<String>) {
+            db.query(query + ' LIMIT 1', cast sanitizeValues(values), cast function (err: Dynamic, results: Array<Dynamic>, fields: Array<String>) {
                 if (err != null) {
                     callback(err, null);
                 } else {
@@ -52,7 +52,7 @@ class Db {
 
     public function execute(query: String, values: Array<Dynamic>, callback: Dynamic->Array<Dynamic>->Void) {
         if (isConnectionRunning()) {
-            db.query(query, cast values, callback);
+            db.query(query, cast sanitizeValues(values), callback);
         } else {
             addQueryToPool({
                 method: 'execute',
@@ -183,6 +183,26 @@ class Db {
                 close(connectionClosedAfterFatalErrorHandler);
             }
         }
+    }
+
+    private function sanitizeValues(values: Array<Dynamic>): Array<Dynamic> {
+        var ret = null;
+
+        if (values != null) {
+            ret = values.map(sanitizeValue);
+        }
+
+        return ret;
+    }
+
+    private function sanitizeValue(value: Dynamic): Dynamic {
+        var newValue: Dynamic = value;
+
+        if (Std.is(value, String)) {
+            newValue = ~/[\u0800-\uFFFF]/g.replace(value, '');
+        }
+
+        return newValue;
     }
 }
 
