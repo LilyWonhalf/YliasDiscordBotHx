@@ -1,9 +1,10 @@
 package yliasdiscordbothx.model.commandlist;
 
-import yliasdiscordbothx.utils.YliasDiscordUtils;
 import yliasdiscordbothx.utils.HttpQuery;
 import discordbothx.log.Logger;
 import discordbothx.core.CommunicationContext;
+import StringTools;
+import discordhx.message.Message;
 import haxe.Json;
 
 class OED extends YliasBaseCommand {
@@ -16,137 +17,138 @@ class OED extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var domain = 'od-api.oxforddictionaries.com';
-        var basePath = '/api/v1';
-        var auth = new Map<String, String>();
-        var query: HttpQuery = new HttpQuery(
-            domain,
-            basePath + '/search/en?limit=1&q=' + StringTools.urlEncode(args.join(' '))
-        );
 
-        auth.set('app_id', Bot.instance.authDetails.OED_APP_ID);
-        auth.set('app_key', Bot.instance.authDetails.OED_APP_KEY);
+        if (args.length > 0) {
+            var domain = 'od-api.oxforddictionaries.com';
+            var basePath = '/api/v1';
+            var query = new HttpQuery(domain);
+            var auth = new Map<String, String>();
 
-        query.headers = auth;
-        YliasDiscordUtils.setTyping(true, context.message.channel);
+            auth.set('app_id', Bot.instance.authDetails.OED_APP_ID);
+            auth.set('app_key', Bot.instance.authDetails.OED_APP_KEY);
 
-        query.send().then(function (data: String) {
-            var response: Dynamic = null;
+            query.headers = auth;
+            query.path = basePath + '/search/en?limit=1&q=' + StringTools.urlEncode(args.join(' '));
 
-            try {
-                response = Json.parse(data);
-            } catch (err: Dynamic) {
-                Logger.exception(err);
-            }
+            query.send().then(function (data: String) {
+                var response: Dynamic = null;
 
-            if (response != null && Reflect.hasField(response, 'results')) {
-                if (response.results.length > 0) {
-                    var word = response.results[0].word;
+                try {
+                    response = Json.parse(data);
+                } catch (err: Dynamic) {
+                    Logger.exception(err);
+                }
 
-                    query.path = basePath + '/entries/en/' + StringTools.urlEncode(response.results[0].id);
+                if (response != null && Reflect.hasField(response, 'results')) {
+                    if (response.results.length > 0) {
+                        var word = response.results[0].word;
 
-                    query.send().then(function (data: String) {
-                        var response: Dynamic = null;
+                        query.path = basePath + '/entries/en/' + StringTools.urlEncode(response.results[0].id);
 
-                        try {
-                            response = Json.parse(data);
-                        } catch (err: Dynamic) {
-                            Logger.exception(err);
-                        }
+                        query.send().then(function (data: String) {
+                            var response: Dynamic = null;
 
-                        var message = '**' + word + '**\n\n';
-                        var lexicalEntries: Array<Dynamic> = cast response.results[0].lexicalEntries;
+                            try {
+                                response = Json.parse(data);
+                            } catch (err: Dynamic) {
+                                Logger.exception(err);
+                            }
 
-                        for (lexicalEntry in lexicalEntries) {
-                            message += '**' + lexicalEntry.lexicalCategory.toUpperCase() + '**\n\n';
+                            var message = '**' + word + '**\n\n';
+                            var lexicalEntries: Array<Dynamic> = cast response.results[0].lexicalEntries;
 
-                            var entries: Array<Dynamic> = cast lexicalEntry.entries;
+                            for (lexicalEntry in lexicalEntries) {
+                                message += '**' + lexicalEntry.lexicalCategory.toUpperCase() + '**\n\n';
 
-                            for (entry in entries) {
-                                var sensesIndex = 1;
-                                var senses: Array<Dynamic> = cast entry.senses;
+                                var entries: Array<Dynamic> = cast lexicalEntry.entries;
 
-                                for (sense in senses) {
-                                    var definition: String = null;
+                                for (entry in entries) {
+                                    if (Reflect.hasField(entry, 'senses')) {
+                                        var sensesIndex = 1;
+                                        var senses: Array<Dynamic> = cast entry.senses;
 
-                                    if (Reflect.hasField(sense, 'definitions')) {
-                                        definition = sense.definitions[0].substr(0, 1).toUpperCase();
-                                        definition += sense.definitions[0].substr(1);
-                                    } else if (Reflect.hasField(sense, 'crossReferenceMarkers')) {
-                                        definition = sense.crossReferenceMarkers[0].substr(0, 1).toUpperCase();
-                                        definition += sense.crossReferenceMarkers[0].substr(1);
-                                    }
+                                        for (sense in senses) {
+                                            var definition: String = null;
 
-                                    if (definition != null) {
-                                        message += '**' + sensesIndex + '.** ' + definition + '\n';
-
-                                        if (Reflect.hasField(sense, 'examples')) {
-                                            var examples: Array<Dynamic> = cast sense.examples;
-
-                                            for (example in examples) {
-                                                var exampleText = example.text.substr(0, 1).toUpperCase();
-
-                                                exampleText += example.text.substr(1);
-                                                message += '    *‘' + exampleText + '’*\n';
+                                            if (Reflect.hasField(sense, 'definitions')) {
+                                                definition = sense.definitions[0].substr(0, 1).toUpperCase();
+                                                definition += sense.definitions[0].substr(1);
+                                            } else if (Reflect.hasField(sense, 'crossReferenceMarkers')) {
+                                                definition = sense.crossReferenceMarkers[0].substr(0, 1).toUpperCase();
+                                                definition += sense.crossReferenceMarkers[0].substr(1);
                                             }
-                                        }
 
-                                        message += '\n';
+                                            if (definition != null) {
+                                                message += '**' + sensesIndex + '.** ' + definition + '\n';
 
-                                        if (Reflect.hasField(sense, 'subsenses')) {
-                                            var subsenses: Array<Dynamic> = sense.subsenses;
-                                            var subsensesIndex = 1;
+                                                if (Reflect.hasField(sense, 'examples')) {
+                                                    var examples: Array<Dynamic> = cast sense.examples;
 
-                                            for (subsense in subsenses) {
-                                                if (Reflect.hasField(subsense, 'definitions')) {
-                                                    var definition = subsense.definitions[0].substr(0, 1).toUpperCase();
+                                                    for (example in examples) {
+                                                        var exampleText = example.text.substr(0, 1).toUpperCase();
 
-                                                    definition += subsense.definitions[0].substr(1);
+                                                        exampleText += example.text.substr(1);
+                                                        message += '    *‘' + exampleText + '’*\n';
+                                                    }
+                                                }
 
-                                                    message += '    **' + sensesIndex + '.' + subsensesIndex + '.** ' + definition + '\n';
+                                                message += '\n';
 
-                                                    if (Reflect.hasField(subsense, 'examples')) {
-                                                        var examples: Array<Dynamic> = cast subsense.examples;
+                                                if (Reflect.hasField(sense, 'subsenses')) {
+                                                    var subsenses: Array<Dynamic> = sense.subsenses;
+                                                    var subsensesIndex = 1;
 
-                                                        for (example in examples) {
-                                                            var exampleText = example.text.substr(0, 1).toUpperCase();
+                                                    for (subsense in subsenses) {
+                                                        if (Reflect.hasField(subsense, 'definitions')) {
+                                                            var definition = subsense.definitions[0].substr(0, 1).toUpperCase();
 
-                                                            exampleText += example.text.substr(1);
-                                                            message += '        *‘' + exampleText + '’*\n';
+                                                            definition += subsense.definitions[0].substr(1);
+
+                                                            message += '    **' + sensesIndex + '.' + subsensesIndex + '.** ' + definition + '\n';
+
+                                                            if (Reflect.hasField(subsense, 'examples')) {
+                                                                var examples: Array<Dynamic> = cast subsense.examples;
+
+                                                                for (example in examples) {
+                                                                    var exampleText = example.text.substr(0, 1).toUpperCase();
+
+                                                                    exampleText += example.text.substr(1);
+                                                                    message += '        *‘' + exampleText + '’*\n';
+                                                                }
+                                                            }
+
+                                                            message += '\n';
+
+                                                            subsensesIndex++;
+                                                        } else if (Reflect.hasField(subsense, 'crossReferenceMarkers')) {
+                                                            var definition = subsense.crossReferenceMarkers[0].substr(0, 1).toUpperCase();
+
+                                                            definition += subsense.crossReferenceMarkers[0].substr(1);
+                                                            message += '    **' + sensesIndex + '.' + subsensesIndex + '.** ' + definition + '\n\n';
+
+                                                            subsensesIndex++;
                                                         }
                                                     }
-
-                                                    message += '\n';
-
-                                                    subsensesIndex++;
-                                                } else if (Reflect.hasField(subsense, 'crossReferenceMarkers')) {
-                                                    var definition = subsense.crossReferenceMarkers[0].substr(0, 1).toUpperCase();
-
-                                                    definition += subsense.crossReferenceMarkers[0].substr(1);
-                                                    message += '    **' + sensesIndex + '.' + subsensesIndex + '.** ' + definition + '\n\n';
-
-                                                    subsensesIndex++;
                                                 }
+
+                                                sensesIndex++;
                                             }
                                         }
-
-                                        sensesIndex++;
                                     }
                                 }
                             }
-                        }
 
-                        YliasDiscordUtils.setTyping(false, context.message.channel);
-                        context.sendToChannel(message, cast {split: true});
-                    });
+                            context.sendToChannel(message, cast {split: true});
+                        });
+                    } else {
+                        context.sendToChannel(l('404', cast [author]));
+                    }
                 } else {
-                    YliasDiscordUtils.setTyping(false, context.message.channel);
-                    context.sendToChannel(l('404', cast [author]));
+                    context.sendToChannel(l('fatal', cast [author]));
                 }
-            } else {
-                YliasDiscordUtils.setTyping(false, context.message.channel);
-                context.sendToChannel(l('fatal', cast [author]));
-            }
-        });
+            });
+        } else {
+            context.sendToChannel(l('fail', cast [author]));
+        }
     }
 }
