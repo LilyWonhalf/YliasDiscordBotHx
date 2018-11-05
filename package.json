@@ -1,6 +1,6 @@
 {
   "name": "yliasdiscordbothx",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "A bot for Discord",
   "main": "./yliasdiscordbothx/Bot.hx",
   "author": "Elian Wonhalf <elianwonhalf@gmail.com>",
@@ -9,7 +9,7 @@
     "url": "https://github.com/ElianWonhalf/YliasDiscordBotHx.git"
   },
   "scripts": {
-    "test": "haxe -main yliasdiscordbothx.Bot --macro include('yliasdiscordbothx.model.commandlist') -debug -D no-simplify -cp ./node_modules/nodehx -cp ./node_modules/discordhx -cp ./node_modules/discordbothx -cp ./node_modules/msignal -cp ./ -js ./out/bot.js"
+    "test": "haxe -main yliasdiscordbothx.Bot --macro \"include('yliasdiscordbothx.model.commandlist')\" -debug -D no-simplify -cp ./node_modules/nodehx -cp ./node_modules/discordhx -cp ./node_modules/discordbothx -cp ./node_modules/msignal -cp ./ -js ./out/bot.js"
   },
   "dependencies": {
     "discordbothx": "^1.2.x",

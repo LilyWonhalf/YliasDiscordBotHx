@@ -13,7 +13,7 @@ class Cat extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var query: HttpQuery = new HttpQuery('random.cat', '/meow');
+        var query: HttpQuery = new HttpQuery('aws.random.cat', '/meow');
 
         query.secured = false;
 

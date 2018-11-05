@@ -16,41 +16,29 @@ class Describe extends YliasBaseCommand {
 
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
-        var domain = 'www.captionbot.ai';
+        var domain = 'captionbot.azurewebsites.net';
         var path = '/api';
-        var query: HttpQuery = new HttpQuery(domain, path + '/init');
+        var query: HttpQuery = new HttpQuery(domain, path + '/messages?language=en-US');
+
+        query.method = cast HTTPMethod.Post;
+        query.data = Json.stringify(
+            {
+                Content: args.join(' '),
+                Type: 'CaptionRequest'
+            }
+        );
 
         YliasDiscordUtils.setTyping(true, context.message.channel);
 
         query.send().then(function (data: String) {
-            var session: String = Json.parse(data);
+            YliasDiscordUtils.setTyping(false, context.message.channel);
+            var response = Json.parse(data);
 
-            query.path = path + '/message';
-            query.method = cast HTTPMethod.Post;
-            query.data = Json.stringify(
-                {
-                    conversationId: session,
-                    waterMark: '',
-                    userMessage: args.join(' ')
-                }
-            );
-
-            query.send().then(function (data: String) {
-                query.path = path + '/message?waterMark=&conversationId=' + session;
-                query.method = cast HTTPMethod.Get;
-                query.data = null;
-
-                query.send().then(function (data: String) {
-                    var response = Json.parse(Json.parse(data));
-
-                    YliasDiscordUtils.setTyping(false, context.message.channel);
-                    context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
-                        'Describe',
-                        YliasDiscordUtils.getCleanString(context, response.BotMessages[1]),
-                        Emotion.NEUTRAL
-                    ), cast author);
-                });
-            });
+            context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
+                'Describe',
+                YliasDiscordUtils.getCleanString(context, response),
+                Emotion.NEUTRAL
+            ), cast author);
         });
     }
 }

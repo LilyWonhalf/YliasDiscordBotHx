@@ -488,7 +488,7 @@
                     ]
                 }
             },
-            "discordutils": {
+            "yliasdiscordutils": {
                 "getlocationstringfrommessage": {
                     "location_private": [
                         "C'était sur une conversation privée (date : %%)."

@@ -47,7 +47,7 @@ class Bot {
         };
         bot.commandIdentifier = Config.COMMAND_IDENTIFIER;
 
-        var commandList: Array<String> = FileSystem.getFileListInFolder('yliasdiscordbothx/model/commandlist/');
+        var commandList: Array<String> = FileSystem.getFileListInFolder('yliasdiscordbothx/model/commandlist');
 
         for (command in commandList) {
             var commandName = command.substr(0, command.lastIndexOf('.'));

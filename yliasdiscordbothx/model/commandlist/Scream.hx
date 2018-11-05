@@ -144,7 +144,7 @@ class Scream extends YliasBaseCommand {
                     var shouldRemoveLastCharacter = lastCharacterIsE && penultimateCharacterIsConsonant;
                     var screamWithoutE: String = scream.substr(0, scream.length - 1);
 
-                    shouldRemoveLastCharacter = shouldRemoveLastCharacter && simpleVowelsRegexp.test(screamWithoutE);
+                    shouldRemoveLastCharacter = shouldRemoveLastCharacter && ~/[aeiouy]/g.match(screamWithoutE);
 
                     if (shouldRemoveLastCharacter) {
                         screamReadyForSearch = screamWithoutE;

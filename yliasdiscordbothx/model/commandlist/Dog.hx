@@ -2,8 +2,6 @@ package yliasdiscordbothx.model.commandlist;
 
 import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordbothx.core.CommunicationContext;
-import nodejs.http.HTTP.HTTPMethod;
-import discordbothx.log.Logger;
 import yliasdiscordbothx.utils.HttpQuery;
 
 class Dog extends YliasBaseCommand {
@@ -14,8 +12,6 @@ class Dog extends YliasBaseCommand {
     override public function process(args: Array<String>): Void {
         var author = context.message.author;
         var query: HttpQuery = new HttpQuery('random.dog', '/woof');
-
-        query.secured = false;
 
         query.send().then(function (data: String) {
             if (data != null && data.split('\n').length < 2) {
