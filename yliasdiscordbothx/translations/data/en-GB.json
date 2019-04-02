@@ -6,7 +6,7 @@
                     "Hello! I'm **Ylias**, a shapeshifter that is here to help! Here is a list of the commands I can answer to:"
                 ],
                 "helpdialogend": [
-                    "As you can see, some commands can take parameters. A parameter is indicated by a pair of parenthesis. When you type the command, you shall not type these parenthesis. If you see parameters in *italic*, that means they are optionnal. If you need more help, ask **Elian Wonhalf**. He's the dumbass that created me, he should know."
+                    "As you can see, some commands can take parameters. A parameter is indicated by a pair of parenthesis. When you type the command, you shall not type these parenthesis. If you see parameters in *italic*, that means they are optionnal. If you need more help, ask **Lily Wonhalf**. She's the dumbass that created me, she should know."
                 ]
             },
             "bindsignals": {
@@ -14,7 +14,7 @@
                     "**whispers to the others** Hey people... I don't mean to freak you out, but I think that %% is a bot. He answers way too quickly..."
                 ],
                 "cleverbotio_not_ready": [
-                    "Wait wait %%, I didn't even have enough time to wake up properly, Elian just started me right now... Can I get some coffee please?"
+                    "Wait wait %%, I didn't even have enough time to wake up properly, Lily just started me right now... Can I get some coffee please?"
                 ],
                 "no_last_command": [
                     "%%, no command was executed on this channel since I joined. Sorry :/ ."

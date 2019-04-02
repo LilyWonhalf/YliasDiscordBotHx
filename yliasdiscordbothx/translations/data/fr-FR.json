@@ -6,7 +6,7 @@
                     "Salut ! Je suis **Ylias**, un métamorphe qui veut aider ! Voici une liste des commandes auxquelles je peux répondre :"
                 ],
                 "helpdialogend": [
-                    "Comme vous pouvez le voir, certaines commandes peuvent prendre des paramètres. Un paramètre est indiqué par un groupe de parenthèses. Lorsque vous tapperez la commande, il ne faut pas reporter ces parenthèses. Si vous voyez des paramètres en *italique*, ça signifie qu'ils sont optionnels. Si vous avez besoin de plus d'aide, demandez à **Elian Wonhalf**. C'est lui l'idiot qui m'a codé, il devrait savoir."
+                    "Comme vous pouvez le voir, certaines commandes peuvent prendre des paramètres. Un paramètre est indiqué par un groupe de parenthèses. Lorsque vous tapperez la commande, il ne faut pas reporter ces parenthèses. Si vous voyez des paramètres en *italique*, ça signifie qu'ils sont optionnels. Si vous avez besoin de plus d'aide, demandez à **Lily Wonhalf**. C'est elle l'idiote qui m'a codé, elle devrait savoir."
                 ]
             },
             "bindsignals": {
@@ -14,7 +14,7 @@
                     "**chuchote aux autres** Dîtes les gens... J'veux pas vous affoler, mais je crois que %% est un bot. Il répond beaucoup trop vite à mon goût..."
                 ],
                 "cleverbotio_not_ready": [
-                    "Attends attends %%, j'ai même pas eu le temps de me réveiller correctement, Elian vient tout juste de me démarrer là... Je peux avoir un café s'il te plaît ?"
+                    "Attends attends %%, j'ai même pas eu le temps de me réveiller correctement, Lily vient tout juste de me démarrer là... Je peux avoir un café s'il te plaît ?"
                 ],
                 "no_last_command": [
                     "%%, aucune commande n'a été exécutée sur ce canal depuis que je suis connecté. Désolé :/ ."

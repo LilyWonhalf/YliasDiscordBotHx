@@ -48,7 +48,7 @@ class HttpQuery {
                 path: path,
                 method: method,
                 headers: {
-                    'User-Agent': 'YliasDiscordBotHx/2.0 (by ElianWonhalf)',
+                    'User-Agent': 'YliasDiscordBotHx/2.0 (by LilyWonhalf)',
                     'Content-Type': 'application/json',
                     'Content-Length': contentLength
                 }
