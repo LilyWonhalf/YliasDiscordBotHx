@@ -24,11 +24,13 @@ class Cat extends YliasBaseCommand {
                 response = Json.parse(data);
             } catch (err: Dynamic) {
                 Logger.exception(err);
+                Logger.debug(data);
             }
 
             if (response != null && Reflect.hasField(response, 'file')) {
                 context.sendFileToChannel(response.file, 'cat.jpg', author.toString());
             } else {
+                Logger.debug(data);
                 context.sendEmbedToChannel(YliasDiscordUtils.getEmbeddedMessage(
                     'Meow!',
                     YliasDiscordUtils.getCleanString(context, l('fail', cast [author])),
