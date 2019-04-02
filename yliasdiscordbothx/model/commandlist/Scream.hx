@@ -41,7 +41,7 @@ class Scream extends YliasBaseCommand {
         });
         _screamList.push({
             scream: 'bark',
-            renderedScream: 'BRR%% BARK',
+            renderedScream: 'RRR%% BARK',
             multipliedLetter: 'R',
             emoji: ':dog:'
         });
@@ -98,6 +98,12 @@ class Scream extends YliasBaseCommand {
             renderedScream: 'YI%%FF',
             multipliedLetter: 'I',
             emoji: ':underage:'
+        });
+        _screamList.push({
+            scream: 'spaghetti',
+            renderedScream: 'SPAGHETTI%%',
+            multipliedLetter: 'I',
+            emoji: ':spaghetti:'
         });
 
         if (args.length > 0 && StringTools.trim(args.join(' ')).length > 0) {
