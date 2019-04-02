@@ -10,7 +10,7 @@ import yliasdiscordbothx.utils.HttpQuery;
 
 class Obf extends YliasBaseCommand {
     private static inline var ITERATIONS = 8;
-    private static inline var MAX_ITERATIONS = 25;
+    private static inline var MAX_ITERATIONS = 15;
 
     private var basePath: String;
     private var iterationsLeft: Int;
@@ -126,6 +126,7 @@ class Obf extends YliasBaseCommand {
                 response = Json.parse(data);
             } catch (err: Dynamic) {
                 Logger.exception(err);
+                Logger.debug(data);
             }
 
             if (response != null) {
