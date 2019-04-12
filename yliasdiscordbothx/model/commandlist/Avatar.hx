@@ -65,7 +65,7 @@ class Avatar extends YliasBaseCommand {
 
             context.sendFileToChannel(
                 foundUser.displayAvatarURL,
-                foundUser.id + '.jpg',
+                foundUser.id + foundUser.displayAvatarURL.substr(foundUser.displayAvatarURL.lastIndexOf('.')),
                 text
             );
         } else {
