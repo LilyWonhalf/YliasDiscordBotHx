@@ -58,14 +58,19 @@ class Avatar extends YliasBaseCommand {
 
         if (foundUser != null) {
             var text: String = author.toString();
+            var url = foundUser.displayAvatarURL;
+
+            if (url.indexOf('?') > -1) {
+                url = url.substr(0, url.indexOf('?'));
+            }
 
             if (foundUser.id == DiscordBot.instance.client.user.id) {
                 text += ', ' + l('client_avatar_author', cast ['https://twitter.com/MiagoArts']);
             }
 
             context.sendFileToChannel(
-                foundUser.displayAvatarURL,
-                foundUser.id + foundUser.displayAvatarURL.substr(foundUser.displayAvatarURL.lastIndexOf('.')),
+                url + '?size=2048',
+                foundUser.id + url.substr(url.lastIndexOf('.')),
                 text
             );
         } else {
