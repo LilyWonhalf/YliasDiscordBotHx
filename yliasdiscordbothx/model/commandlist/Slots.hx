@@ -91,8 +91,8 @@ class Slots extends YliasBaseCommand {
 
         var author: User = context.message.author;
         var first: String = ArrayUtils.random(emojis);
-        var second: String = ArrayUtils.random(emojis);
-        var third: String = ArrayUtils.random(emojis);
+        var second: String = first;
+        var third: String = first;
         var answer: String = '';
         var emotion: Emotion = Emotion.WINK;
 
