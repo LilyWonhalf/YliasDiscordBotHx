@@ -1,8 +1,10 @@
 package yliasdiscordbothx.event;
 
+import discordhx.channel.TextChannel;
+import discordbothx.service.DiscordUtils;
+import discordhx.message.Message;
 import discordhx.RichEmbed;
 import discordhx.invite.Invite;
-import yliasdiscordbothx.config.Config;
 import discordhx.guild.Guild;
 import discordhx.guild.GuildMember;
 import yliasdiscordbothx.model.Db;
@@ -25,6 +27,7 @@ class ClientEventHandler extends EventHandler<Client> {
         eventEmitter.on(cast ClientEvent.CHANNEL_CREATE, registerEntities);
         eventEmitter.on(cast ClientEvent.GUILD_MEMBER_ADD, serverNewMemberHandler);
         eventEmitter.on(cast ClientEvent.GUILD_MEMBER_REMOVE, serverMemberRemovedHandler);
+        eventEmitter.on(cast ClientEvent.MESSAGE, messageHandler);
     }
 
     private function readyHandler(): Void {
@@ -38,6 +41,41 @@ class ClientEventHandler extends EventHandler<Client> {
         Server.registerServers();
         Channel.registerChannels();
         UserEntity.registerUsers();
+    }
+
+    private function messageHandler(message: Message): Void {
+        var context: CommunicationContext = new CommunicationContext();
+        var botOwnerId: String = Bot.instance.authDetails.BOT_OWNER_ID;
+
+        if (message.guild != null && message.author.id != botOwnerId) {
+            var botOwner: User = eventEmitter.users.get(botOwnerId);
+            var channel: TextChannel = cast message.channel;
+            var searching: Array<String> = [
+                botOwnerId,
+                botOwner.username,
+            ];
+
+            searching = searching.concat(botOwner.username.split(' ')).map(function (value: String): String {
+                return value.toLowerCase();
+            });
+
+            var found = false;
+
+            for (search in searching) {
+                found = found || message.cleanContent.indexOf(search) > -1;
+            }
+
+            if (found) {
+                var embed: RichEmbed = new RichEmbed();
+
+                embed.setAuthor(message.author.username, message.author.displayAvatarURL);
+                embed.setDescription(message.content + '\n\n' + '[Go to message](' + untyped __js__('message.url') + ')');
+                embed.setColor(Std.parseInt('0xF44336'));
+                embed.setFooter('#' + channel.name + ' in ' + message.guild.name);
+
+                context.sendEmbedToOwner(embed).catchError(Logger.exception);
+            }
+        }
     }
 
     private function guildCreateHandler(guild: Guild): Void {
