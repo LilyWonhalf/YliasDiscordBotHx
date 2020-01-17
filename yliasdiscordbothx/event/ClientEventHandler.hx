@@ -54,6 +54,11 @@ class ClientEventHandler extends EventHandler<Client> {
                 botOwnerId,
                 botOwner.username,
             ];
+            var additionalPingWords = [ // Missy forced me, I'm sorry :(
+                'lilee',
+                'lil',
+                'liily'
+            ];
 
             searching = searching.concat(botOwner.username.split(' ')).map(function (value: String): String {
                 return value.toLowerCase();
@@ -62,7 +67,7 @@ class ClientEventHandler extends EventHandler<Client> {
             var found = false;
 
             for (search in searching) {
-                found = found || message.cleanContent.indexOf(search) > -1;
+                found = found || message.cleanContent.toLowerCase().indexOf(search) > -1;
             }
 
             if (found) {
