@@ -67,7 +67,7 @@ class ClientEventHandler extends EventHandler<Client> {
             var found = false;
 
             for (search in searching) {
-                found = found || message.cleanContent.toLowerCase().indexOf(search) > -1;
+                found = found || message.content.toLowerCase().indexOf(search) > -1;
             }
 
             if (found) {
