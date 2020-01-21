@@ -61,9 +61,11 @@ class ClientEventHandler extends EventHandler<Client> {
                 'liily'
             ];
 
-            searching = searching.concat(botOwner.username.split(' ')).map(function (value: String): String {
-                return value.toLowerCase();
-            });
+            searching = searching.concat(additionalPingWords).concat(botOwner.username.split(' ')).map(
+                function (value: String): String {
+                    return value.toLowerCase();
+                }
+            );
 
             var found = false;
 
