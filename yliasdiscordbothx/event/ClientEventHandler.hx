@@ -46,8 +46,9 @@ class ClientEventHandler extends EventHandler<Client> {
     private function messageHandler(message: Message): Void {
         var context: CommunicationContext = new CommunicationContext();
         var botOwnerId: String = Bot.instance.authDetails.BOT_OWNER_ID;
+        var mentionned: Bool = message.mentions.users.has(botOwnerId);
 
-        if (message.guild != null && message.author.id != botOwnerId) {
+        if (!mentionned && message.guild != null && message.author.id != botOwnerId) {
             var botOwner: User = eventEmitter.users.get(botOwnerId);
             var channel: TextChannel = cast message.channel;
             var searching: Array<String> = [
