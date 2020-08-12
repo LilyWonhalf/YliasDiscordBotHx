@@ -4,7 +4,6 @@ import yliasdiscordbothx.utils.YliasDiscordUtils;
 import discordhx.Collection;
 import Date;
 import discordhx.user.User;
-import discordhx.message.Message;
 import yliasdiscordbothx.utils.ArrayUtils;
 import discordbothx.core.CommunicationContext;
 
@@ -125,6 +124,8 @@ class Slots extends YliasBaseCommand {
             if (first == second && second == third) {
                 answer += ':sparkles: **JACKPOT** :sparkles:';
                 emotion = Emotion.SURPRISE;
+
+                context.sendToChannel('<@141288766760288256>');
             } else {
                 answer += ':x: **' + l('try_again').toUpperCase() + '** :x:';
             }

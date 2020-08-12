@@ -56,9 +56,12 @@ class ClientEventHandler extends EventHandler<Client> {
                 botOwner.username,
             ];
             var additionalPingWords = [ // Missy forced me, I'm sorry :(
-                'lilee',
+                'leel',
                 'lil',
-                'liily'
+                'lyl',
+                'liily',
+                'lielie',
+                'l¡ly',
             ];
 
             searching = searching.concat(additionalPingWords).concat(botOwner.username.split(' ')).map(

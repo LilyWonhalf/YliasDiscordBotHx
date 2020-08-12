@@ -3,7 +3,7 @@
   "version": "2.2.4",
   "description": "A bot for Discord",
   "main": "./yliasdiscordbothx/Bot.hx",
-  "author": "Elian Wonhalf <elianwonhalf@gmail.com>",
+  "author": "Lily Wonhalf <lilywonhalf@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/ElianWonhalf/YliasDiscordBotHx.git"
