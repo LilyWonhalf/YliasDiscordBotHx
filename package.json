@@ -15,7 +15,7 @@
     "discordbothx": "^1.2.x",
     "imgflipper": "^1.0.1",
     "mysql": "^2.13.0",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.6.0"
   },
   "engines": {
     "node": ">=6.0.0"
